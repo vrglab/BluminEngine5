@@ -1,0 +1,46 @@
+package BluminEngine5.Utils.Math;
+
+
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
+
+public class Vector2  {
+
+    public float x;
+    public float y;
+
+    public Vector2(float x, float y) {
+        set(x,y);
+    }
+
+    public Vector2(Vector3 vec) {
+        set(vec.x,vec.y);
+    }
+
+    public float GetX() {
+        return x;
+    }
+    public float GetY() {
+        return y;
+    }
+
+
+    public void set(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public static Vector2 Zero = new Vector2(0,0);
+
+    public Vector2f GetAsVec3f() {
+        Vector2f f = new Vector2f();
+        f.x =x;
+        f.y = y;
+        return f;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector2(" +x + "," + y+")";
+    }
+}

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: BluminEngine5.ExampleGame.Main
+Class-Path: BluminEngine5
+
