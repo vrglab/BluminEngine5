@@ -1,22 +1,15 @@
 package BluminEngine5.ExampleGame;
 
-import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.UI.Canvas;
-import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Input;
 import org.lwjgl.glfw.GLFW;
-
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
 
 public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
 
-    private Panel pan = new Panel("My panel");
     public Canvas UiCanvas = new Canvas();
     public ExampleScene() {
         RegsiterGameObject(obj);

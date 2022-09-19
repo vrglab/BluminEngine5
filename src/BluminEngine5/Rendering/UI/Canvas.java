@@ -16,8 +16,6 @@ import java.util.List;
 
 public class Canvas extends BluminBehaviour {
 
-    private final ImGuiImplGl3 imGuiImplGl3 =  new ImGuiImplGl3();
-    private final ImGuiImplGlfw imGuiImplGlfw =  new ImGuiImplGlfw();
     private List<UiObject> UiObjects = new ArrayList<>();
 
 
@@ -30,20 +28,15 @@ public class Canvas extends BluminBehaviour {
 
     @Override
     public void OnRender() {
-        imGuiImplGlfw.newFrame();
-        ImGui.newFrame();
+
         for (UiObject comp: UiObjects) {
             comp.OnUiRender();
         }
-        ImGui.render();
-        imGuiImplGl3.renderDrawData(ImGui.getDrawData());
+
     }
 
     @Override
     public void Init() {
-        InitImGui();
-        imGuiImplGlfw.init(Application.display.getWindow(), true);
-        imGuiImplGl3.init("#version 460");
         for (UiObject comp: UiObjects) {
             comp.Init();
         }
@@ -61,9 +54,6 @@ public class Canvas extends BluminBehaviour {
         for (UiObject comp: UiObjects) {
             comp.OnExit();
         }
-        imGuiImplGlfw.dispose();
-        imGuiImplGl3.dispose();
-        ImGui.destroyContext();
     }
 
     @Override
@@ -78,10 +68,6 @@ public class Canvas extends BluminBehaviour {
         for (UiObject comp: UiObjects) {
             comp.Destroy();
         }
-    }
-
-    private void InitImGui() {
-        ImGui.createContext();
     }
 
     public void RegisterUiObj(UiObject obj) {
