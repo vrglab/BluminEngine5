@@ -7,9 +7,9 @@ import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 
 public class Transform extends IComponent {
-    public Vector3 position;
-    public Vector3 rotation;
-    public Vector3 scale;
+    public Vector3 position = Vector3.Zero;
+    public Vector3 rotation = Vector3.Zero;
+    public Vector3 scale = Vector3.Zero;
 
     public Transform() {
         position = Vector3.Zero;
