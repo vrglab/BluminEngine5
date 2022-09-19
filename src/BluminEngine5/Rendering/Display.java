@@ -5,6 +5,10 @@ import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.Math.Matrix;
 import BluminEngine5.Utils.Utils;
 import org.lwjgl.glfw.*;
+import org.lwjgl.nuklear.NkBuffer;
+import org.lwjgl.nuklear.NkContext;
+import org.lwjgl.nuklear.NkDrawNullTexture;
+import org.lwjgl.nuklear.NkUserFont;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 
@@ -24,6 +28,7 @@ public class Display {
     private long window;
     private Resolution CurentScreenRes;
     private DisplayMode CurentDisplayMode;
+
     private Matrix projectionMatrix;
     private GLFWWindowSizeCallback sizeCallback = new GLFWWindowSizeCallback() {
         @Override
@@ -68,12 +73,15 @@ public class Display {
         }
 
         glfwWindowHint(GLFW_REFRESH_RATE, res.getFPS());
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         window = glfwCreateWindow(res.getWIDTH(), res.getHIGHT(), name, NULL, NULL);
         if ( window == NULL ) {
             Utils.CrashApp(-13, "Failed to create the GLFW window");
         }
         CurentScreenRes = res;
         CurentDisplayMode = mode;
+        GLFW.glfwFocusWindow(window);
         try ( MemoryStack stack = stackPush() ) {
             IntBuffer pWidth = stack.mallocInt(1);
             IntBuffer pHeight = stack.mallocInt(1);
@@ -92,6 +100,7 @@ public class Display {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
+
     }
 
     public void Close() {

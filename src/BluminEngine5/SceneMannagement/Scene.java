@@ -7,6 +7,7 @@ import BluminEngine5.Behaviour.ILogic;
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
@@ -19,6 +20,8 @@ public abstract class Scene implements ILogic {
     private List<BluminBehaviour> GameObjects = new ArrayList<>();
 
     public objActionData ActionData =  new objActionData();
+
+
 
     public Scene() {
 
