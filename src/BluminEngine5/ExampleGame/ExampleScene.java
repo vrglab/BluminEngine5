@@ -10,7 +10,7 @@ public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
 
-    public Canvas UiCanvas = new Canvas();
+    public Canvas UiCanvas = new Canvas(10,10,10,10);
     public ExampleScene() {
         RegsiterGameObject(obj);
         RegsiterGameObject(UiCanvas);
