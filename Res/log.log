@@ -1,6 +1,6 @@
-{System 2022/09/20 14:37:01:371}: Starting SceneManager
-{System 2022/09/20 14:37:01:371}: 1
-{System 2022/09/20 14:37:01:371}: Loading Metadata
-{System 2022/09/20 14:37:01:371}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/09/20 14:37:02:372}: Setting up keyboard
-{System 2022/09/20 14:37:02:372}: Setting up DaynamicsWorld
+{System 2022/09/20 22:28:30:2830}: Starting SceneManager
+{System 2022/09/20 22:28:30:2830}: 0
+{System 2022/09/20 22:28:30:2830}: Loading Metadata
+{System 2022/09/20 22:28:30:2830}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/09/20 22:28:31:2831}: Setting up keyboard
+{System 2022/09/20 22:28:31:2831}: Setting up DaynamicsWorld

@@ -8,12 +8,6 @@ public class Canvas extends BluminBehaviour {
 
     private List<UiObject> UiObjects = new ArrayList<>();
 
-    private Rect rect;
-
-    public Canvas(int x,int xx,int y,int yy){
-        rect = new Rect(y,yy,x,xx);
-    }
-
     @Override
     public void Update() {
         for (UiObject comp: UiObjects) {
