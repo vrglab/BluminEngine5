@@ -1,7 +1,9 @@
 package BluminEngine5.Utils;
 
 import BluminEngine5.Application;
+import BluminEngine5.Rendering.UI.Obj.Vertex;
 import BluminEngine5.Utils.Debuging.Debug;
+import BluminEngine5.Utils.Math.Vector2;
 import jdk.jshell.execution.Util;
 
 import java.io.*;
@@ -53,5 +55,14 @@ public class Utils {
         e.printStackTrace();
         Application.OnExit.Invoke();
         System.exit(status);
+    }
+    public static Vertex[] QuadAsVertex2D() {
+        Vertex vpos[] = {
+                new Vertex(new Vector2(-1,1)),
+                new Vertex(new Vector2(-1,-1)),
+                new Vertex(new Vector2(1,1)),
+                new Vertex(new Vector2(1,-1)),
+        };
+        return vpos;
     }
 }
