@@ -1,12 +1,13 @@
 #version 430 core
 
-in vec3 color;
-in vec2 texCord;
+in vec2 textureCoords;
 
-uniform sampler2D Texture;
+out vec4 out_Color;
 
-out vec4 outColor;
+uniform sampler2D guiTexture;
 
-void main() {
-    outColor = texture(Texture, texCord);
+void main(void){
+
+    out_Color = texture(guiTexture,textureCoords);
+
 }

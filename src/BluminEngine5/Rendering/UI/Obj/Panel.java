@@ -1,20 +1,20 @@
-package BluminEngine5.Rendering.UI;
+package BluminEngine5.Rendering.UI.Obj;
 
 import BluminEngine5.Rendering.Shaders.Shader;
-import BluminEngine5.Rendering.UI.Obj.UiObject;
-import BluminEngine5.Utils.ObjLoader;
+import BluminEngine5.Utils.Math.Vector2;
 
-public class TextField extends UiObject {
+public class Panel extends UiObject{
 
-    private String text;
-
-    public TextField(int x,int xx,int y,int yy){
-        rect = new Rect(y,yy,x,xx);
-        //mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
+    public Panel() {
+        Vertex vpos[] = {
+                new Vertex(new Vector2(-1,1)),
+                new Vertex(new Vector2(-1,-1)),
+                new Vertex(new Vector2(1,1)),
+                new Vertex(new Vector2(1,-1)),
+        };
+        mesh = new Mesh(vpos);
         shader = new Shader("Res/Shaders/HUD/HUDShader.json");
     }
-
-
 
     @Override
     public void Update() {

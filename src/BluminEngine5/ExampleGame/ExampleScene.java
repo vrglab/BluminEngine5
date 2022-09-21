@@ -1,6 +1,8 @@
 package BluminEngine5.ExampleGame;
 
 import BluminEngine5.Rendering.UI.Canvas;
+import BluminEngine5.Rendering.UI.Obj.Panel;
+import BluminEngine5.Rendering.UI.TextField;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
@@ -12,9 +14,11 @@ public class ExampleScene extends Scene {
 
     public Canvas UiCanvas = new Canvas();
 
+    public Panel p = new Panel();
     public ExampleScene() {
         RegsiterGameObject(obj);
         RegsiterGameObject(UiCanvas);
+        UiCanvas.RegisterUiObj(p);
     }
     @Override
     public void Update() {
