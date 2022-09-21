@@ -47,7 +47,7 @@ public class Display {
 
         projectionMatrix = Matrix.projection(90,res.getWIDTH() / res.getHIGHT()+ 0.7f, 0.1f,10000.0f);
         glfwDefaultWindowHints();
-
+        long monitor = NULL;
         switch(mode) {
             case Windowed:
                 glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
@@ -59,6 +59,7 @@ public class Display {
                 glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
                 glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
                 glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+                monitor = glfwGetPrimaryMonitor();
                 break;
             case WindowedLocked:
                 glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -75,7 +76,7 @@ public class Display {
         glfwWindowHint(GLFW_REFRESH_RATE, res.getFPS());
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-        window = glfwCreateWindow(res.getWIDTH(), res.getHIGHT(), name, NULL, NULL);
+        window = glfwCreateWindow(res.getWIDTH(), res.getHIGHT(), name, monitor, NULL);
         if ( window == NULL ) {
             Utils.CrashApp(-13, "Failed to create the GLFW window");
         }

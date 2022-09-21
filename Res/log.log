@@ -1,6 +1,5 @@
-{System 2022/09/20 22:28:30:2830}: Starting SceneManager
-{System 2022/09/20 22:28:30:2830}: 0
-{System 2022/09/20 22:28:30:2830}: Loading Metadata
-{System 2022/09/20 22:28:30:2830}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/09/20 22:28:31:2831}: Setting up keyboard
-{System 2022/09/20 22:28:31:2831}: Setting up DaynamicsWorld
+{System 2022/09/21 09:30:34:3034}: Starting SceneManager
+{System 2022/09/21 09:30:35:3035}: 0
+{System 2022/09/21 09:30:35:3035}: Loading Metadata
+{System 2022/09/21 09:30:35:3035}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{Error: 2022/09/21 09:30:35:3035}: Failed to create the GLFW window
