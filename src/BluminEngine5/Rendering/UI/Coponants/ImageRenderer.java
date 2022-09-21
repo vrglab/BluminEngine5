@@ -1,4 +1,4 @@
-package BluminEngine5.Componant.Rendering;
+package BluminEngine5.Rendering.UI.Coponants;
 
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
