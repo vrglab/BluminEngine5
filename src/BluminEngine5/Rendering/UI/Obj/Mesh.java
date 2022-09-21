@@ -11,7 +11,7 @@ import java.nio.IntBuffer;
 
 public class Mesh {
     private Vertex[] vertecies;
-    private int vao;
+    private int vao, pbo;
     private Material mat;
     public Mesh(Vertex[] vertecies) {
         this.vertecies = vertecies;
@@ -36,6 +36,7 @@ public class Mesh {
             positionData[i * 2 + 1] = vertecies[i].getPosition().y;
         }
         positionBuffer.put(positionData).flip();
+        pbo = glStoreBuffer(positionBuffer, 0, 2);
     }
     private int glStoreBuffer(FloatBuffer bufferdata, int index, int size){
         int Bufferid = GL15.glGenBuffers();
@@ -54,6 +55,9 @@ public class Mesh {
     }
     public int getVAO() {
         return vao;
+    }
+    public int getPBO() {
+        return pbo;
     }
     public Material getMaterial() {
         return mat;

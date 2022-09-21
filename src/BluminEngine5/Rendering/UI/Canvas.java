@@ -3,7 +3,10 @@ import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
+import BluminEngine5.Utils.Math.Vector2;
+import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
@@ -28,15 +31,17 @@ public class Canvas extends BluminBehaviour {
             GL30.glBindVertexArray(comp.mesh.getVAO());
             GL20.glEnableVertexAttribArray(0);
             comp.shader.Run();
+            GL13.glActiveTexture(GL13.GL_TEXTURE0);
+            GL13.glBindTexture(GL13.GL_TEXTURE_2D, comp.mesh.getMaterial().getTexture().getTextureId());
+            comp.shader.SetUniform("transformationMatrix", Matrix.transform(new Vector2(comp.transform.position.x, comp.transform.position.y),
+                    comp.transform.rotation,
+                    new Vector2(comp.transform.scale.x,comp.transform.scale.z)));
             comp.OnUiRender();
-            comp.shader.SetUniform("transformationMatrix", Matrix.transform(comp.transform));
             GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, comp.mesh.getVertecies().length);
             comp.shader.Stop();
             GL20.glDisableVertexAttribArray(0);
             GL30.glBindVertexArray(0);
-
         }
-
     }
 
     @Override

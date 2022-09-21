@@ -1,3 +1,5 @@
-{System 2022/09/21 11:31:33:3133}: Starting SceneManager
-{System 2022/09/21 11:31:33:3133}: 1
-{Error: 2022/09/21 11:31:33:3133}: Couldn't load file: Res/Shaders/HUDShader.json
+{System 2022/09/21 13:22:32:2232}: Starting SceneManager
+{System 2022/09/21 13:22:33:2233}: Loading Metadata
+{System 2022/09/21 13:22:33:2233}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/09/21 13:22:33:2233}: Setting up keyboard
+{System 2022/09/21 13:22:33:2233}: Setting up DaynamicsWorld

@@ -39,6 +39,11 @@ public class Vector2  {
         return f;
     }
 
+    public Vector3 GetAsVec3() {
+        Vector3 f = new Vector3(x,y,0);
+        return f;
+    }
+
     @Override
     public String toString() {
         return "Vector2(" +x + "," + y+")";

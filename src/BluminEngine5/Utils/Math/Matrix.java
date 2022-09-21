@@ -27,6 +27,12 @@ public class Matrix {
         result.Set(3, 2, translate.z);
         return result;
     }
+    public static Matrix translate(Vector2 translate) {
+        Matrix result = Matrix.identity();
+        result.Set(3, 0, translate.x);
+        result.Set(3, 1, translate.y);
+        return result;
+    }
     public static Matrix rotate(float angle, Vector3 axis) {
         Matrix result = Matrix.identity();
 
@@ -79,6 +85,14 @@ public class Matrix {
 
         return result;
     }
+    public static Matrix scale(Vector2 scalar) {
+        Matrix result = Matrix.identity();
+
+        result.Set(0, 0, scalar.x);
+        result.Set(1, 1, scalar.y);
+
+        return result;
+    }
     public static Matrix transform(Transform transform) {
         Matrix result = Matrix.identity();
         Vector3 position = transform.position;
@@ -98,6 +112,26 @@ public class Matrix {
         result = BluminEngine5.Utils.Math.Math.multiply(translationMatrix, BluminEngine5.Utils.Math.Math.multiply(rotationMatrix, scaleMatrix));
         return result;
     }
+    public static Matrix transform(Vector2 pos, Vector3 rotatio ,Vector2 scal) {
+        Matrix result = Matrix.identity();
+        Vector2 position = pos;
+        Vector3 rotation = rotatio;
+        Vector2 scale = scal;
+
+        Matrix translationMatrix = Matrix.translate(position);
+
+        Matrix rotXMatrix = Matrix.rotate(rotation.x, new Vector3(1, 0, 0));
+        Matrix rotYMatrix = Matrix.rotate(rotation.y, new Vector3(0, 1, 0));
+        Matrix rotZMatrix = Matrix.rotate(rotation.z, new Vector3(0, 0, 1));
+
+        Matrix scaleMatrix = Matrix.scale(scale);
+
+        Matrix rotationMatrix = BluminEngine5.Utils.Math.Math.multiply(rotXMatrix, BluminEngine5.Utils.Math.Math.multiply(rotYMatrix, rotZMatrix));
+
+        result = BluminEngine5.Utils.Math.Math.multiply(translationMatrix, BluminEngine5.Utils.Math.Math.multiply(rotationMatrix, scaleMatrix));
+        return result;
+    }
+
     public static Matrix projection(float fov, float aspect, float near, float far) {
         Matrix result = Matrix.identity();
 

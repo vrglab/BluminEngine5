@@ -16,8 +16,10 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
+import static org.lwjglx.util.glu.GLU.gluPerspective;
 
 public class Display {
 
@@ -43,16 +45,15 @@ public class Display {
         if (!glfwInit()) {
             Utils.CrashApp(-12, "Glfw could not be initilazed");
         }
-
+        glfwDefaultWindowHints();
         switch(dim) {
             case ThreeD:
                 projectionMatrix = Matrix.projection(90,res.getWIDTH() / res.getHIGHT()+ 0.7f, 0.1f,10000.0f);
                 break;
             case TwoD:
+                make2D();
                 break;
         }
-
-        glfwDefaultWindowHints();
         long monitor = NULL;
         switch(mode) {
             case Windowed:
@@ -81,7 +82,7 @@ public class Display {
 
         glfwWindowHint(GLFW_REFRESH_RATE, res.getFPS());
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         window = glfwCreateWindow(res.getWIDTH(), res.getHIGHT(), name, monitor, NULL);
         if ( window == NULL ) {
             Utils.CrashApp(-13, "Failed to create the GLFW window");
@@ -108,6 +109,7 @@ public class Display {
         glfwSwapInterval(1);
         glfwShowWindow(window);
 
+
     }
 
     public void Close() {
@@ -129,5 +131,29 @@ public class Display {
 
     public Resolution getCurentScreenRes() {
         return CurentScreenRes;
+    }
+
+
+    public  void make2D() {
+        //Remove the Z axis
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glPushMatrix();
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, CurentScreenRes.getWIDTH(), 0, CurentScreenRes.getHIGHT(), -1, 1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glPushMatrix();
+        GL11.glLoadIdentity();
+    }
+
+    public  void make3D() {
+        //Restore the Z axis
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glPopMatrix();
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glPopMatrix();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 }
