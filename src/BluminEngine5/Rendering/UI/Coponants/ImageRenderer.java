@@ -20,9 +20,13 @@ public class ImageRenderer extends IComponent {
     public void OnRender() {
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL13.glBindTexture(GL13.GL_TEXTURE_2D, Parent.mesh.getMaterial().getTexture().getTextureId());
-        Parent.shader.SetUniform("transformationMatrix", Matrix.transform(new Vector2(Parent.transform.position.x, Parent.transform.position.y),
+        Parent.shader.SetUniform(
+                "transformationMatrix",
+                Matrix.transform(
+                Parent.transform.position,
                 Parent.transform.rotation,
-                new Vector2(Parent.transform.scale.x,Parent.transform.scale.z)));
+                Parent.transform.scale)
+        );
         GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, Parent.mesh.getVertecies().length);
     }
 

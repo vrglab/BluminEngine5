@@ -90,6 +90,7 @@ public class Matrix {
 
         result.Set(0, 0, scalar.x);
         result.Set(1, 1, scalar.y);
+        result.Set(2, 2, scalar.y);
 
         return result;
     }

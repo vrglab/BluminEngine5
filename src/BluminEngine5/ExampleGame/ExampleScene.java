@@ -2,10 +2,12 @@ package BluminEngine5.ExampleGame;
 
 import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
+import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
 import BluminEngine5.Utils.Math.Vector2;
+import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.glfw.GLFW;
 
 public class ExampleScene extends Scene {
@@ -14,7 +16,7 @@ public class ExampleScene extends Scene {
 
     public Canvas UiCanvas = new Canvas();
 
-    public Panel p = new Panel(new Vector2(0,0), new Vector2(1,1));
+    public Panel p = new Panel(new Rect(new Vector2(2,0), new Vector2(0.03f,0.05f), Vector3.Zero));
 
     public ExampleScene() {
         RegsiterGameObject(obj);

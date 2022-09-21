@@ -4,7 +4,9 @@ import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Transform;
 import BluminEngine5.Rendering.Shaders.Shader;
+import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.Utils.EventSystem.IAction;
+import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.objActionData;
 
@@ -16,7 +18,7 @@ public abstract class UiObject extends BluminBehaviour  {
 
     private List<IComponent> AttachedComponants = new ArrayList<>();
     public objActionData ActionData =  new objActionData();
-    public Transform transform = new Transform(new Vector3(0,0,2),Vector3.Zero,Vector3.Zero);
+    public Rect transform = new Rect(Vector2.Zero,new Vector2(1,1), Vector3.Zero);
     public Shader shader;
     public Mesh mesh;
     public UiObject() {
@@ -110,6 +112,12 @@ public abstract class UiObject extends BluminBehaviour  {
             @Override
             public void Run() {
                 component.Destroy();
+            }
+        };
+        component.data.OnExit = new IAction() {
+            @Override
+            public void Run() {
+
             }
         };
         component.UIParent = bb;
