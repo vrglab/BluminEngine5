@@ -8,7 +8,7 @@ import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {
 
-    public Mesh mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
+    public Mesh mesh = ObjLoader.LoadFile("Res/Models/dragon.obj");
     MeshRenderer mr = new MeshRenderer(mesh);
 
     MeshColider collider = new MeshColider(mr);

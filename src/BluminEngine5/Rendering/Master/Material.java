@@ -29,4 +29,8 @@ public class Material {
     public Texture getTexture() {
         return texture;
     }
+
+    public void SetTexture(Texture t) {
+        texture = t;
+    }
 }

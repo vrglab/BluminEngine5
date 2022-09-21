@@ -1,5 +1,6 @@
 package BluminEngine5.Utils.Math;
 import BluminEngine5.Componant.Transform;
+import org.lwjglx.util.vector.Matrix4f;
 
 import java.lang.Math;
 public class Matrix {
@@ -44,6 +45,30 @@ public class Matrix {
         result.Set(2, 2, cos + axis.z * axis.z * C);
 
         return result;
+    }
+    public static Matrix OrthoMatrix(float left, float right, float bottom, float top, float Zfar, float Znear) {
+        Matrix orthomatrix = Matrix.identity();
+        orthomatrix.Set(0,0,2/(right-left));
+        orthomatrix.Set(0,1,0);
+        orthomatrix.Set(0,2,0);
+        orthomatrix.Set(0,3,0);
+
+        orthomatrix.Set(1,0,0);
+        orthomatrix.Set(1,1,2/(top-bottom));
+        orthomatrix.Set(1,2,0);
+        orthomatrix.Set(1,3,0);
+
+        orthomatrix.Set(2,0,0);
+        orthomatrix.Set(2,1,0);
+        orthomatrix.Set(2,2,2/(Zfar-Znear));
+        orthomatrix.Set(2,3,0);
+
+        orthomatrix.Set(3,0,-(right+left)/(right-left));
+        orthomatrix.Set(3,1,-(top+bottom)/(top-bottom));
+        orthomatrix.Set(3,2,-(Zfar+Znear)/(Zfar-Znear));
+        orthomatrix.Set(3,3,1);
+
+        return orthomatrix;
     }
     public static Matrix scale(Vector3 scalar) {
         Matrix result = Matrix.identity();

@@ -44,8 +44,14 @@ public class Display {
             Utils.CrashApp(-12, "Glfw could not be initilazed");
         }
 
+        switch(dim) {
+            case ThreeD:
+                projectionMatrix = Matrix.projection(90,res.getWIDTH() / res.getHIGHT()+ 0.7f, 0.1f,10000.0f);
+                break;
+            case TwoD:
+                break;
+        }
 
-        projectionMatrix = Matrix.projection(90,res.getWIDTH() / res.getHIGHT()+ 0.7f, 0.1f,10000.0f);
         glfwDefaultWindowHints();
         long monitor = NULL;
         switch(mode) {
@@ -119,5 +125,9 @@ public class Display {
 
     public Matrix getProjectionMatrix() {
         return projectionMatrix;
+    }
+
+    public Resolution getCurentScreenRes() {
+        return CurentScreenRes;
     }
 }

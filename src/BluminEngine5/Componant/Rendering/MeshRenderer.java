@@ -13,6 +13,9 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjglx.util.glu.GLU.gluPerspective;
+
 public class MeshRenderer extends IComponent {
 
     public Mesh mesh;
@@ -40,6 +43,8 @@ public class MeshRenderer extends IComponent {
 
     @Override
     public void OnRender() {
+        glDepthFunc(GL_LEQUAL);
+        glEnable(GL_DEPTH_TEST);
         GL30.glBindVertexArray(mesh.getVAO());
         GL30.glEnableVertexAttribArray(0);
         GL30.glEnableVertexAttribArray(1);
