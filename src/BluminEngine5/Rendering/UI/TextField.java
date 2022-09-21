@@ -8,8 +8,8 @@ public class TextField extends UiObject {
 
     private String text;
 
-    public TextField(int x,int xx,int y,int yy){
-        rect = new Rect(y,yy,x,xx);
+    public TextField(){
+
         //mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
         shader = new Shader("Res/Shaders/HUD/HUDShader.json");
     }
@@ -18,6 +18,11 @@ public class TextField extends UiObject {
 
     @Override
     public void Update() {
+
+    }
+
+    @Override
+    public void OnRender() {
 
     }
 
