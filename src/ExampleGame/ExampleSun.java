@@ -1,8 +1,15 @@
-package BluminEngine5.Rendering.Lighting;
+package ExampleGame;
 
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Behaviour.BluminBehaviour;
+import BluminEngine5.Rendering.Lighting.Sun;
 
-public class BaseLight extends IComponent {
+public class ExampleSun extends BluminBehaviour {
+
+    public Sun SunComponant = new Sun();
+
+    public ExampleSun() {
+        RegisterComponant(SunComponant, this);
+    }
 
     @Override
     public void Update() {

@@ -13,6 +13,7 @@ import org.lwjgl.glfw.GLFW;
 public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
+    private ExampleSun ES = new ExampleSun();
 
     public Canvas UiCanvas = new Canvas();
 
@@ -20,6 +21,7 @@ public class ExampleScene extends Scene {
 
     public ExampleScene() {
         RegsiterGameObject(obj);
+        RegsiterGameObject(ES);
         RegsiterGameObject(UiCanvas);
         UiCanvas.RegisterUiObj(p);
     }
