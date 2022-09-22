@@ -16,8 +16,7 @@ public class ImageRenderer extends IComponent {
 
     @Override
     public void Update() {
-        Parent.transform.Center.x += 0.01;
-        Debug.log(Parent.transform.Center.x);
+
     }
 
     @Override

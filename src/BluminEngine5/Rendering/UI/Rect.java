@@ -9,7 +9,8 @@ public class Rect extends IComponent {
     public Vector2 position = Vector2.Zero;
     public Vector2 scale = Vector2.Zero;
     public Vector3 rotation = Vector3.Zero;
-    public Vector2 Center = new Vector2(0,0);
+    public UICenter Center = UICenter.Center;
+
 
     public Rect(Vector2 pos, Vector2 scal, Vector3 r){
         position = pos;
