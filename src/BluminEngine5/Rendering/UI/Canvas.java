@@ -33,14 +33,16 @@ public class Canvas extends BluminBehaviour {
             GL30.glBindVertexArray(comp.mesh.getVAO());
             GL20.glEnableVertexAttribArray(0);
             GL20.glEnableVertexAttribArray(1);
-            glEnable(GL_BLEND);
-            glEnable(GL_RGBA);
-            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            if(comp.mesh.getMaterial().getColor().GetA() < 1) {
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            }
             comp.shader.Run();
             comp.ActionData.OnRender.Run();
             comp.shader.Stop();
-            glDisable(GL_RGBA);
-            glDisable(GL_BLEND);
+            if(comp.mesh.getMaterial().getColor().GetA() < 1) {
+                glDisable(GL_BLEND);
+            }
             GL20.glDisableVertexAttribArray(1);
             GL20.glDisableVertexAttribArray(0);
             GL30.glBindVertexArray(0);

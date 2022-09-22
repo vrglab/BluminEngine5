@@ -14,7 +14,8 @@ void main(){
         if(color.xyz == vec3(1,1,1)) {
             outColor = texture(guiTexture, textureCoords);
         } else{
-            outColor = texture(guiTexture, textureCoords) + color;
+            vec4 col = texture(guiTexture, textureCoords) + color.w * (1 - color.w) + color;
+            outColor = texture(guiTexture, textureCoords) + col;
         }
     }
 }
