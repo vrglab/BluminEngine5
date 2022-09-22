@@ -1,6 +1,6 @@
 #version 430 core
 
-in vec3 color;
+in vec4 color;
 in vec2 texCord;
 
 uniform sampler2D Texture;
@@ -8,5 +8,13 @@ uniform sampler2D Texture;
 out vec4 outColor;
 
 void main() {
-    outColor = texture(Texture, texCord);
+    if(color.w < 0.1) {
+        discard;
+    } else {
+        if(color.xyz == vec3(1,1,1)) {
+            outColor = texture(Texture, texCord);
+        } else{
+            outColor = texture(Texture, texCord) + color;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package BluminEngine5.Rendering.UI;
 
+import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Rendering.UI.Coponants.ImageRenderer;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Obj.Mesh;
@@ -15,6 +16,7 @@ public class Panel extends UiObject {
 
     public Panel(Rect r) {
         transform = r;
+
         mesh = new Mesh(Utils.QuadAsVertex2D());
         shader = new Shader("Res/Shaders/HUD/HUDShader.json");
         RegisterComponant(sr,this);

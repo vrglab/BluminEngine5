@@ -7,11 +7,6 @@ import BluminEngine5.Utils.Math.Vector3;
 public class Color  {
 
     float r,g,b,a;
-
-    public float GetA() {
-        return a;
-    }
-
     public Color(float r, float g, float b, float a){
         set(r,g,b,a);
     }
@@ -32,10 +27,16 @@ public class Color  {
     public float GetB() {
         return b;
     }
+    public float GetA() {
+        return a;
+    }
 
     public float[] getAsArray() {
         float array[] = {
-                r,g,b,a
+                r,
+                g,
+                b,
+                a
         };
         return array;
     }

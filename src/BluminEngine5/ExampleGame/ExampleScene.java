@@ -1,5 +1,6 @@
 package BluminEngine5.ExampleGame;
 
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
@@ -55,7 +56,7 @@ public class ExampleScene extends Scene {
 
     @Override
     public void Init() {
-
+        p.mesh.getMaterial().setColor(new Color(0,1,0,1));
     }
 
     @Override

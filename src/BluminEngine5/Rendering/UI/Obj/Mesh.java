@@ -38,16 +38,17 @@ public class Mesh {
         positionBuffer.put(positionData).flip();
         pbo = glStoreBuffer(positionBuffer, 0, 2);
 
-        FloatBuffer colorBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
-        float[] colorData = new float[vertecies.length * 3];
+        FloatBuffer colorBuffer = MemoryUtil.memAllocFloat(vertecies.length * 4);
+        float[] colorData = new float[vertecies.length * 4];
         for (int i = 0; i < vertecies.length; i++) {
-            colorData[i * 3] = mat.getColor().GetR();
-            colorData[i * 3 + 1] = mat.getColor().GetG();
-            colorData[i * 3 + 2] = mat.getColor().GetB();
+            colorData[i * 4] = mat.getColor().GetR();
+            colorData[i * 4 + 1] = mat.getColor().GetG();
+            colorData[i * 4 + 2] = mat.getColor().GetB();
+            colorData[i * 4 + 3] = mat.getColor().GetA();
         }
         colorBuffer.put(colorData).flip();
 
-        cbo = glStoreBuffer(colorBuffer, 1, 3);
+        cbo = glStoreBuffer(colorBuffer, 1, 4);
     }
     private int glStoreBuffer(FloatBuffer bufferdata, int index, int size){
         int Bufferid = GL15.glGenBuffers();

@@ -31,7 +31,6 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Init() {
-        mesh.getMaterial().setColor(new Color(1,0,0,1));
     }
 
     @Override

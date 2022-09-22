@@ -58,8 +58,10 @@ public class SceneManager {
 
     public void SetActiveScene(Scene scene) {
         if(CurrentActiveScene != null) {
+            Application.PreInit.Invoke();
             CurrentActiveScene.ActionData.OnDestroy.Run();
             CurrentActiveScene = scene;
+            Application.Init.Invoke();
             CurrentActiveScene.ActionData.OnSceneLoad.Run();
         }else{
             scene.Load();

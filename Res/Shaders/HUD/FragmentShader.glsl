@@ -7,12 +7,14 @@ out vec4 outColor;
 
 uniform sampler2D guiTexture;
 
-void main(void){
-
-    if(color.xyz == vec3(1,1,1)) {
-        outColor = texture(guiTexture, textureCoords);
-    } else{
-        outColor = texture(guiTexture, textureCoords) + color;
+void main(){
+    if(color.w < 0.1) {
+        discard;
+    } else {
+        if(color.xyz == vec3(1,1,1)) {
+            outColor = texture(guiTexture, textureCoords);
+        } else{
+            outColor = texture(guiTexture, textureCoords) + color;
+        }
     }
-
 }

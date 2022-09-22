@@ -9,6 +9,6 @@ import BluminEngine5.SceneMannagement.SceneManager;
 public class Main {
     public static void main(String[] args) {
         SceneManager.GetCurent().SetActiveScene(new ExampleScene());
-        Application.Run(Resolution.CurentRes(), DisplayMode.WindowedLocked, DisplayDimension.ThreeD);
+        Application.Run(Resolution.CurentRes(), DisplayMode.Fullscreen, DisplayDimension.ThreeD);
     }
 }
