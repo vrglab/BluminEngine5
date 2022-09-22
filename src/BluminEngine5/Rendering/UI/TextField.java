@@ -1,6 +1,6 @@
 package BluminEngine5.Rendering.UI;
 
-import BluminEngine5.Rendering.ThreeD.Shaders.Shader;
+import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
 
 public class TextField extends UiObject {

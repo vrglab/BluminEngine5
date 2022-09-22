@@ -1,8 +1,8 @@
 package BluminEngine5.Utils;
 
-import BluminEngine5.Rendering.ThreeD.Master.Material;
-import BluminEngine5.Rendering.ThreeD.Master.Mesh;
-import BluminEngine5.Rendering.ThreeD.Vertex;
+import BluminEngine5.Rendering.Master.Material;
+import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Rendering.Vertex;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;

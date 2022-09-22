@@ -1,7 +1,6 @@
 package BluminEngine5.Rendering.Master;
 
 import BluminEngine5.Rendering.Vertex;
-import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;

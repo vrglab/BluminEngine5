@@ -3,7 +3,7 @@ package BluminEngine5.ExampleGame;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Physics.MeshColider;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
-import BluminEngine5.Rendering.ThreeD.Master.Mesh;
+import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {

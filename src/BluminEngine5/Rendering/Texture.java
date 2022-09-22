@@ -9,10 +9,8 @@ import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
 public class Texture {

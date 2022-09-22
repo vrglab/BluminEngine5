@@ -1,14 +1,9 @@
 package BluminEngine5.Rendering;
 
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.Math.Matrix;
 import BluminEngine5.Utils.Utils;
 import org.lwjgl.glfw.*;
-import org.lwjgl.nuklear.NkBuffer;
-import org.lwjgl.nuklear.NkContext;
-import org.lwjgl.nuklear.NkDrawNullTexture;
-import org.lwjgl.nuklear.NkUserFont;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 
@@ -16,10 +11,8 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
-import static org.lwjglx.util.glu.GLU.gluPerspective;
 
 public class Display {
 

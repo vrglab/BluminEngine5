@@ -1,6 +1,6 @@
 package BluminEngine5.ExampleGame;
 
-import BluminEngine5.Rendering.ThreeD.Color;
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;

@@ -4,8 +4,8 @@ package BluminEngine5.SceneMannagement;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Behaviour.ILogic;
-import BluminEngine5.Rendering.ThreeD.Camera;
-import BluminEngine5.Rendering.ThreeD.Color;
+import BluminEngine5.Rendering.Camera;
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
 
