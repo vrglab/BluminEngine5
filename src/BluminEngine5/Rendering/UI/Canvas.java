@@ -41,6 +41,7 @@ public class Canvas extends BluminBehaviour {
                 glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
             }
             comp.shader.Run();
+            comp.shader.SetUniform("CenterPos", comp.transform.Center );
             comp.ActionData.OnRender.Run();
             comp.shader.Stop();
             if(comp.mesh.getMaterial().getColor().GetA() < 1) {

@@ -2,10 +2,13 @@ package BluminEngine5.Rendering.UI.Coponants;
 
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
 import BluminEngine5.Utils.Math.Vector2;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class ImageRenderer extends IComponent {
 
@@ -13,13 +16,16 @@ public class ImageRenderer extends IComponent {
 
     @Override
     public void Update() {
-
+        Parent.transform.Center.x += 0.01;
+        Debug.log(Parent.transform.Center.x);
     }
 
     @Override
     public void OnRender() {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, Parent.mesh.getMaterial().getTexture().getRenderMode().GetValue());
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, Parent.mesh.getMaterial().getTexture().getRenderMode().GetValue());
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL13.glBindTexture(GL13.GL_TEXTURE_2D, Parent.mesh.getMaterial().getTexture().getTextureId());
+        GL13.glBindTexture(GL_TEXTURE_2D, Parent.mesh.getMaterial().getTexture().getTextureId());
         Parent.shader.SetUniform(
                 "transformationMatrix",
                 Matrix.transform(

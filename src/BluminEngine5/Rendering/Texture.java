@@ -13,12 +13,14 @@ import java.io.InputStream;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
 public class Texture {
     private org.newdawn.slick.opengl.Texture texture;
     private float width, height;
     private int textureId;
     private String file;
+    private TextureMode renderMode = TextureMode.ClampToEdge;
 
     public Texture(String file) {
         this.file = file;
@@ -35,6 +37,8 @@ public class Texture {
                 width = texture.getWidth();
                 height = texture.getHeight();
                 textureId = texture.getTextureID();
+
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
             } catch(IOException e){
                 Debug.logException("Failed to load texture with exception", e);
             }
@@ -64,5 +68,13 @@ public class Texture {
 
     public int getTextureId() {
         return textureId;
+    }
+
+    public TextureMode getRenderMode() {
+        return renderMode;
+    }
+
+    public void setRenderMode(TextureMode renderMode) {
+        this.renderMode = renderMode;
     }
 }
