@@ -28,11 +28,12 @@ public class Canvas extends BluminBehaviour {
             GL30.glBindVertexArray(comp.mesh.getVAO());
             GL20.glEnableVertexAttribArray(0);
             GL20.glEnableVertexAttribArray(1);
+            glDisable(GL_DEPTH_TEST);
             if(comp.mesh.getMaterial().getColor().GetA() < 1) {
                 glEnable(GL_BLEND);
                 glBlendEquation(GL_FUNC_ADD);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+                glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
             }
             comp.shader.Run();
             comp.shader.SetUniform("CenterPos", comp.transform.Center.GetValue());
@@ -41,6 +42,7 @@ public class Canvas extends BluminBehaviour {
             if(comp.mesh.getMaterial().getColor().GetA() < 1) {
                 glDisable(GL_BLEND);
             }
+            glEnable(GL_DEPTH_TEST);
             GL20.glDisableVertexAttribArray(1);
             GL20.glDisableVertexAttribArray(0);
             GL30.glBindVertexArray(0);

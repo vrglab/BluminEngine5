@@ -1,5 +1,7 @@
 package ExampleGame;
 
+import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
@@ -19,11 +21,12 @@ public class ExampleScene extends Scene {
 
     public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
 
+
     public ExampleScene() {
         RegsiterGameObject(obj);
         RegsiterGameObject(ES);
         RegsiterGameObject(UiCanvas);
-        UiCanvas.RegisterUiObj(p);
+        ActiveLight = ES.SunComponant;
     }
     @Override
     public void Update() {

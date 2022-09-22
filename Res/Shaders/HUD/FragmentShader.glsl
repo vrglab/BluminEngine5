@@ -17,7 +17,7 @@ void main(){
         if(color == vec4(1,1,1,1)) {
             outColor = texture(guiTexture, textureCoords);
         } else{
-            outColor = tex + color;
+            outColor = tex * color;
         }
     }
 }

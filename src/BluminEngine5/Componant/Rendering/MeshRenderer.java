@@ -2,6 +2,7 @@ package BluminEngine5.Componant.Rendering;
 
 import BluminEngine5.Application;
 import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
