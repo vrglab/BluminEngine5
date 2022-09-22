@@ -1,6 +1,7 @@
 package BluminEngine5.ExampleGame;
 
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
@@ -17,7 +18,7 @@ public class ExampleScene extends Scene {
 
     public Canvas UiCanvas = new Canvas();
 
-    public Panel p = new Panel(new Rect(new Vector2(2,0), new Vector2(0.03f,0.05f), Vector3.Zero));
+    public Panel p = new Panel(new Rect(new Vector2(1,0), new Vector2(0.6f,0.5f), Vector3.Zero));
 
     public ExampleScene() {
         RegsiterGameObject(obj);
@@ -56,7 +57,7 @@ public class ExampleScene extends Scene {
 
     @Override
     public void Init() {
-        p.mesh.getMaterial().setColor(new Color(0,1,0,1));
+        p.mesh.getMaterial().SetTexture(new Texture("Res/Textures/uhhhh.png"));
     }
 
     @Override

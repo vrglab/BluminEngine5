@@ -1,9 +1,10 @@
-{System 2022/09/22 10:23:02:232}: Starting SceneManager
-{System 2022/09/22 10:23:03:233}: Loading Metadata
-{System 2022/09/22 10:23:03:233}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/09/22 10:23:03:233}: Setting up keyboard
-{System 2022/09/22 10:23:03:233}: Setting up DaynamicsWorld
-{Error: 2022/09/22 10:23:04:234}: ERROR: 0:17: 'assign' :  cannot convert from '3-component vector of highp float' to 'FragUserData 4-component vector of highp float'
+{System 2022/09/22 11:36:52:3652}: Starting SceneManager
+{System 2022/09/22 11:36:53:3653}: Loading Metadata
+{System 2022/09/22 11:36:53:3653}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/09/22 11:36:54:3654}: Setting up keyboard
+{System 2022/09/22 11:36:54:3654}: Setting up DaynamicsWorld
+{Error: 2022/09/22 11:36:54:3654}: ERROR: 0:13: '+' : wrong operand types no operation '+' exists that takes a left-hand operand of type 'uniform 4X4 (default)row_major matrix of highp float' and a right operand of type '4-component vector of highp float' (or there is no acceptable conversion)
+ERROR: 0:13: 'assign' :  cannot convert from 'uniform 4X4 (default)row_major matrix of highp float' to 'Position 4-component vector of highp float'
 
 
-{Error: 2022/09/22 10:23:04:234}: Failed to compile fragment shader
+{Error: 2022/09/22 11:36:54:3654}: Failed to compile vertex shader

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.*;
 
 
 public class Canvas extends BluminBehaviour {
@@ -35,7 +36,9 @@ public class Canvas extends BluminBehaviour {
             GL20.glEnableVertexAttribArray(1);
             if(comp.mesh.getMaterial().getColor().GetA() < 1) {
                 glEnable(GL_BLEND);
-                glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+                glBlendEquation(GL_FUNC_ADD);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
             }
             comp.shader.Run();
             comp.ActionData.OnRender.Run();

@@ -8,14 +8,16 @@ out vec4 outColor;
 uniform sampler2D guiTexture;
 
 void main(){
-    if(color.w < 0.1) {
+    vec4 tex = vec4(texture(guiTexture, textureCoords).xyz, color.w);
+
+
+    if(color.w < 0.1 || texture(guiTexture, textureCoords).w < 0.1f) {
         discard;
     } else {
-        if(color.xyz == vec3(1,1,1)) {
+        if(color == vec4(1,1,1,1)) {
             outColor = texture(guiTexture, textureCoords);
         } else{
-            vec4 col = texture(guiTexture, textureCoords) + color.w * (1 - color.w) + color;
-            outColor = texture(guiTexture, textureCoords) + col;
+            outColor = tex + color;
         }
     }
 }
