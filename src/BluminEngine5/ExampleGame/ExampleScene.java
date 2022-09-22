@@ -18,7 +18,7 @@ public class ExampleScene extends Scene {
 
     public Canvas UiCanvas = new Canvas();
 
-    public Panel p = new Panel(new Rect(new Vector2(1,0), new Vector2(0.6f,0.5f), Vector3.Zero));
+    public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
 
     public ExampleScene() {
         RegsiterGameObject(obj);
@@ -57,7 +57,7 @@ public class ExampleScene extends Scene {
 
     @Override
     public void Init() {
-        p.mesh.getMaterial().SetTexture(new Texture("Res/Textures/uhhhh.png"));
+
     }
 
     @Override

@@ -18,6 +18,7 @@ public class Panel extends UiObject {
         transform = r;
 
         mesh = new Mesh(Utils.QuadAsVertex2D());
+        mesh.getMaterial().SetTexture(new Texture("Res/Textures/UI/Panel.png"));
         shader = new Shader("Res/Shaders/HUD/HUDShader.json");
         RegisterComponant(sr,this);
     }

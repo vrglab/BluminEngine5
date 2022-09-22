@@ -35,7 +35,6 @@ public class Texture {
                 width = texture.getWidth();
                 height = texture.getHeight();
                 textureId = texture.getTextureID();
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             } catch(IOException e){
                 Debug.logException("Failed to load texture with exception", e);
             }
