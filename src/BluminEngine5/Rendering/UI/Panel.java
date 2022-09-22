@@ -1,12 +1,10 @@
 package BluminEngine5.Rendering.UI;
 
-import BluminEngine5.Rendering.Texture;
+import BluminEngine5.Rendering.ThreeD.Texture;
 import BluminEngine5.Rendering.UI.Coponants.ImageRenderer;
-import BluminEngine5.Rendering.Shaders.Shader;
+import BluminEngine5.Rendering.ThreeD.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Obj.Mesh;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
-import BluminEngine5.Utils.Math.Vector2;
-import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.Utils;
 
 public class Panel extends UiObject {

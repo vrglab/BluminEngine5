@@ -2,8 +2,7 @@ package BluminEngine5.Rendering.UI.Obj;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.IComponent;
-import BluminEngine5.Componant.Transform;
-import BluminEngine5.Rendering.Shaders.Shader;
+import BluminEngine5.Rendering.ThreeD.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.Math.Vector2;

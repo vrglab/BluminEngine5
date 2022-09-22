@@ -1,9 +1,9 @@
 package BluminEngine5.ExampleGame;
 
 import BluminEngine5.Application;
-import BluminEngine5.Rendering.DisplayDimension;
-import BluminEngine5.Rendering.DisplayMode;
-import BluminEngine5.Rendering.Resolution;
+import BluminEngine5.Rendering.ThreeD.DisplayDimension;
+import BluminEngine5.Rendering.ThreeD.DisplayMode;
+import BluminEngine5.Rendering.ThreeD.Resolution;
 import BluminEngine5.SceneMannagement.SceneManager;
 
 public class Main {

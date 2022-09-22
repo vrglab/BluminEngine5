@@ -1,12 +1,6 @@
 package BluminEngine5.Rendering.UI;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
-import BluminEngine5.Utils.Debuging.Debug;
-import BluminEngine5.Utils.Math.Matrix;
-import BluminEngine5.Utils.Math.Vector2;
-import BluminEngine5.Utils.Math.Vector3;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 

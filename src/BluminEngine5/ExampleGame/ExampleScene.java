@@ -1,7 +1,5 @@
 package BluminEngine5.ExampleGame;
 
-import BluminEngine5.Rendering.Color;
-import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;

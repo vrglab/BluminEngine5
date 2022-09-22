@@ -1,13 +1,12 @@
 package BluminEngine5.Rendering.UI.Obj;
 
-import BluminEngine5.Rendering.Master.Material;
+import BluminEngine5.Rendering.ThreeD.Master.Material;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 public class Mesh {
     private Vertex[] vertecies;

@@ -2,9 +2,7 @@ package BluminEngine5.Rendering.UI.Coponants;
 
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
-import BluminEngine5.Utils.Math.Vector2;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 

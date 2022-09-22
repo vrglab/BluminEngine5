@@ -1,8 +1,10 @@
 package BluminEngine5;
 
-import BluminEngine5.Rendering.*;
-import BluminEngine5.Rendering.Master.MasterRenderer;
-import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Rendering.ThreeD.Display;
+import BluminEngine5.Rendering.ThreeD.DisplayDimension;
+import BluminEngine5.Rendering.ThreeD.DisplayMode;
+import BluminEngine5.Rendering.ThreeD.Master.MasterRenderer;
+import BluminEngine5.Rendering.ThreeD.Resolution;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.*;
 import BluminEngine5.Utils.*;

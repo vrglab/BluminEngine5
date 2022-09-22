@@ -1,10 +1,9 @@
 package BluminEngine5.ExampleGame;
 
-import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.ThreeD.Color;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
-import BluminEngine5.Utils.ObjLoader;
 import org.lwjgl.glfw.GLFW;
 
 public class SecondExampleScene extends Scene {

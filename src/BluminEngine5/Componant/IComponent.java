@@ -1,10 +1,8 @@
 package BluminEngine5.Componant;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Behaviour.ILogic;
 import BluminEngine5.Behaviour.IObjLogic;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
-import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.Utils.objActionData;
 
 
