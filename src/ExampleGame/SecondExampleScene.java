@@ -1,28 +1,20 @@
-package BluminEngine5.ExampleGame;
+package ExampleGame;
 
-import BluminEngine5.Rendering.UI.Canvas;
-import BluminEngine5.Rendering.UI.Panel;
-import BluminEngine5.Rendering.UI.Rect;
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
-import BluminEngine5.Utils.Math.Vector2;
-import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.glfw.GLFW;
 
-public class ExampleScene extends Scene {
+public class SecondExampleScene extends Scene {
 
-    private ExampleGameobject obj = new ExampleGameobject();
 
-    public Canvas UiCanvas = new Canvas();
 
-    public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
+    public SecondExampleScene() {
+        SkyColor = new Color(0,1,1,1);
 
-    public ExampleScene() {
-        RegsiterGameObject(obj);
-        RegsiterGameObject(UiCanvas);
-        UiCanvas.RegisterUiObj(p);
     }
+
     @Override
     public void Update() {
         if(Input.Instance().WasHeld(GLFW.GLFW_KEY_A)){
@@ -44,7 +36,7 @@ public class ExampleScene extends Scene {
             ActiveCamera.transform.position.y -= 0.01;
         }
         if(Input.Instance().WasPressed(GLFW.GLFW_KEY_ESCAPE)){
-            SceneManager.GetCurent().SetActiveScene(new SecondExampleScene());
+            SceneManager.GetCurent().SetActiveScene(new ExampleScene());
         }
     }
 
@@ -70,5 +62,6 @@ public class ExampleScene extends Scene {
 
     @Override
     public void Load() {
+
     }
 }

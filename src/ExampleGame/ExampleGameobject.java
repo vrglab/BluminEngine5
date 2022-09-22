@@ -1,4 +1,4 @@
-package BluminEngine5.ExampleGame;
+package ExampleGame;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Physics.MeshColider;

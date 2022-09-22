@@ -1,4 +1,4 @@
-package BluminEngine5.ExampleGame;
+package ExampleGame;
 
 import BluminEngine5.Application;
 import BluminEngine5.Rendering.DisplayDimension;
