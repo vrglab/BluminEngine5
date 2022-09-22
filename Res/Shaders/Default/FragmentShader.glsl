@@ -4,10 +4,11 @@ in vec4 color;
 in vec2 texCord;
 in vec3 Normal;
 in vec3 EyeView;
+in vec3 SunLightPos;
 
 
 uniform sampler2D Texture;
-uniform vec3 SunLightPos;
+
 
 out vec4 outColor;
 
@@ -15,7 +16,7 @@ out vec4 outColor;
 float GetDefiuseLight() {
     float distance = length(SunLightPos - EyeView);
     vec3 lightVector = normalize(SunLightPos - EyeView);
-    float diffuse = max(dot(Normal, lightVector), 0.1);
+    float diffuse = max(dot(Normal, lightVector), 0.08);
     return diffuse * (1.0 / (1.0 + (0.25 * distance * distance)));
 }
 
