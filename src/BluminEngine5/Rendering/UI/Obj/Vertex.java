@@ -11,7 +11,9 @@ public class Vertex {
         position = pos;
     }
 
+
     public Vector2 getPosition() {
         return position;
     }
+
 }

@@ -12,7 +12,7 @@ public class MasterRenderer {
 
     public void Render() {
         Color SkyColor = SceneManager.GetCurent().GetActiveScene().SkyColor;
-        glClearColor(SkyColor.GetR(), SkyColor.GetG(), SkyColor.GetB(), SkyColor.getA());
+        glClearColor(SkyColor.GetR(), SkyColor.GetG(), SkyColor.GetB(), SkyColor.GetA());
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         OnRender.Invoke();
     }

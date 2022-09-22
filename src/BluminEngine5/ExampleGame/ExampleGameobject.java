@@ -3,6 +3,7 @@ package BluminEngine5.ExampleGame;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Physics.MeshColider;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Utils.ObjLoader;
 
@@ -30,7 +31,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Init() {
-
+        mesh.getMaterial().setColor(new Color(1,0,0,1));
     }
 
     @Override

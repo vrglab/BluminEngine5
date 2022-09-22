@@ -50,9 +50,9 @@ public class Mesh {
         FloatBuffer colorBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
         float[] colorData = new float[vertecies.length * 3];
         for (int i = 0; i < vertecies.length; i++) {
-            colorData[i * 3] = vertecies[i].getColor().GetR();
-            colorData[i * 3 + 1] = vertecies[i].getColor().GetG();
-            colorData[i * 3 + 2] = vertecies[i].getColor().GetB();
+            colorData[i * 3] = mat.getColor().GetR();
+            colorData[i * 3 + 1] = mat.getColor().GetG();
+            colorData[i * 3 + 2] = mat.getColor().GetB();
         }
         colorBuffer.put(colorData).flip();
 

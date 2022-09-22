@@ -8,7 +8,7 @@ public class Color  {
 
     float r,g,b,a;
 
-    public float getA() {
+    public float GetA() {
         return a;
     }
 
@@ -33,7 +33,12 @@ public class Color  {
         return b;
     }
 
-
+    public float[] getAsArray() {
+        float array[] = {
+                r,g,b,a
+        };
+        return array;
+    }
     public void set(float r, float g, float b, float a) {
         this.r = r;
         this.g = g;

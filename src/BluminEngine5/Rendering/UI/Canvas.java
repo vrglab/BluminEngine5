@@ -30,9 +30,11 @@ public class Canvas extends BluminBehaviour {
         for (UiObject comp: UiObjects) {
             GL30.glBindVertexArray(comp.mesh.getVAO());
             GL20.glEnableVertexAttribArray(0);
+            GL20.glEnableVertexAttribArray(1);
             comp.shader.Run();
             comp.ActionData.OnRender.Run();
             comp.shader.Stop();
+            GL20.glDisableVertexAttribArray(1);
             GL20.glDisableVertexAttribArray(0);
             GL30.glBindVertexArray(0);
         }

@@ -1,5 +1,6 @@
 package BluminEngine5.Rendering.Shaders;
 
+import BluminEngine5.Rendering.Color;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.*;
 import BluminEngine5.Utils.Utils;
@@ -84,6 +85,11 @@ public class Shader {
         FloatBuffer matrix = MemoryUtil.memAllocFloat(Matrix.SIZE * Matrix.SIZE);
         matrix.put(data.Get()).flip();
         GL20.glUniformMatrix4fv(GetUniformLocation(name), true, matrix);
+    }
+
+    public void SetUniform(String name, Color data) {
+
+        GL20.glUniform4f(GetUniformLocation(name), data.GetR(),data.GetG(),data.GetB(),data.GetA());
     }
 
     public void Run() {
