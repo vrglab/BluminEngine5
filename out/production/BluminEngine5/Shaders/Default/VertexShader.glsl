@@ -22,5 +22,5 @@ void main() {
     texCord = textureCord;
     Normal = mat3(transpose(inverse(transform))) * normal;
     EyeView = vec3(ProjectionMatrix * transform);
-    FragPos = vec3(transform * vec4(position, 1.0));
+    FragPos = vec3(ViewMatrix * vec4(position, 1.0));
 }

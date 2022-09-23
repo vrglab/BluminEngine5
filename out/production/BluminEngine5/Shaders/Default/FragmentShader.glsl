@@ -31,8 +31,8 @@ struct PointLight {
 
 struct Material {
     vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
+    sampler2D  diffuse;
+    sampler2D  specular;
     float shininess;
 };
 
@@ -40,7 +40,7 @@ struct Material {
 
 uniform sampler2D Texture;
 uniform Material material;
-uniform DirLight dirLight;
+uniform DirLight light;
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform vec3 lightPos;
 uniform vec4 lightColor;
@@ -57,23 +57,24 @@ void main() {
         discard;
     } else {
         if(color.xyz == vec3(1,1,1)) {
-            float ambientStrength = 0.1;
-            vec3 ambient = ambientStrength * lightColor.xyz;
 
+            // diffuse
             vec3 norm = normalize(Normal);
             vec3 lightDir = normalize(lightPos - FragPos);
             float diff = max(dot(norm, lightDir), 0.0);
-            vec3 diffuse = diff * lightColor.xyz;
 
-            float specularStrength = 0.5;
+            // specular
             vec3 viewDir = normalize(viewPos - FragPos);
-            vec3 reflectDir = reflect(-lightDir, norm);
+            vec3 reflectDir = reflect(lightDir, norm);
+            float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
-            float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-            vec3 specular = specularStrength * spec * lightColor.xyz;
 
-            vec3 result = (ambient + diffuse + specular) * color.xyz;
-            outColor = texture(Texture, texCord) + vec4(result, 1.0);
+            vec3 ambient = light.ambient * vec3(texture(material.diffuse, texCord));
+            vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, texCord));
+            vec3 specular = light.specular * spec * vec3(texture(material.specular, texCord));
+
+            vec3 result = ambient + diffuse + specular;
+            outColor = texture(Texture, texCord) + result;
 
         } else{
             //outColor = tex * color * GetDefiuseLight(lightdata[i]);

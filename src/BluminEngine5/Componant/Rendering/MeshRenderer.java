@@ -8,6 +8,7 @@ import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
+import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
@@ -61,7 +62,22 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
         shader.SetUniform("lightPos", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).Parent.transform.position);
         shader.SetUniform("lightColor", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).color);
-        shader.SetUniform("CamPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
+        shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
+
+        shader.SetUniform("material.ambient", mesh.getMaterial().Ambient);
+        shader.SetUniform("material.diffuse",  mesh.getMaterial().Diffuse);
+        shader.SetUniform("material.specular", mesh.getMaterial().Specular);
+        shader.SetUniform("material.shininess", mesh.getMaterial().Shine);
+
+        shader.SetUniform("light.ambient", new Vector3(0.2f, 0.2f, 0.2f));
+        shader.SetUniform("light.diffuse",  1);
+        shader.SetUniform("light.specular", 2);
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE1);
+        GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getDefuseMap().getTextureId());
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE2);
+        GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getSpecularMap().getTextureId());
 
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();
