@@ -56,8 +56,6 @@ public class ExampleScene extends Scene {
             SceneManager.GetCurent().SetActiveScene(new SecondExampleScene());
         }
         ESE.transform.position.y = 18;
-        Debug.log(getGameObject(new ExampleSun()).transform.position);
-
     }
 
 

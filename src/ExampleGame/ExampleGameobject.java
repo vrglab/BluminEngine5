@@ -23,7 +23,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Update() {
-        Debug.log(sun);
+
     }
 
     @Override

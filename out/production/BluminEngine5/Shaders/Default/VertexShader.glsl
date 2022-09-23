@@ -1,4 +1,4 @@
-#version 430 core
+#version 460 core
 
 in vec3 position;
 in vec4 incolor;
@@ -14,13 +14,14 @@ out vec2 texCord;
 out vec3 Normal;
 out vec3 EyeView;
 out vec3 FragPos;
-
+out int ActiveLightIndexes;
 
 void main() {
     gl_Position =  ProjectionMatrix * ViewMatrix *transform * vec4(position, 1.0f) ;
     color = incolor;
     texCord = textureCord;
-    Normal = mat3(transpose(inverse(transform))) * normal;
+    Normal = normal;
     EyeView = vec3(ProjectionMatrix * transform);
     FragPos = vec3(ViewMatrix * vec4(position, 1.0));
+    ActiveLightIndexes = 16;
 }

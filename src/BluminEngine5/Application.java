@@ -18,6 +18,7 @@ import com.bulletphysics.dynamics.DiscreteDynamicsWorld;
 import com.bulletphysics.dynamics.DynamicsWorld;
 import com.bulletphysics.dynamics.constraintsolver.ConstraintSolver;
 import com.bulletphysics.dynamics.constraintsolver.SequentialImpulseConstraintSolver;
+import org.lwjgl.glfw.GLFWVulkan;
 import org.lwjgl.opengl.GL;
 import BluminEngine5.Utils.Math.Math;
 import org.lwjgl.opengl.GL11;
@@ -63,6 +64,8 @@ public class Application {
                 Debug.logError("Vulkan not suported");
             }
         }
+
+
 
         display = new Display();
         display.CreateWindow(getMetadata().GameName, res, mode, dim);

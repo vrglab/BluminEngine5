@@ -100,7 +100,6 @@ public class Shader {
                 data.color.GetA());
         GL20.glUniform4f(GetUniformLocation(name, arrayPos, "Color"),
                 data.color.GetR(),data.color.GetG(),data.color.GetB(),data.color.GetA());
-        Debug.log(data.Parent.transform.position);
     }
 
     public void SetUniform(String name, Color data) {

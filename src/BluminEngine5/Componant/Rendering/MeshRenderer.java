@@ -54,8 +54,6 @@ public class MeshRenderer extends IComponent {
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         }
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getTexture().getTextureId());
         shader.Run();
         shader.SetUniform("transform", Matrix.transform(Parent.transform));
         shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
@@ -65,19 +63,32 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
 
         shader.SetUniform("material.ambient", mesh.getMaterial().Ambient);
-        shader.SetUniform("material.diffuse",  mesh.getMaterial().Diffuse);
-        shader.SetUniform("material.specular", mesh.getMaterial().Specular);
         shader.SetUniform("material.shininess", mesh.getMaterial().Shine);
 
-        shader.SetUniform("light.ambient", new Vector3(0.2f, 0.2f, 0.2f));
-        shader.SetUniform("light.diffuse",  1);
-        shader.SetUniform("light.specular", 2);
+
+        //Set the Textures
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getTexture().getTextureId());
+        shader.SetUniform("material.Texture",  0);
 
         GL13.glActiveTexture(GL13.GL_TEXTURE1);
         GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getDefuseMap().getTextureId());
+        shader.SetUniform("material.diffuse",  1);
 
         GL13.glActiveTexture(GL13.GL_TEXTURE2);
         GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getSpecularMap().getTextureId());
+        shader.SetUniform("material.specular", 2);
+
+        for(int i = 0; i < SceneManager.GetCurent().GetActiveScene().LightObjects.size(); i++) {
+            shader.SetUniform("pointLights["+ i + "].ambient", new Vector3(0.2f, 0.2f, 0.2f));
+            shader.SetUniform("pointLights["+ i + "].diffuse",  new Vector3(0.5f, 0.5f, 0.5f));
+            shader.SetUniform("pointLights["+ i + "].specular", new Vector3(1.0f, 1.0f, 1.0f));
+            shader.SetUniform("pointLights["+ i + "].position", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).transform.position);
+            shader.SetUniform("pointLights["+ i + "].constant", 1.0f);
+            Debug.log("Light " + i);
+        }
+        shader.SetUniform("dirLight.direction", new Vector3(-0.2f, -1.0f, -0.3f));
+
 
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();

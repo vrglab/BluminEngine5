@@ -23,7 +23,7 @@ public class Material {
         texture = new Texture("Res/Textures/Missing.png");
         DefuseMap = new Texture("Res/Textures/Missing.png");
         SpecularMap = new Texture("Res/Textures/Missing.png");
-        color = new Color(1,1,1,1);
+        color = new Color(1,0.5f,1,1);
     }
 
     public Material(String text) {
@@ -36,10 +36,14 @@ public class Material {
 
     public void Creat() {
         texture.Create();
+        DefuseMap.Create();
+        SpecularMap.Create();
     }
 
     public void Destroy() {
         texture.Destroy();
+        DefuseMap.Destroy();
+        SpecularMap.Destroy();
     }
 
     public Texture getTexture() {
