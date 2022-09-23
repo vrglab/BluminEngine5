@@ -58,8 +58,6 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("transform", Matrix.transform(Parent.transform));
         shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
-        shader.SetUniform("lightPos", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).Parent.transform.position);
-        shader.SetUniform("lightColor", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).color);
         shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
 
         shader.SetUniform("material.ambient", mesh.getMaterial().Ambient);
@@ -80,10 +78,11 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("material.specular", 2);
 
         for(int i = 0; i < SceneManager.GetCurent().GetActiveScene().LightObjects.size(); i++) {
+            shader.SetUniform("lightPos", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).Parent.transform.position);
+            shader.SetUniform("lightColor", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).color);
             shader.SetUniform("pointLights["+ i + "].ambient", new Vector3(0.2f, 0.2f, 0.2f));
             shader.SetUniform("pointLights["+ i + "].diffuse",  new Vector3(0.5f, 0.5f, 0.5f));
             shader.SetUniform("pointLights["+ i + "].specular", new Vector3(1.0f, 1.0f, 1.0f));
-            shader.SetUniform("pointLights["+ i + "].position", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).transform.position);
             shader.SetUniform("pointLights["+ i + "].constant", 1.0f);
             Debug.log("Light " + i);
         }

@@ -1,6 +1,7 @@
 package ExampleGame;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
+import BluminEngine5.Componant.Audio.Source;
 import BluminEngine5.Componant.Physics.MeshColider;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Master.Mesh;
@@ -13,6 +14,8 @@ public class ExampleGameobject extends BluminBehaviour {
     MeshRenderer mr = new MeshRenderer(mesh);
 
     MeshColider collider = new MeshColider(mr);
+
+    Source s;
 
     BluminBehaviour sun;
 
@@ -34,6 +37,8 @@ public class ExampleGameobject extends BluminBehaviour {
     @Override
     public void Init() {
         sun = parent.getGameObject(new ExampleSun());
+        s  = new Source("Res/Master_220921-222919_0.mp3");
+        RegisterComponant(s, this);
     }
 
     @Override

@@ -16,21 +16,15 @@ import org.lwjgl.glfw.GLFW;
 public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
-    private ExampleSun ES = new ExampleSun();
-    private ExampleSun ESE = new ExampleSun();
-
     public Canvas UiCanvas = new Canvas();
 
     public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
 
 
     public ExampleScene() {
+        RegsiterGameObject(ActiveCamera);
         RegsiterGameObject(obj);
-        RegsiterGameObject(ES);
-        RegsiterGameObject(ESE);
         RegsiterGameObject(UiCanvas);
-        RegsiterLightObject(ES.SunComponant);
-        RegsiterLightObject(ESE.SunComponant);
     }
     @Override
     public void Update() {
@@ -55,7 +49,6 @@ public class ExampleScene extends Scene {
         if(Input.Instance().WasPressed(GLFW.GLFW_KEY_ESCAPE)){
             SceneManager.GetCurent().SetActiveScene(new SecondExampleScene());
         }
-        ESE.transform.position.y = 18;
     }
 
 

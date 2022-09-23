@@ -22,9 +22,18 @@ public abstract class Scene implements ILogic {
 
     public objActionData ActionData =  new objActionData();
 
+    public String name = "New Scene";
+    /* public LightBase Sun =  new Sun(new Transform(
+             new Vector3(0,0,0),
+             new Vector3(0,0,0)),
+             new Color(0,0,0,1));*/
+    public Camera ActiveCamera = new Camera();
+    public Color SkyColor = new Color(0.2f,0.5f,0.5f,1);
+
 
 
     public Scene() {
+
 
         ActionData.OnUpdate = new IAction() {
             @Override
@@ -163,13 +172,7 @@ public abstract class Scene implements ILogic {
         }
     }
 
-    public String name = "New Scene";
-   /* public LightBase Sun =  new Sun(new Transform(
-            new Vector3(0,0,0),
-            new Vector3(0,0,0)),
-            new Color(0,0,0,1));*/
-    public Camera ActiveCamera = new Camera();
-    public Color SkyColor = new Color(0.2f,0.5f,0.5f,1);
+
 
     public BluminBehaviour getGameObject(BluminBehaviour componantType) {
         for (BluminBehaviour comp: GameObjects) {
