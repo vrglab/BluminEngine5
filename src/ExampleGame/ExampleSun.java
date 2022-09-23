@@ -1,11 +1,16 @@
 package ExampleGame;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
+import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Lighting.Sun;
+import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Utils.Debuging.Debug;
+import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleSun extends BluminBehaviour {
 
     public Sun SunComponant = new Sun();
+
 
     public ExampleSun() {
         RegisterComponant(SunComponant, this);

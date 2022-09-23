@@ -4,8 +4,10 @@ package BluminEngine5.SceneMannagement;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Behaviour.ILogic;
+import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
 
@@ -18,6 +20,7 @@ public abstract class Scene implements ILogic {
 
     public objActionData ActionData =  new objActionData();
 
+    public BaseLight ActiveLight = new Sun();
 
 
     public Scene() {

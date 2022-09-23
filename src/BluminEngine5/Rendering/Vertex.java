@@ -18,9 +18,10 @@ public class Vertex {
         normals = norm;
         color = new Color(1,1,1,1);
     }
-    public Vertex(Vector3 pos, Color c, Vector2 texpos) {
+    public Vertex(Vector3 pos, Color c, Vector2 texpos, Vector3 norm) {
         position = pos;
         texturePosition = texpos;
+        normals = norm;
         color = c;
     }
     public Vector3 getPosition() {

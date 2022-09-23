@@ -7,6 +7,12 @@ import BluminEngine5.Utils.Math.Vector3;
 public class Color  {
 
     float r,g,b,a;
+
+    public static final Color White = new Color(1,1,1,1);
+    public static final Color Black = new Color(0,0,0,1);
+    public static final Color Red = new Color(1,0,0,1);
+    public static final Color Green = new Color(0,1,0,1);
+    public static final Color BLue = new Color(0,0,1,1);
     public Color(float r, float g, float b, float a){
         set(r,g,b,a);
     }

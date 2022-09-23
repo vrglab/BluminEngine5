@@ -12,7 +12,7 @@ import java.nio.IntBuffer;
 public class Mesh {
     private Vertex[] vertecies;
     private int[] indecies;
-    private int vao, pbo, ibo, cbo, tbo;
+    private int vao, pbo, ibo, cbo, tbo, nbo;
     private Material mat;
 
     public Mesh(Vertex[] vertecies, int[] indecies) {
@@ -69,6 +69,18 @@ public class Mesh {
         tbo = glStoreBuffer(textBuffer, 2, 2);
 
 
+        FloatBuffer normalsBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
+        float[]  normalsData = new float[vertecies.length * 3];
+        for (int i = 0; i < vertecies.length; i++) {
+            normalsData[i * 3] = vertecies[i].getNormals().x;
+            normalsData[i * 3 + 1] = vertecies[i].getNormals().y;
+            normalsData[i * 3 + 2] = vertecies[i].getNormals().z;
+        }
+        normalsBuffer.put(normalsData).flip();
+
+        nbo = glStoreBuffer(normalsBuffer, 3, 3);
+
+
         IntBuffer indeciesBuffer = MemoryUtil.memAllocInt(indecies.length);
         indeciesBuffer.put(indecies).flip();
         ibo = GL15.glGenBuffers();
@@ -115,6 +127,9 @@ public class Mesh {
     }
     public int getTBO() {
         return tbo;
+    }
+    public int getNBO() {
+        return nbo;
     }
 
     public Material getMaterial() {

@@ -2,9 +2,11 @@ package BluminEngine5.Componant.Rendering;
 
 import BluminEngine5.Application;
 import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -57,6 +59,7 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("transform", Matrix.transform(Parent.transform));
         shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
+        shader.SetUniform("SunLightPosition", SceneManager.GetCurent().GetActiveScene().ActiveLight.transform.position);
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();
         if(mesh.getMaterial().getColor().GetA() < 1) {

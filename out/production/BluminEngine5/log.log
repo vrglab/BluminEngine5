@@ -1,9 +1,5 @@
-{System 2022/09/22 13:11:27:1127}: Starting SceneManager
-{System 2022/09/22 13:11:29:1129}: Loading Metadata
-{System 2022/09/22 13:11:29:1129}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/09/22 13:11:29:1129}: Setting up keyboard
-{System 2022/09/22 13:11:29:1129}: Setting up DaynamicsWorld
-{Error: 2022/09/22 13:11:30:1130}: ERROR: 0:15: '*' : wrong operand types no operation '*' exists that takes a left-hand operand of type 'uniform 4X4 (default)row_major matrix of highp float' and a right operand of type 'uniform 2-component vector of highp float' (or there is no acceptable conversion)
-
-
-{Error: 2022/09/22 13:11:30:1130}: Failed to compile vertex shader
+{System 2022/09/22 21:23:46:2346}: Starting SceneManager
+{System 2022/09/22 21:23:46:2346}: Loading Metadata
+{System 2022/09/22 21:23:46:2346}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/09/22 21:23:46:2346}: Setting up keyboard
+{System 2022/09/22 21:23:46:2346}: Setting up DaynamicsWorld
