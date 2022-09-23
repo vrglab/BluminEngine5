@@ -16,6 +16,7 @@ public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
     private ExampleSun ES = new ExampleSun();
+    private ExampleSun ESE = new ExampleSun();
 
     public Canvas UiCanvas = new Canvas();
 
@@ -25,8 +26,10 @@ public class ExampleScene extends Scene {
     public ExampleScene() {
         RegsiterGameObject(obj);
         RegsiterGameObject(ES);
+        RegsiterGameObject(ESE);
         RegsiterGameObject(UiCanvas);
-        ActiveLight = ES.SunComponant;
+        RegsiterLightObject(ES.SunComponant);
+        RegsiterLightObject(ESE.SunComponant);
     }
     @Override
     public void Update() {
@@ -51,7 +54,9 @@ public class ExampleScene extends Scene {
         if(Input.Instance().WasPressed(GLFW.GLFW_KEY_ESCAPE)){
             SceneManager.GetCurent().SetActiveScene(new SecondExampleScene());
         }
+        ESE.transform.position.y = 18;
     }
+
 
     @Override
     public void OnRender() {

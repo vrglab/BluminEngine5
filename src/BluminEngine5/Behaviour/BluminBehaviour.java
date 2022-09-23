@@ -106,6 +106,12 @@ public abstract class BluminBehaviour implements IObjLogic{
                                 component.Destroy();
                         }
                 };
+                component.data.OnExit = new IAction() {
+                        @Override
+                        public void Run() {
+                                component.OnExit();
+                        }
+                };
                 component.Parent = bb;
                 AttachedComponants.add(component);
         }

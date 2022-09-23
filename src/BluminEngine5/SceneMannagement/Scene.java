@@ -17,10 +17,10 @@ import java.util.List;
 public abstract class Scene implements ILogic {
 
     private List<BluminBehaviour> GameObjects = new ArrayList<>();
+    public List<BaseLight> LightObjects = new ArrayList<>();
 
     public objActionData ActionData =  new objActionData();
 
-    public BaseLight ActiveLight = new Sun();
 
 
     public Scene() {
@@ -30,7 +30,10 @@ public abstract class Scene implements ILogic {
             public void Run() {
                 Update();
                 for (BluminBehaviour comp: GameObjects) {
-                    comp.Update();
+                    comp.ActionData.OnUpdate.Run();
+                }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnUpdate.Run();
                 }
             }
         };
@@ -38,7 +41,10 @@ public abstract class Scene implements ILogic {
             @Override
             public void Run() {
                 for (BluminBehaviour comp: GameObjects) {
-                    comp.OnExit();
+                    comp.ActionData.OnExit.Run();
+                }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnExit.Run();
                 }
                 OnExit();
             }
@@ -50,6 +56,9 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnRender.Run();
                 }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnRender.Run();
+                }
             }
         };
         ActionData.OnInit = new IAction() {
@@ -58,6 +67,9 @@ public abstract class Scene implements ILogic {
                 Init();
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnInit.Run();
+                }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnInit.Run();
                 }
             }
         };
@@ -71,6 +83,12 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnInit.Run();
                 }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnPreInit.Run();
+                }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnInit.Run();
+                }
             }
         };
         ActionData.OnDestroy =  new IAction() {
@@ -80,6 +98,9 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnDestroy.Run();
                 }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnDestroy.Run();
+                }
             }
         };
         ActionData.OnPreInit =  new IAction() {
@@ -87,6 +108,9 @@ public abstract class Scene implements ILogic {
             public void Run() {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnPreInit.Run();
+                }
+                for (BaseLight comp: LightObjects) {
+                    comp.data.OnPreInit.Run();
                 }
             }
         };
@@ -107,6 +131,19 @@ public abstract class Scene implements ILogic {
     public void UnRegsiterGameObject(BluminBehaviour bb) {
         if(GameObjects.contains(bb)) {
             GameObjects.remove(GameObjects.lastIndexOf(bb));
+        }
+
+    }
+
+    public void RegsiterLightObject(BaseLight bb) {
+        if(!LightObjects.contains(bb)) {
+            LightObjects.add(bb);
+        }
+    }
+
+    public void UnRegsiterLightObject(BaseLight bb) {
+        if(LightObjects.contains(bb)) {
+            LightObjects.remove(GameObjects.lastIndexOf(bb));
         }
 
     }

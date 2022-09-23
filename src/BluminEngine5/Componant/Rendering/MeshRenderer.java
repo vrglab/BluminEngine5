@@ -59,7 +59,10 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("transform", Matrix.transform(Parent.transform));
         shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
-        shader.SetUniform("SunLightPosition", SceneManager.GetCurent().GetActiveScene().ActiveLight.transform.position);
+        shader.SetUniform("lightPos", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).Parent.transform.position);
+        shader.SetUniform("lightColor", SceneManager.GetCurent().GetActiveScene().LightObjects.get(0).color);
+        shader.SetUniform("CamPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
+
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();
         if(mesh.getMaterial().getColor().GetA() < 1) {

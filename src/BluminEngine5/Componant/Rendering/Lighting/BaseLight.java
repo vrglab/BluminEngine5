@@ -7,5 +7,6 @@ import BluminEngine5.Rendering.Lighting.Sun;
 
 public abstract class BaseLight extends IComponent {
     public Transform transform = new Transform();
+    public int Intesity = 1;
     public Color color = Color.White;
 }

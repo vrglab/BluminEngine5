@@ -8,20 +8,19 @@ in vec3 normal;
 uniform mat4 transform;
 uniform mat4 ProjectionMatrix;
 uniform mat4 ViewMatrix;
-uniform vec3 SunLightPosition;
 
 out vec4 color;
 out vec2 texCord;
 out vec3 Normal;
 out vec3 EyeView;
-out vec3 SunLightPos;
+out vec3 FragPos;
 
 
 void main() {
     gl_Position =  ProjectionMatrix * ViewMatrix *transform * vec4(position, 1.0f) ;
     color = incolor;
     texCord = textureCord;
-    Normal = vec3(ProjectionMatrix * vec4(normal, 0.0));
+    Normal = mat3(transpose(inverse(transform))) * normal;
     EyeView = vec3(ProjectionMatrix * transform);
-    SunLightPos = SunLightPosition;
+    FragPos = vec3(transform * vec4(position, 1.0));
 }

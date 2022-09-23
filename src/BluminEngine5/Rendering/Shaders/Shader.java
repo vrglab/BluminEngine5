@@ -1,5 +1,6 @@
 package BluminEngine5.Rendering.Shaders;
 
+import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Color;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.*;
@@ -66,6 +67,11 @@ public class Shader {
         return GL20.glGetUniformLocation(programid, name);
     }
 
+    public int GetUniformLocation(String name, int arraypos, String types) {
+        String n = name + "[" + arraypos + "]" + "." + types;
+        return GL20.glGetUniformLocation(programid, n);
+    }
+
     public void SetUniform(String name, int data) {
         GL20.glUniform1i(GetUniformLocation(name), data);
     }
@@ -87,8 +93,17 @@ public class Shader {
         GL20.glUniformMatrix4fv(GetUniformLocation(name), true, matrix);
     }
 
-    public void SetUniform(String name, Color data) {
+    public void SetUniform(String name, BaseLight data, int arrayPos) {
+        GL20.glUniform3f(GetUniformLocation(name, arrayPos, "pos"),
+                data.Parent.transform.position.x, data.Parent.transform.position.y, data.Parent.transform.position.z);
+        GL20.glUniform1f(GetUniformLocation(name, arrayPos, "intesity"),
+                data.color.GetA());
+        GL20.glUniform4f(GetUniformLocation(name, arrayPos, "Color"),
+                data.color.GetR(),data.color.GetG(),data.color.GetB(),data.color.GetA());
+        Debug.log(data.Parent.transform.position);
+    }
 
+    public void SetUniform(String name, Color data) {
         GL20.glUniform4f(GetUniformLocation(name), data.GetR(),data.GetG(),data.GetB(),data.GetA());
     }
 
