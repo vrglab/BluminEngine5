@@ -9,13 +9,6 @@ in vec3 EyeView;
 in vec3 FragPos;
 
 
-struct DirLight {
-    vec3 direction;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-};
 
 struct PointLight {
     vec3 position;
@@ -40,8 +33,7 @@ struct Material {
 
 uniform sampler2D Texture;
 uniform Material material;
-uniform DirLight light;
-uniform PointLight pointLights[NR_POINT_LIGHTS];
+uniform PointLight light;
 uniform vec3 lightPos;
 uniform vec4 lightColor;
 uniform vec3 viewPos;
@@ -65,7 +57,7 @@ void main() {
 
             // specular
             vec3 viewDir = normalize(viewPos - FragPos);
-            vec3 reflectDir = reflect(lightDir, norm);
+            vec3 reflectDir = reflect(-lightDir, norm);
             float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 
 

@@ -1,9 +1,5 @@
-{System 2022/09/23 11:29:12:2912}: Starting SceneManager
-{System 2022/09/23 11:29:13:2913}: Loading Metadata
-{System 2022/09/23 11:29:13:2913}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/09/23 11:29:14:2914}: Setting up keyboard
-{System 2022/09/23 11:29:14:2914}: Setting up DaynamicsWorld
-{Error: 2022/09/23 11:29:14:2914}: ERROR: 0:74: '*' : wrong operand types no operation '*' exists that takes a left-hand operand of type 'highp float' and a right operand of type '2-component vector of sampler2D' (or there is no acceptable conversion)
-
-
-{Error: 2022/09/23 11:29:14:2914}: Failed to compile fragment shader
+{System 2022/09/23 11:43:18:4318}: Starting SceneManager
+{System 2022/09/23 11:43:19:4319}: Loading Metadata
+{System 2022/09/23 11:43:19:4319}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/09/23 11:43:20:4320}: Setting up keyboard
+{System 2022/09/23 11:43:20:4320}: Setting up DaynamicsWorld

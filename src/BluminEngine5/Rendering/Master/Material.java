@@ -16,7 +16,7 @@ public class Material {
     public Vector3 Ambient = new Vector3(1,0.5f,0.31f);
     public Vector3 Diffuse = new Vector3(1,0.5f,0.31f);
     public Vector3 Specular = new Vector3(0.5f,0.5f,0.5f);
-    public float Shine = 32.0f;
+    public float Shine = 12.0f;
 
 
     public Material() {
