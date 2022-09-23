@@ -4,6 +4,7 @@ package BluminEngine5.SceneMannagement;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Behaviour.ILogic;
+import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Color;
@@ -125,6 +126,7 @@ public abstract class Scene implements ILogic {
     public void RegsiterGameObject(BluminBehaviour bb) {
         if(!GameObjects.contains(bb)) {
             GameObjects.add(bb);
+            bb.parent = this;
         }
     }
 
@@ -168,4 +170,56 @@ public abstract class Scene implements ILogic {
             new Color(0,0,0,1));*/
     public Camera ActiveCamera = new Camera();
     public Color SkyColor = new Color(0.2f,0.5f,0.5f,1);
+
+    public BluminBehaviour getGameObject(BluminBehaviour componantType) {
+        for (BluminBehaviour comp: GameObjects) {
+            if(comp.getClass().getName() == componantType.getClass().getName()) {
+                return comp;
+            }
+        }
+        return null;
+    }
+
+
+
+    public BluminBehaviour[] getGameObjectArray(BluminBehaviour componantType) {
+        List<BluminBehaviour> bs = new ArrayList<>();
+        for (BluminBehaviour comp: GameObjects) {
+            if(comp.getClass().getName() == componantType.getClass().getName()) {
+                bs.add(comp);
+            }
+        }
+        BluminBehaviour[] b = new BluminBehaviour[bs.size()];
+
+        for (int i = 0; i < b.length; i++){
+            b[i] = bs.get(i);
+        }
+
+        return b;
+    }
+
+    public BluminBehaviour[] getGameObjectArray(BluminBehaviour componantType, Scene bb) {
+        List<BluminBehaviour> bs = new ArrayList<>();
+        for (BluminBehaviour comp: bb.GameObjects) {
+            if(comp.getClass().getName() == componantType.getClass().getName()) {
+                bs.add(comp);
+            }
+        }
+        BluminBehaviour[] b = new BluminBehaviour[bs.size()];
+
+        for (int i = 0; i < b.length; i++){
+            b[i] = bs.get(i);
+        }
+
+        return b;
+    }
+
+    public static BluminBehaviour getGameObject(BluminBehaviour componantType, Scene bb) {
+        for (BluminBehaviour comp: bb.GameObjects) {
+            if(comp.getClass().getName() == componantType.getClass().getName()) {
+                return comp;
+            }
+        }
+        return null;
+    }
 }

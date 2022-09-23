@@ -4,6 +4,7 @@ import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Physics.MeshColider;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {
@@ -13,6 +14,8 @@ public class ExampleGameobject extends BluminBehaviour {
 
     MeshColider collider = new MeshColider(mr);
 
+    BluminBehaviour sun;
+
     public ExampleGameobject() {
         RegisterComponant(mr, this);
         RegisterComponant(collider, this);
@@ -20,7 +23,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Update() {
-
+        Debug.log(sun);
     }
 
     @Override
@@ -30,6 +33,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Init() {
+        sun = parent.getGameObject(new ExampleSun());
     }
 
     @Override

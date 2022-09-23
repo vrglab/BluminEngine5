@@ -53,7 +53,7 @@ void main() {
             // diffuse
             vec3 norm = normalize(Normal);
             vec3 lightDir = normalize(lightPos - FragPos);
-            float diff = max(dot(norm, lightDir), 0.0);
+            float diff = max(dot(norm, lightDir), 0.1);
 
             // specular
             vec3 viewDir = normalize(viewPos - FragPos);
@@ -65,7 +65,7 @@ void main() {
             vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, texCord));
             vec3 specular = light.specular * spec * vec3(texture(material.specular, texCord));
 
-            vec3 result = ambient + diffuse + specular;
+            vec3 result = diffuse;
             outColor = texture(Texture, texCord) + result;
 
         } else{

@@ -2,6 +2,7 @@ package BluminEngine5.Behaviour;
 
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Transform;
+import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.objActionData;
@@ -15,6 +16,8 @@ public abstract class BluminBehaviour implements IObjLogic{
         public objActionData ActionData =  new objActionData();
 
         public Transform transform = new Transform(new Vector3(0,0,-1), Vector3.Zero);
+
+        public Scene parent;
 
         public BluminBehaviour() {
                 RegisterComponant(transform, this);
@@ -120,4 +123,21 @@ public abstract class BluminBehaviour implements IObjLogic{
                 AttachedComponants.remove(AttachedComponants.lastIndexOf(component));
         }
 
+        public IComponent getComponant(IComponent componantType) {
+                for (IComponent comp: AttachedComponants) {
+                        if(comp.getClass().getName() == componantType.getClass().getName()) {
+                                return comp;
+                        }
+                }
+                return null;
+        }
+
+        public static IComponent getComponant(IComponent componantType, BluminBehaviour bb) {
+                for (IComponent comp: bb.AttachedComponants) {
+                        if(comp.getClass().getName() == componantType.getClass().getName()) {
+                                return comp;
+                        }
+                }
+                return null;
+        }
 }

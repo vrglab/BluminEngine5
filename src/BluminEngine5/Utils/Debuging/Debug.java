@@ -70,6 +70,10 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
+        if(dat == null) {
+            dat = "null";
+        }
+
         String datString = "{System "+dtf.format(now)  + "}: "+ dat.toString();
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
@@ -84,6 +88,9 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
+        if(dat == null) {
+            dat = "null";
+        }
         String datString = "{" +throwerName + " " +dtf.format(now)  + "}: "+ dat.toString();
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
@@ -97,6 +104,9 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
+        if(dat == null) {
+            dat = "null";
+        }
         String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.toString();
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
@@ -111,6 +121,7 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
+
         String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.getMessage() + "\r\n" + dat.getStackTrace();
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);

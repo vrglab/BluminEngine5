@@ -7,6 +7,7 @@ import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Input;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
@@ -55,6 +56,8 @@ public class ExampleScene extends Scene {
             SceneManager.GetCurent().SetActiveScene(new SecondExampleScene());
         }
         ESE.transform.position.y = 18;
+        Debug.log(getGameObject(new ExampleSun()).transform.position);
+
     }
 
 
