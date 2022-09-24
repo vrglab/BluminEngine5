@@ -18,6 +18,7 @@ public class ResourceMannager {
 
     private int Counter = 0;
     public ResourceMannager() {
+        //Add all the resources manually into the Archive system
         archive.CreateArchive(1, "Textures");
             archive.PutFileInArchive("Res/Textures/Missing.png", 2);
             archive.PutFileInArchive("Res/Textures/groundImage 1.png", 2);
@@ -53,6 +54,7 @@ public class ResourceMannager {
     }
 
     private void Exit() {
-        Debug.log(archive.GeFileFromArchive(1,5));
+        //TODO: Write the Archive compresion and serialization
+        Debug.log(archive.GeFileFromArchive(0,3).FileName);
     }
 }
