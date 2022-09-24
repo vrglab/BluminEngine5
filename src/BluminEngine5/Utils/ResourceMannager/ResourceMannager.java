@@ -36,12 +36,7 @@ public class ResourceMannager {
 
 
 
-        Application.OnExit.addListener(new IAction() {
-            @Override
-            public void Run() {
-                Exit();
-            }
-        });
+        Application.OnExit.addListener(this::Exit);
     }
 
     public File LoadIntoTempFile(ArchivedFile file)
