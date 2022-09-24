@@ -1,17 +1,28 @@
 package BluminEngine5.Utils;
 
+import BluminEngine5.Application;
 import BluminEngine5.Rendering.Master.Material;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Vertex;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
+import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.assimp.*;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.TextureLoader;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 public class ObjLoader {
 
-    public static Mesh LoadFile(String obj, String texture) {
-        AIScene scene = Assimp.aiImportFile(obj, Assimp.aiProcess_JoinIdenticalVertices |Assimp.aiProcess_Triangulate );
+    public static Mesh LoadFile(ArchivedFile obj, ArchivedFile texture) {
+            AIScene scene = GetDtaFromFile(obj);
 
         if(scene == null) {
             Debug.logError("Failed to load model at: " + obj);
@@ -53,8 +64,8 @@ public class ObjLoader {
         }
     }
 
-    public static Mesh LoadFile(String obj) {
-        AIScene scene = Assimp.aiImportFile(obj, Assimp.aiProcess_JoinIdenticalVertices |Assimp.aiProcess_Triangulate );
+    public static Mesh LoadFile(ArchivedFile obj) {
+        AIScene scene = GetDtaFromFile(obj);
 
         if(scene == null) {
             Debug.logError("Failed to load model at: " + obj);
@@ -96,8 +107,8 @@ public class ObjLoader {
         }
     }
 
-    public static Mesh LoadFile(String obj, Material mat) {
-        AIScene scene = Assimp.aiImportFile(obj, Assimp.aiProcess_JoinIdenticalVertices |Assimp.aiProcess_Triangulate );
+    public static Mesh LoadFile(ArchivedFile obj, Material mat) {
+        AIScene scene = GetDtaFromFile(obj);
 
         if(scene == null) {
             Debug.logError("Failed to load model at: " + obj);
@@ -137,5 +148,18 @@ public class ObjLoader {
             }
             return new Mesh(vertexes, indecies, mat);
         }
+    }
+
+
+    private static AIScene GetDtaFromFile(ArchivedFile file){
+        try{
+            File f = Application.getResourceManager().LoadIntoTempFile(file);
+            AIScene as = Assimp.aiImportFile(f.getAbsolutePath(), Assimp.aiProcess_JoinIdenticalVertices | Assimp.aiProcess_Triangulate );
+            f.delete();
+            return  as;
+        } catch (IOException e) {
+
+        }
+        return null;
     }
 }

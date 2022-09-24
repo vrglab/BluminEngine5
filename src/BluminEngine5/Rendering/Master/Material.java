@@ -1,10 +1,12 @@
 package BluminEngine5.Rendering.Master;
 
 
+import BluminEngine5.Application;
 import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Rendering.Vertex;
 import BluminEngine5.Utils.Math.Vector3;
+import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
 
 public class Material {
     private Texture texture;
@@ -20,13 +22,13 @@ public class Material {
 
 
     public Material() {
-        texture = new Texture("Res/Textures/Missing.png");
-        DefuseMap = new Texture("Res/Textures/Missing.png");
-        SpecularMap = new Texture("Res/Textures/Missing.png");
+        texture = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
+        DefuseMap = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
+        SpecularMap = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
         color = new Color(1,0.5f,1,1);
     }
 
-    public Material(String text) {
+    public Material(ArchivedFile text) {
         texture = new Texture(text);
     }
 

@@ -1,14 +1,22 @@
 package BluminEngine5.Rendering;
 
+import BluminEngine5.Application;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
+import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
 import BluminEngine5.Utils.Utils;
+import org.apache.commons.io.FileUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
@@ -17,10 +25,10 @@ public class Texture {
     private org.newdawn.slick.opengl.Texture texture;
     private float width, height;
     private int textureId;
-    private String file;
+    private ArchivedFile file;
     private TextureMode renderMode = TextureMode.ClampToEdge;
 
-    public Texture(String file) {
+    public Texture(ArchivedFile file) {
         this.file = file;
     }
     public Texture(Vector2 size) {
@@ -31,7 +39,7 @@ public class Texture {
     public void Create() {
         if(file != null) {
             try{
-                texture = TextureLoader.getTexture(file.split("[.]")[1], Utils.LoadFileAsStream(file), GL11.GL_LINEAR);
+                texture = GetTexFromFile();
                 width = texture.getWidth();
                 height = texture.getHeight();
                 textureId = texture.getTextureID();
@@ -74,5 +82,16 @@ public class Texture {
 
     public void setRenderMode(TextureMode renderMode) {
         this.renderMode = renderMode;
+    }
+
+    private org.newdawn.slick.opengl.Texture GetTexFromFile()
+    throws IOException{
+
+        File f = Application.getResourceManager().LoadIntoTempFile(file);
+        InputStream is = Utils.LoadFileAsStream(f.getAbsolutePath());
+        org.newdawn.slick.opengl.Texture tex =  TextureLoader.getTexture(file.Extension, is , GL11.GL_LINEAR);
+        is.close();
+        f.delete();
+        return  tex;
     }
 }

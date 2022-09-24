@@ -28,6 +28,7 @@ public class Utils {
         try {
             File initialFile = new File(fileLocation);
             InputStream stream = new FileInputStream(initialFile);
+
             return stream;
         } catch (FileNotFoundException e){
             Utils.CrashApp(-18, "Failed to load stream", e);

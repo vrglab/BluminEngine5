@@ -3,6 +3,8 @@ package BluminEngine5.Componant.Audio;
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Utils;
+import com.sun.jdi.connect.spi.TransportService;
+import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
 
@@ -30,7 +32,7 @@ public class AudioListner extends IComponent {
                 Utils.CrashApp(-21, "Failed to make audio Listner context");
             }
             alcMakeContextCurrent(context);
-            ALC.createCapabilities(deviceCaps.alcOpenDevice);
+            AL.createCapabilities(deviceCaps);
             Debug.log("Audio Listner Initialized");
 
         } catch (Exception e) {

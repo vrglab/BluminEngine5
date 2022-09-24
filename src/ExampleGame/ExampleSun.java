@@ -1,5 +1,6 @@
 package ExampleGame;
 
+import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Lighting.Sun;
@@ -10,7 +11,7 @@ import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleSun extends BluminBehaviour {
 
-    public Mesh mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
+    public Mesh mesh = ObjLoader.LoadFile(Application.getResourceManager().archive.GeFileFromArchive(0,4));
     MeshRenderer mr = new MeshRenderer(mesh);
     public Sun SunComponant = new Sun();
 
