@@ -44,6 +44,7 @@ public class Application {
     public static Action<IAction> PreInit = new Action<>();
     public static Action<IAction> OnExit = new Action<>();
 
+    private static ResourceMannager resourceManager = new ResourceMannager();
     private static String MetaDataFile = "Res/metdata.json";
     public static Metadata getMetadata() {
         return metadata;
@@ -56,7 +57,7 @@ public class Application {
 
     private static Version ActiveEngineVersion;
 
-    private static ResourceMannager resourceManager = new ResourceMannager();
+
 
     public static ResourceMannager getResourceManager() {
         return resourceManager;

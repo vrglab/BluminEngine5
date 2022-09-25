@@ -1,7 +1,10 @@
 package BluminEngine5.Componant.Audio;
 
+import BluminEngine5.Application;
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Utils.Debuging.Debug;
+import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
+import BluminEngine5.Utils.ResourceMannager.ResourceMannager;
 import BluminEngine5.Utils.Utils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL10;
@@ -67,7 +70,18 @@ public class Source extends IComponent {
             BufferId = alGenBuffers();
             try (STBVorbisInfo info = STBVorbisInfo.malloc()) {
 
-                ShortBuffer pcm = readVorbis(file, 32 * 1024, info);
+                ArchivedFile file =  Application.getResourceManager().archive.GeFileFromArchive(0,5);
+                ShortBuffer pcm = null;
+                try {
+                  File tempFile = Application.getResourceManager().LoadIntoTempFile(file);
+                  pcm = readVorbis(tempFile.getAbsolutePath(), 32 * 1024, info);
+                  tempFile.delete();
+                } catch (Exception e){
+
+                }
+
+
+
 
                 // Copy to buffer
                 alBufferData(BufferId, info.channels() == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16, pcm, info.sample_rate());

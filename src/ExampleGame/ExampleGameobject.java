@@ -11,18 +11,17 @@ import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {
 
-    public Mesh mesh = ObjLoader.LoadFile(Application.getResourceManager().archive.GeFileFromArchive(1,4));
-    MeshRenderer mr = new MeshRenderer(mesh);
+    public Mesh mesh;
 
-    MeshColider collider = new MeshColider(mr);
+    MeshRenderer mr;
+
 
     Source s;
 
     BluminBehaviour sun;
 
     public ExampleGameobject() {
-        RegisterComponant(mr, this);
-        RegisterComponant(collider, this);
+
     }
 
     @Override
@@ -37,10 +36,12 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Init() {
+        mesh = ObjLoader.LoadFile(Application.getResourceManager().archive.GeFileFromArchive(1,4));
+        mr = new MeshRenderer(mesh);
+        RegisterComponant(mr, this);
         sun = parent.getGameObject(new ExampleSun());
         s  = new Source("Res/testing.ogg");
         RegisterComponant(s, this);
-
         s.Play();
     }
 
