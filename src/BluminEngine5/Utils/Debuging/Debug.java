@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Debug implements ExceptionListener{
+public class Debug{
     private static List<String> Log = new ArrayList<>();
     private static List<String> RawLog = new ArrayList<>();
 
@@ -122,7 +122,7 @@ public class Debug implements ExceptionListener{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
 
-        String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.getMessage();
+        String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.getMessage()+"\n" + Utils.GetStacktrace(dat);;
 
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
@@ -138,7 +138,7 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
-        String datString = "{Error: "+dtf.format(now)  + "}: " + data.toString() +": "+ dat.getMessage();
+        String datString = "{Error: "+dtf.format(now)  + "}: " + data.toString() +"\n"+ Utils.GetStacktrace(dat);
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
             RawLog.add(dat.toString());
@@ -147,10 +147,18 @@ public class Debug implements ExceptionListener{
         Application.OnExit.Invoke();
     }
 
-    @Override
-    public void exceptionThrown(Exception e) {
-        String data = e.getMessage() + "\r\n" + e.getStackTrace();
-        logError(data);
+    public static void logException(String data, StackTraceElement[] dat) {
+        if(!Application.OnExit.IsListener(InitAct)) {
+            Application.OnExit.addListener(InitAct);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
+        LocalDateTime now = LocalDateTime.now();
+        String datString = "{Error: "+dtf.format(now)  + "}: " + data +"\n"+ Utils.GetStacktrace(dat);
+        if(!RawLog.contains(dat.toString())) {
+            Log.add(datString);
+            RawLog.add(dat.toString());
+        }
+        System.err.println(datString);
         Application.OnExit.Invoke();
     }
 }

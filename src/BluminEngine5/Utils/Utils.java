@@ -52,11 +52,37 @@ public class Utils {
         System.exit(status);
     }
     public static void CrashApp(int status, Exception e) {
-        Debug.logError(e.getMessage());
-        e.printStackTrace();
+        Debug.logException(e);
         Application.OnExit.Invoke();
         System.exit(status);
     }
+
+    public static void CrashApp(int status, Throwable e) {
+        Debug.logException(e.getMessage(), e.getStackTrace());
+        Application.OnExit.Invoke();
+        System.exit(status);
+    }
+
+    public static String GetStacktrace(Exception e){
+        String s = "";
+
+        for (int i = 0; i < e.getStackTrace().length; i++) {
+            s += e.getStackTrace()[i] + "\n";
+        }
+
+        return  s;
+    }
+
+    public static String GetStacktrace(StackTraceElement[] e){
+        String s = "";
+
+        for (int i = 0; i < e.length; i++) {
+            s += e[i] + "\n";
+        }
+
+        return  s;
+    }
+
     public static Vertex[] QuadAsVertex2D() {
         Vertex vpos[] = {
                 new Vertex(new Vector2(-1,1)),

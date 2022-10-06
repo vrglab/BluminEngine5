@@ -35,11 +35,17 @@ public class ResourceMannager {
 
     public File LoadIntoTempFile(ArchivedFile file)
     throws IOException {
-        UUID id = UUID.randomUUID();
-        String path = Application.ResFolder +"/Temp/Temp " + id.toString() + " " + file.FileName + "." + file.Extension;
-        File f = Files.createFile(Paths.get(path)).toFile();
-        FileUtils.writeByteArrayToFile(f, file.GetDecodedData());
-        return f;
+        try{
+            UUID id = UUID.randomUUID();
+            String path = Application.ResFolder +"/Temp/Temp " + id.toString() + " " + file.FileName + "." + file.Extension;
+            File f = Files.createFile(Paths.get(path)).toFile();
+            FileUtils.writeByteArrayToFile(f, file.GetDecodedData());
+            return f;
+        }catch(Exception e) {
+            Debug.logException("Failed to load the Archive file", e);
+            return null;
+        }
+
     }
 
     public void LoadArchiveAsMainArchive(String file){
@@ -86,7 +92,8 @@ public class ResourceMannager {
             } else{
                 return wavsbacth.get(location);
             }
-        }catch (IOException e) {
+        }catch (Exception e) {
+            Debug.logException("Could not load the wav file",e);
             return null;
         }
     }
