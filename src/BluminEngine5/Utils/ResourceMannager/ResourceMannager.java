@@ -29,7 +29,7 @@ public class ResourceMannager {
     private HashMap<String, WaveData> wavsbacth = new HashMap<String, WaveData>();
 
     public ResourceMannager(String s) {
-        LoadArchiveAsMainArchive( Application.ResFolder + "/" + s);
+        LoadArchiveAsMainArchive( Application.getMetadata().ResourceFolder + "/" + s);
     }
 
 
@@ -37,7 +37,8 @@ public class ResourceMannager {
     throws IOException {
         try{
             UUID id = UUID.randomUUID();
-            String path = Application.ResFolder +"/Temp/Temp " + id.toString() + " " + file.FileName + "." + file.Extension;
+            String path = Application.getMetadata().ResourceFolder
+                    +"/Temp/Temp " + id.toString() + " " + file.FileName + "." + file.Extension;
             File f = Files.createFile(Paths.get(path)).toFile();
             FileUtils.writeByteArrayToFile(f, file.GetDecodedData());
             return f;
@@ -68,7 +69,7 @@ public class ResourceMannager {
 
     public Texture GetTexture(int file, int Archive) {
         var arch = archive.GeFileFromArchive(file, Archive);
-        var location = Application.ResFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
+        var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
         if(!texturesbacth.containsKey(location)) {
             var dat = new Texture(arch);
             texturesbacth.put(location,dat);
@@ -82,7 +83,7 @@ public class ResourceMannager {
         try {
             var arch = archive.GeFileFromArchive(file, Archive);
             var f = LoadIntoTempFile(arch);
-            var location = Application.ResFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
+            var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
 
             var shaderLocation = f.getAbsolutePath();
             if(!wavsbacth.containsKey(location)) {
@@ -104,7 +105,7 @@ public class ResourceMannager {
             var arch = archive.GeFileFromArchive(file, Archive);
             var f = LoadIntoTempFile(arch);
 
-            var location = Application.ResFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
+            var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
 
             var shaderLocation = f.getAbsolutePath();
 
@@ -126,7 +127,7 @@ public class ResourceMannager {
             var arch = archive.GeFileFromArchive(file, Archive);
             var f = LoadIntoTempFile(arch);
 
-            var location = Application.ResFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
+            var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
 
             var shaderLocation = f.getAbsolutePath();
 

@@ -1,15 +1,19 @@
 package BluminEngine5.Utils;
 
+import org.ini4j.Wini;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Metadata {
-    public String GameName;
+    public String GameName = "";
     public Version gameVersion;
+    public String ResourceFolder;
+    public String MainArchiveFile;
     public Version engineVersion;
-    public String Developer;
-    public String Publisher;
+    public String Developer = "";
+    public String Publisher = "";
 
     public boolean PostProcessing;
 
@@ -17,13 +21,16 @@ public class Metadata {
         if (!Utils.FileExists(file)) {
             throw new IOException("File " + file + " Not found");
         }
-        String fileData = Utils.LoadFile(file);
-        JSONObject obj = new JSONObject(fileData);
-        GameName = obj.getString("GameName");
-        gameVersion = Version.FromJson(obj.getJSONObject("GameVersion"));
-        engineVersion = Version.FromJson(obj.getJSONObject("EngineVersion"));
-        Developer = obj.getString("Developer");
-        Publisher = obj.getString("publisher");
-        PostProcessing = obj.getBoolean("PostProcessing");
+
+        Wini ini = new Wini(new File(file));
+
+        ResourceFolder = ini.get("EngineConfig", "ResourcesPath");
+        MainArchiveFile = ini.get("EngineConfig", "Archive");
+        engineVersion= new Version(ini.get("EngineConfig", "Version"));
+
+        GameName = ini.get("GameConfig", "Name");
+        Developer = ini.get("GameConfig", "Developer");
+        Publisher = ini.get("GameConfig", "publisher");
+        gameVersion= new Version(ini.get("GameConfig", "Version"));
     }
 }

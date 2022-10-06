@@ -20,15 +20,11 @@ import com.bulletphysics.dynamics.DiscreteDynamicsWorld;
 import com.bulletphysics.dynamics.DynamicsWorld;
 import com.bulletphysics.dynamics.constraintsolver.ConstraintSolver;
 import com.bulletphysics.dynamics.constraintsolver.SequentialImpulseConstraintSolver;
-import org.apache.commons.io.FileSystemUtils;
-import org.apache.commons.io.FileUtils;
-import org.lwjgl.glfw.GLFWVulkan;
 import org.lwjgl.opengl.GL;
 import BluminEngine5.Utils.Math.Math;
 import org.lwjgl.opengl.GL11;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,8 +41,7 @@ public class Application {
     public static Action<IAction> OnExit = new Action<>();
 
     private static ResourceMannager resourceManager;
-    public static String ResFolder = "Res";
-    private static String MetaDataFile = ResFolder + "/metdata.json";
+    private static String ConfigFile =  "Config.ini";
     public static Metadata getMetadata() {
         return metadata;
     }
@@ -70,10 +65,9 @@ public class Application {
 
 
     private static Version EngineVersion = new Version(0,0,1,0,"DevSystem");
-    public static void Run(Resolution res, DisplayMode mode, DisplayDimension dim, String GameArchive, String resourcesFolder) {
+    public static void Run(Resolution res, DisplayMode mode, DisplayDimension dim) {
         DealWithEngineVersioning();
-        resourceManager= new ResourceMannager(GameArchive);
-        ResFolder = resourcesFolder;
+        resourceManager= new ResourceMannager(metadata.MainArchiveFile);
         Path tempDir;
         System.setProperty("org.lwjgl.util.Debug", "true");
         try{
@@ -146,7 +140,7 @@ public class Application {
     private static void DealWithEngineVersioning() {
         try{
             Debug.log("Loading Metadata");
-            metadata  = new Metadata(MetaDataFile);
+            metadata  = new Metadata(ConfigFile);
         }catch (IOException e) {
             Utils.CrashApp(-134, e);
         }

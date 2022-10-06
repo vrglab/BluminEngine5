@@ -1,5 +1,6 @@
 package BluminEngine5.Utils;
 
+import BluminEngine5.Utils.Debuging.Debug;
 import org.json.JSONObject;
 
 public class Version {
@@ -18,6 +19,18 @@ public class Version {
         this.p = p;
         this.r = r;
         this.ext = ext;
+    }
+
+
+    public Version(String ext) {
+        String reg = "[._]";
+        String[] s = ext.split(reg);
+
+        this.a = Integer.parseInt(s[0]);
+        this.b = Integer.parseInt(s[1]);
+        this.p = Integer.parseInt(s[2]);
+        this.r = Integer.parseInt(s[3]);
+        this.ext = s[4];
     }
 
     public String Json() {

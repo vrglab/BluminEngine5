@@ -11,7 +11,7 @@ public class TextField extends UiObject {
     public TextField(){
 
         //mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
-        shader = Application.getResourceManager().GetShader(Application.ResFolder + "/Shaders/HUD/HUDShader.json");
+        shader = Application.getResourceManager().GetShader(Application.getMetadata().ResourceFolder + "/Shaders/HUD/HUDShader.json");
     }
 
 
