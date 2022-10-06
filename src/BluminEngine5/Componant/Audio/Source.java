@@ -32,7 +32,6 @@ public class Source extends IComponent {
 
 
     public void Play() {
-        Debug.log("Play caled");
         alSourcePlay(id.get(0));
 
     }

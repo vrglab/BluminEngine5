@@ -73,6 +73,12 @@ public class ExampleScene extends Scene {
         pl2.Intesity = 5;
         LightObjects.PointLights.AddLight(pl2);
 
+        PointLight pl3 = new PointLight();
+        pl3.transform.position = new Vector3(4, 3,-2);
+        pl3.color = Color.Green;
+        pl3.Intesity = 5;
+        LightObjects.PointLights.AddLight(pl3);
+
         LightObjects.SetSunPos(new Vector3(0,20,-6));
     }
 

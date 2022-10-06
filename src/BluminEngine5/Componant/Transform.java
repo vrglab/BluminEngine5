@@ -41,6 +41,9 @@ public class Transform extends IComponent {
         return t;
     }
 
+    public static Transform DefaultZero = new Transform(Vector3.Zero,Vector3.Zero,Vector3.Zero);
+
+
 
     @Override
     public void Update() {

@@ -1,7 +1,6 @@
-{System 2022/10/06 09:42:43:4243}: Audio Listner Initialized
-{System 2022/10/06 09:42:43:4243}: Starting SceneManager
-{System 2022/10/06 09:42:43:4243}: Loading Metadata
-{System 2022/10/06 09:42:43:4243}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
-{System 2022/10/06 09:42:44:4244}: Setting up keyboard
-{System 2022/10/06 09:42:44:4244}: Setting up DaynamicsWorld
-{System 2022/10/06 09:42:45:4245}: audio is not playing
+{System 2022/10/06 10:29:03:293}: Audio Listener Initialized
+{System 2022/10/06 10:29:03:293}: Starting SceneManager
+{System 2022/10/06 10:29:03:293}: Loading Metadata
+{System 2022/10/06 10:29:03:293}: Starting BluminEngine3 on Version 0.0.1.0_DevSystem
+{System 2022/10/06 10:29:05:295}: Setting up keyboard
+{System 2022/10/06 10:29:05:295}: Setting up DaynamicsWorld
