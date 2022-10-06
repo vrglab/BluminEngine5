@@ -13,7 +13,6 @@ public class ExampleGameobject extends BluminBehaviour {
     MeshRenderer mr;
 
 
-    Source s;
 
     public ExampleGameobject() {
 
@@ -21,11 +20,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Update() {
-        if(s.IsPlaying()) {
-            Debug.log("audio should be playing");
-        }else{
-            s.Play();
-        }
+
         transform.rotation = new Vector3(transform.rotation.x, transform.rotation.y += 1, transform.rotation.z);
     }
 
@@ -37,9 +32,7 @@ public class ExampleGameobject extends BluminBehaviour {
     public void Init() {
         model.setMesh(1,3);
         mr = new MeshRenderer(model);
-        s = new Source(2,4);
         RegisterComponant(mr, this);
-        RegisterComponant(s, this);
         model.getMesh().getMaterial().Shine = 0.5f;
     }
 

@@ -5,11 +5,8 @@ import BluminEngine5.Behaviour.BluminBehaviour;
 
 public class Camera extends BluminBehaviour {
 
-    public AudioListner al = new AudioListner();
-
     public Camera() {
         transform.position.z = 0;
-        RegisterComponant(al, this);
     }
 
     @Override
