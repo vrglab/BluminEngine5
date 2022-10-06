@@ -2,9 +2,6 @@ package BluminEngine5.Rendering;
 
 
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.Audio.AudioListner;
-import BluminEngine5.Utils.Input;
-import org.lwjgl.glfw.GLFW;
 
 public class Camera extends BluminBehaviour {
 

@@ -1,15 +1,10 @@
 package ExampleGame;
 
-import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.Audio.Source;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
-import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Master.Model;
-import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector3;
-import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {
 

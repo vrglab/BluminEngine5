@@ -71,7 +71,7 @@ public class Application {
         Path tempDir;
         System.setProperty("org.lwjgl.util.Debug", "true");
         try{
-            tempDir = Files.createDirectories(Paths.get("Res/Temp"));
+            Files.createDirectories(Paths.get(metadata.ResourceFolder+"/Temp"));
             PreInit.Invoke();
 
 
