@@ -64,8 +64,6 @@ public class Shader {
             }
         }
 
-        Debug.log(FragmentShader);
-
         GL20.glAttachShader(programid, vertexId);
         GL20.glAttachShader(programid, fragmentId);
 

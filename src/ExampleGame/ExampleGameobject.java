@@ -40,7 +40,7 @@ public class ExampleGameobject extends BluminBehaviour {
     }
     @Override
     public void Init() {
-        model.setMesh(0,3);
+        model.setMesh(1,3);
         mr = new MeshRenderer(model);
         s = new Source(2,4);
         RegisterComponant(mr, this);
