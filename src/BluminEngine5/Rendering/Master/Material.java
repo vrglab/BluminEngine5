@@ -15,28 +15,30 @@ public class Material {
     private Texture DefuseMap;
     private Texture SpecularMap;
 
-    public Vector3 Ambient = new Vector3(1,0.5f,0.31f);
+    public Vector3 Ambient = new Vector3(0.31f,0.31f,0.31f);
     public Vector3 Diffuse = new Vector3(1,0.5f,0.31f);
     public Vector3 Specular = new Vector3(0.5f,0.5f,0.5f);
     public float Shine = 12.0f;
 
 
     public Material() {
-        texture = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
-        DefuseMap = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
-        SpecularMap = new Texture(Application.getResourceManager().archive.GeFileFromArchive(0,2));
         color = new Color(1,0.5f,1,1);
     }
 
     public Material(ArchivedFile text) {
-        texture = new Texture(text);
+        texture = Application.getResourceManager().GetTexture(text.ArchiveId, text.ID);
+        color = new Color(1,0.5f,1,1);
     }
 
     public Material(Texture text) {
         texture = text;
+        color = new Color(1,0.5f,1,1);
     }
 
     public void Creat() {
+        texture = Application.getResourceManager().GetTexture(0,2);
+        DefuseMap = Application.getResourceManager().GetTexture(0,2);
+        SpecularMap = Application.getResourceManager().GetTexture(0,2);
         texture.Create();
         DefuseMap.Create();
         SpecularMap.Create();

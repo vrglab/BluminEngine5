@@ -4,6 +4,7 @@ import BluminEngine5.Rendering.Display;
 import BluminEngine5.Rendering.DisplayDimension;
 import BluminEngine5.Rendering.DisplayMode;
 import BluminEngine5.Rendering.Master.MasterRenderer;
+import BluminEngine5.Rendering.PostProcessing.PostProcessingProfileBehaviour;
 import BluminEngine5.Rendering.Resolution;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.*;
@@ -34,7 +35,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFWVulkan.glfwVulkanSupported;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Application {
@@ -44,8 +44,9 @@ public class Application {
     public static Action<IAction> PreInit = new Action<>();
     public static Action<IAction> OnExit = new Action<>();
 
-    private static ResourceMannager resourceManager = new ResourceMannager();
-    private static String MetaDataFile = "Res/metdata.json";
+    private static ResourceMannager resourceManager;
+    public static String ResFolder = "Res";
+    private static String MetaDataFile = ResFolder + "/metdata.json";
     public static Metadata getMetadata() {
         return metadata;
     }
@@ -57,7 +58,7 @@ public class Application {
 
     private static Version ActiveEngineVersion;
 
-
+    private static PostProcessingProfileBehaviour postProcessingProfile = null;
 
     public static ResourceMannager getResourceManager() {
         return resourceManager;
@@ -69,20 +70,15 @@ public class Application {
 
 
     private static Version EngineVersion = new Version(0,0,1,0,"DevSystem");
-    public static void Run(Resolution res, DisplayMode mode, DisplayDimension dim) {
+    public static void Run(Resolution res, DisplayMode mode, DisplayDimension dim, String GameArchive, String resourcesFolder) {
         DealWithEngineVersioning();
-
+        resourceManager= new ResourceMannager(GameArchive);
+        ResFolder = resourcesFolder;
         Path tempDir;
+        System.setProperty("org.lwjgl.util.Debug", "true");
         try{
             tempDir = Files.createDirectories(Paths.get("Res/Temp"));
             PreInit.Invoke();
-
-            if(getMetadata().Raytracing) {
-                if (!glfwVulkanSupported()) {
-                    Debug.logError("Vulkan not suported");
-                }
-            }
-
 
 
             display = new Display();
@@ -92,6 +88,7 @@ public class Application {
             GL.createCapabilities();
 
             Debug.log("Setting up keyboard");
+            //TODO: this is a dumb way to handel inputs re-write this system
             glfwSetKeyCallback(display.getWindow(), (window, key, scancode, action, mods) -> {
                 if(action == GLFW_PRESS) {
                     if(!Input.Instance().Pressed.contains(key)) {
@@ -118,6 +115,7 @@ public class Application {
                     }
                 }
             });
+
             GL11.glEnable(GL11.GL_DEPTH_TEST);
 
             Debug.log("Setting up DaynamicsWorld");
@@ -143,8 +141,6 @@ public class Application {
         } catch (IOException i) {
             Utils.CrashApp(-100, "Failed to create required temp folder");
         }
-
-
     }
 
     private static void DealWithEngineVersioning() {
@@ -167,14 +163,13 @@ public class Application {
         return dynamicsWorld;
     }
 
-    static void deleteDir(File file) {
-        File[] contents = file.listFiles();
-        if (contents != null) {
-            for (File f : contents) {
-                deleteDir(f);
-            }
-        }
-        file.delete();
+    public static boolean IsPostProcessingActive(){
+        return metadata.PostProcessing;
     }
-
+    public static void setPostProcessingProfile(PostProcessingProfileBehaviour postProcessingProfile) {
+        Application.postProcessingProfile = postProcessingProfile;
+    }
+    public static PostProcessingProfileBehaviour getPostProcessingProfile() {
+        return postProcessingProfile;
+    }
 }

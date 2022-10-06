@@ -123,19 +123,14 @@ public abstract class BluminBehaviour implements IObjLogic{
                 AttachedComponants.remove(AttachedComponants.lastIndexOf(component));
         }
 
-        public IComponent getComponant(IComponent componantType) {
+        public <t extends IComponent> t getComponant(Class<t> componantType) {
                 for (IComponent comp: AttachedComponants) {
-                        if(comp.getClass().getName() == componantType.getClass().getName()) {
-                                return comp;
-                        }
-                }
-                return null;
-        }
+                        if(comp.getClass().isAssignableFrom(componantType.getClass())) {
+                                try{
+                                        return componantType.cast(comp);
+                                } catch(ClassCastException e){
 
-        public static IComponent getComponant(IComponent componantType, BluminBehaviour bb) {
-                for (IComponent comp: bb.AttachedComponants) {
-                        if(comp.getClass().getName() == componantType.getClass().getName()) {
-                                return comp;
+                                }
                         }
                 }
                 return null;

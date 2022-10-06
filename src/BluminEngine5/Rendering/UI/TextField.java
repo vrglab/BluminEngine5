@@ -1,5 +1,6 @@
 package BluminEngine5.Rendering.UI;
 
+import BluminEngine5.Application;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
 
@@ -10,7 +11,7 @@ public class TextField extends UiObject {
     public TextField(){
 
         //mesh = ObjLoader.LoadFile("Res/Models/Cube.obj");
-        shader = new Shader("Res/Shaders/HUD/HUDShader.json");
+        shader = Application.getResourceManager().GetShader(Application.ResFolder + "/Shaders/HUD/HUDShader.json");
     }
 
 

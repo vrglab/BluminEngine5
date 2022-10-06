@@ -11,14 +11,14 @@ import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleSun extends BluminBehaviour {
 
-    public Mesh mesh = ObjLoader.LoadFile(Application.getResourceManager().archive.GeFileFromArchive(0,4));
-    MeshRenderer mr = new MeshRenderer(mesh);
+    public Mesh mesh;
+    MeshRenderer mr;
     public Sun SunComponant = new Sun();
 
 
     public ExampleSun() {
         RegisterComponant(SunComponant, this);
-        RegisterComponant(mr, this);
+
     }
 
     @Override
@@ -32,11 +32,13 @@ public class ExampleSun extends BluminBehaviour {
 
     @Override
     public void OnRender() {
-
     }
 
     @Override
     public void Init() {
+        mesh = Application.getResourceManager().GetMesh(0,3);
+        mr = new MeshRenderer(mesh);
+        RegisterComponant(mr, this);
         transform.scale = new Vector3(0.5f,0.5f,0.5f);
         transform.position.y = 1;
     }

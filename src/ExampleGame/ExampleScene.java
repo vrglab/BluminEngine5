@@ -1,8 +1,9 @@
 package ExampleGame;
 
+import BluminEngine5.Editor.UI.Canvas;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.Lighting.Sun;
-import BluminEngine5.Rendering.UI.Canvas;
 import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.SceneMannagement.Scene;
@@ -16,15 +17,15 @@ import org.lwjgl.glfw.GLFW;
 public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
-    public Canvas UiCanvas = new Canvas();
+
 
     public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
-
 
     public ExampleScene() {
         RegsiterGameObject(ActiveCamera);
         RegsiterGameObject(obj);
-        RegsiterGameObject(UiCanvas);
+
+
     }
     @Override
     public void Update() {
@@ -59,7 +60,20 @@ public class ExampleScene extends Scene {
 
     @Override
     public void Init() {
+        PointLight pl = new PointLight();
+        pl.color = Color.Red;
+        pl.transform.position = new Vector3(0,0, -4);
+        pl.Intesity = 5;
+        LightObjects.PointLights.AddLight(pl);
 
+
+        PointLight pl2 = new PointLight();
+        pl2.transform.position = new Vector3(-4, 6,-3);
+        pl2.color = Color.Blue;
+        pl2.Intesity = 5;
+        LightObjects.PointLights.AddLight(pl2);
+
+        LightObjects.SetSunPos(new Vector3(0,20,-6));
     }
 
     @Override

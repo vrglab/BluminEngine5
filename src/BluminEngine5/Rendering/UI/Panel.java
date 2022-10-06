@@ -15,11 +15,6 @@ public class Panel extends UiObject {
 
     public Panel(Rect r) {
         transform = r;
-
-        mesh = new Mesh(Utils.QuadAsVertex2D());
-        mesh.getMaterial().SetTexture(new Texture(Application.getResourceManager().archive.GeFileFromArchive(1,2)));
-        shader = new Shader("Res/Shaders/HUD/HUDShader.json");
-        RegisterComponant(sr,this);
     }
 
     @Override
@@ -34,6 +29,10 @@ public class Panel extends UiObject {
 
     @Override
     public void Init() {
+        mesh = new Mesh(Utils.QuadAsVertex2D());
+        mesh.getMaterial().SetTexture(Application.getResourceManager().GetTexture(5,0));
+        shader = Application.getResourceManager().GetShader(Application.ResFolder + "/Shaders/HUD/HUDShader.json");
+        RegisterComponant(sr,this);
         mesh.Creat();
         shader.Creat();
     }

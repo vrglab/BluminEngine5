@@ -3,6 +3,7 @@ package BluminEngine5.Componant.Rendering;
 import BluminEngine5.Application;
 import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
+import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
@@ -23,7 +24,7 @@ public class MeshRenderer extends IComponent {
 
     public MeshRenderer(Mesh mesh) {
         this.mesh = mesh;
-        shader = new Shader("Res/Shaders/Default/DefaultGameShader.json");
+        shader = Application.getResourceManager().GetShader(Application.ResFolder + "/Shaders/Default/DefaultGameShader.json");
     }
 
     public MeshRenderer(Mesh mesh, Shader shader) {
@@ -59,10 +60,21 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
         shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
-
         shader.SetUniform("material.ambient", mesh.getMaterial().Ambient);
         shader.SetUniform("material.shininess", mesh.getMaterial().Shine);
 
+
+        shader.SetUniform("levelLightData.sunlight.intensity", SceneManager.GetCurent().GetActiveScene().LightObjects.SceneSun.Intesity);
+        shader.SetUniform("levelLightData.sunlight.position", SceneManager.GetCurent().GetActiveScene().LightObjects.SceneSun.transform.position);
+        shader.SetUniform("levelLightData.sunlight.color", SceneManager.GetCurent().GetActiveScene().LightObjects.SceneSun.color);
+
+        shader.SetUniform("pointLightsIntheLevel", SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.getAmnt());
+        for (int i = 0; i < SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.getAmnt(); i++) {
+            shader.SetUniform("levelLightData.pointlights" + "[" + i + "]" +".position", SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.GetLight(i).transform.position);
+            shader.SetUniform("levelLightData.pointlights" + "[" + i + "]" +".intensity", SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.GetLight(i).Intesity);
+            shader.SetUniform("levelLightData.pointlights" + "[" + i + "]" +".color", SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.GetLight(i).color);
+            shader.SetUniform("levelLightData.pointlights" + "[" + i + "]" +".attenuation", SceneManager.GetCurent().GetActiveScene().LightObjects.PointLights.GetLight(i).attenuation);
+        }
 
         //Set the Textures
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
@@ -76,18 +88,6 @@ public class MeshRenderer extends IComponent {
         GL13.glActiveTexture(GL13.GL_TEXTURE2);
         GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getSpecularMap().getTextureId());
         shader.SetUniform("material.specular", 2);
-
-        for(int i = 0; i < SceneManager.GetCurent().GetActiveScene().LightObjects.size(); i++) {
-            shader.SetUniform("lightPos", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).Parent.transform.position);
-            shader.SetUniform("lightColor", SceneManager.GetCurent().GetActiveScene().LightObjects.get(i).color);
-            shader.SetUniform("pointLights["+ i + "].ambient", new Vector3(0.2f, 0.2f, 0.2f));
-            shader.SetUniform("pointLights["+ i + "].diffuse",  new Vector3(0.5f, 0.5f, 0.5f));
-            shader.SetUniform("pointLights["+ i + "].specular", new Vector3(1.0f, 1.0f, 1.0f));
-            shader.SetUniform("pointLights["+ i + "].constant", 1.0f);
-            Debug.log("Light " + i);
-        }
-        shader.SetUniform("dirLight.direction", new Vector3(-0.2f, -1.0f, -0.3f));
-
 
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();

@@ -11,7 +11,7 @@ public class Metadata {
     public String Developer;
     public String Publisher;
 
-    public boolean Raytracing;
+    public boolean PostProcessing;
 
     public Metadata(String file) throws IOException {
         if (!Utils.FileExists(file)) {
@@ -24,6 +24,6 @@ public class Metadata {
         engineVersion = Version.FromJson(obj.getJSONObject("EngineVersion"));
         Developer = obj.getString("Developer");
         Publisher = obj.getString("publisher");
-        Raytracing = obj.getBoolean("Raytracing");
+        PostProcessing = obj.getBoolean("PostProcessing");
     }
 }

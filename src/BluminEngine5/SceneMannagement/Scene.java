@@ -8,6 +8,7 @@ import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.Lighting.LightData;
 import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
@@ -18,15 +19,10 @@ import java.util.List;
 public abstract class Scene implements ILogic {
 
     private List<BluminBehaviour> GameObjects = new ArrayList<>();
-    public List<BaseLight> LightObjects = new ArrayList<>();
+    public LightData LightObjects = new LightData();
 
     public objActionData ActionData =  new objActionData();
-
     public String name = "New Scene";
-    /* public LightBase Sun =  new Sun(new Transform(
-             new Vector3(0,0,0),
-             new Vector3(0,0,0)),
-             new Color(0,0,0,1));*/
     public Camera ActiveCamera = new Camera();
     public Color SkyColor = new Color(0.2f,0.5f,0.5f,1);
 
@@ -42,9 +38,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnUpdate.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnUpdate.Run();
-                }
+                LightObjects.Update();
             }
         };
         ActionData.OnExit = new IAction() {
@@ -53,9 +47,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnExit.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnExit.Run();
-                }
+                LightObjects.OnExit();
                 OnExit();
             }
         };
@@ -66,9 +58,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnRender.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnRender.Run();
-                }
+                LightObjects.OnRender();
             }
         };
         ActionData.OnInit = new IAction() {
@@ -78,9 +68,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnInit.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnInit.Run();
-                }
+                LightObjects.Init();
             }
         };
         ActionData.OnSceneLoad =  new IAction() {
@@ -93,12 +81,8 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnInit.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnPreInit.Run();
-                }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnInit.Run();
-                }
+                LightObjects.PreInit();
+                LightObjects.Init();
             }
         };
         ActionData.OnDestroy =  new IAction() {
@@ -108,9 +92,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnDestroy.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnDestroy.Run();
-                }
+                LightObjects.Destroy();
             }
         };
         ActionData.OnPreInit =  new IAction() {
@@ -119,9 +101,7 @@ public abstract class Scene implements ILogic {
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnPreInit.Run();
                 }
-                for (BaseLight comp: LightObjects) {
-                    comp.data.OnPreInit.Run();
-                }
+                LightObjects.PreInit();
             }
         };
 
@@ -147,16 +127,11 @@ public abstract class Scene implements ILogic {
     }
 
     public void RegsiterLightObject(BaseLight bb) {
-        if(!LightObjects.contains(bb)) {
-            LightObjects.add(bb);
-        }
+        LightObjects.miscLight.AddLight(bb);
     }
 
     public void UnRegsiterLightObject(BaseLight bb) {
-        if(LightObjects.contains(bb)) {
-            LightObjects.remove(GameObjects.lastIndexOf(bb));
-        }
-
+        LightObjects.miscLight.RemoveLight(bb);
     }
 
     public abstract void Load();
@@ -172,55 +147,14 @@ public abstract class Scene implements ILogic {
         }
     }
 
-
-
-    public BluminBehaviour getGameObject(BluminBehaviour componantType) {
+    public <t extends BluminBehaviour> t getGameObject(Class<t> componantType) {
         for (BluminBehaviour comp: GameObjects) {
-            if(comp.getClass().getName() == componantType.getClass().getName()) {
-                return comp;
-            }
-        }
-        return null;
-    }
+            if(comp.getClass().isAssignableFrom(componantType.getClass())) {
+                try{
+                    return componantType.cast(comp);
+                } catch(ClassCastException e){
 
-
-
-    public BluminBehaviour[] getGameObjectArray(BluminBehaviour componantType) {
-        List<BluminBehaviour> bs = new ArrayList<>();
-        for (BluminBehaviour comp: GameObjects) {
-            if(comp.getClass().getName() == componantType.getClass().getName()) {
-                bs.add(comp);
-            }
-        }
-        BluminBehaviour[] b = new BluminBehaviour[bs.size()];
-
-        for (int i = 0; i < b.length; i++){
-            b[i] = bs.get(i);
-        }
-
-        return b;
-    }
-
-    public BluminBehaviour[] getGameObjectArray(BluminBehaviour componantType, Scene bb) {
-        List<BluminBehaviour> bs = new ArrayList<>();
-        for (BluminBehaviour comp: bb.GameObjects) {
-            if(comp.getClass().getName() == componantType.getClass().getName()) {
-                bs.add(comp);
-            }
-        }
-        BluminBehaviour[] b = new BluminBehaviour[bs.size()];
-
-        for (int i = 0; i < b.length; i++){
-            b[i] = bs.get(i);
-        }
-
-        return b;
-    }
-
-    public static BluminBehaviour getGameObject(BluminBehaviour componantType, Scene bb) {
-        for (BluminBehaviour comp: bb.GameObjects) {
-            if(comp.getClass().getName() == componantType.getClass().getName()) {
-                return comp;
+                }
             }
         }
         return null;

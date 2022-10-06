@@ -6,10 +6,6 @@ import BluminEngine5.Utils.Debuging.Debug;
 
 public class Sun extends BaseLight {
 
-
-
-
-    //TODO: Look into why the update function doesn't work but everything else is fine
     @Override
     public void Update() {
             transform = Parent.transform;

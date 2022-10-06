@@ -16,7 +16,6 @@
   },
   "Developer": "Example Developer",
   "publisher": "Example Publisher",
-  "Raytracing": "false",
-  "mode": "3D",
+  "PostProcessing": "true",
   "icon" : ""
 }

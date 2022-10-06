@@ -1,6 +1,6 @@
 package BluminEngine5.Utils.Debuging;
 
-//import BluminEngine5.Utils.Application;
+//import BluminEngine5.Application;
 //import BluminEngine5.Utils.EventSystem.Action;
 //import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Application;
@@ -122,12 +122,14 @@ public class Debug implements ExceptionListener{
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
 
-        String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.getMessage() + "\r\n" + dat.getStackTrace();
+        String datString = "{Error: "+dtf.format(now)  + "}: "+ dat.getMessage();
+
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
             RawLog.add(dat.toString());
         }
         System.err.println(datString);
+        Application.OnExit.Invoke();
     }
 
     public static void logException(Object data, Exception dat) {
@@ -136,12 +138,13 @@ public class Debug implements ExceptionListener{
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss:ms");
         LocalDateTime now = LocalDateTime.now();
-        String datString = "{Error: "+dtf.format(now)  + "}: " + data.toString() +": "+ dat.getMessage() + "\r\n" + dat.getStackTrace();
+        String datString = "{Error: "+dtf.format(now)  + "}: " + data.toString() +": "+ dat.getMessage();
         if(!RawLog.contains(dat.toString())) {
             Log.add(datString);
             RawLog.add(dat.toString());
         }
         System.err.println(datString);
+        Application.OnExit.Invoke();
     }
 
     @Override

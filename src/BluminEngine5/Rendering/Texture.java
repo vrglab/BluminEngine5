@@ -6,6 +6,7 @@ import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
 import BluminEngine5.Utils.Utils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.newdawn.slick.opengl.InternalTextureLoader;
@@ -26,10 +27,15 @@ public class Texture {
     private float width, height;
     private int textureId;
     private ArchivedFile file;
+    private String fileBackup;
     private TextureMode renderMode = TextureMode.ClampToEdge;
 
     public Texture(ArchivedFile file) {
         this.file = file;
+    }
+
+    public Texture(String file) {
+        this.fileBackup = file;
     }
     public Texture(Vector2 size) {
         width = size.x;
@@ -50,8 +56,15 @@ public class Texture {
             }
         } else{
             try{
-                texture = InternalTextureLoader.get().createTexture((int)width,(int)height);
+                InputStream is = Utils.LoadFileAsStream(fileBackup);
+                File f = new File(fileBackup);
+                texture =  TextureLoader.getTexture(FilenameUtils.getExtension(fileBackup), is , GL11.GL_LINEAR);
+                width = texture.getWidth();
+                height = texture.getHeight();
                 textureId = texture.getTextureID();
+
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+                f.delete();
             } catch(IOException e){
                 Debug.logException("Failed to create texture with exception", e);
             }

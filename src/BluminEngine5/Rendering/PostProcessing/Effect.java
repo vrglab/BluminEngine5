@@ -8,5 +8,4 @@ public abstract class Effect implements IObjLogic {
     public boolean Active = false;
     public PostProcessingBehaviour Parent = null;
     public objActionData data = null;
-
 }

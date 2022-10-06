@@ -6,6 +6,7 @@ import BluminEngine5.Componant.Audio.Source;
 import BluminEngine5.Componant.Physics.MeshColider;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.ObjLoader;
 
@@ -18,31 +19,30 @@ public class ExampleGameobject extends BluminBehaviour {
 
     Source s;
 
-    BluminBehaviour sun;
-
     public ExampleGameobject() {
 
     }
 
     @Override
     public void Update() {
-
+        if(s.IsPlaying()) {
+            Debug.log("audio should be playing");
+        }else{
+            s.Play();
+        }
     }
 
     @Override
     public void OnRender() {
 
     }
-
     @Override
     public void Init() {
-        mesh = ObjLoader.LoadFile(Application.getResourceManager().archive.GeFileFromArchive(1,4));
+        mesh =  Application.getResourceManager().GetMesh(1,3);
         mr = new MeshRenderer(mesh);
+        s = new Source(2,4);
         RegisterComponant(mr, this);
-        sun = parent.getGameObject(new ExampleSun());
-        s  = new Source("Res/testing.ogg");
         RegisterComponant(s, this);
-        s.Play();
     }
 
     @Override

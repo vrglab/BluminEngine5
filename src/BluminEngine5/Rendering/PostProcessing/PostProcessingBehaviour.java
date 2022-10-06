@@ -112,4 +112,8 @@ public abstract class PostProcessingBehaviour extends IComponent {
     public void UnregisterComponant(IComponent component) {
         AttachedEffects.remove(AttachedEffects.lastIndexOf(component));
     }
+
+    public List<Effect> getAttachedEffects() {
+        return AttachedEffects;
+    }
 }

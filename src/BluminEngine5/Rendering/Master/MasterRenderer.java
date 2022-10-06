@@ -1,6 +1,8 @@
 package BluminEngine5.Rendering.Master;
 
+import BluminEngine5.Application;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.PostProcessing.Effect;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.EventSystem.IAction;
