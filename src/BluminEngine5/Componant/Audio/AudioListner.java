@@ -7,6 +7,7 @@ import com.sun.jdi.connect.spi.TransportService;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
+import org.lwjgl.openal.ALCapabilities;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -22,21 +23,29 @@ public class AudioListner extends IComponent {
 
     public AudioListner() {
         try{
-            device = alcOpenDevice((ByteBuffer) null);
+            String def = alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER);
+            device = alcOpenDevice(def);
             if (device == NULL) {
-                Utils.CrashApp(-20, "Failed to make audio Listner device");
+                Utils.CrashApp(-20, "Failed to make audio Listener device");
             }
-            ALCCapabilities deviceCaps = ALC.createCapabilities(device);
-            this.context = alcCreateContext(device, (IntBuffer) null);
+            int[] atribs = {0};
+
+            this.context = alcCreateContext(device, atribs);
             if (context == NULL) {
-                Utils.CrashApp(-21, "Failed to make audio Listner context");
+                Utils.CrashApp(-21, "Failed to make audio Listener context");
             }
             alcMakeContextCurrent(context);
-            AL.createCapabilities(deviceCaps);
-            Debug.log("Audio Listner Initialized");
+            ALCCapabilities deviceCaps = ALC.createCapabilities(device);
+            ALCapabilities capaby = AL.createCapabilities(deviceCaps);
+
+            if(!capaby.OpenAL10) {
+                Utils.CrashApp(-26, "OpenAL not supported on this device");
+            }
+
+            Debug.log("Audio Listener Initialized");
 
         } catch (Exception e) {
-            Utils.CrashApp(-22, "Failed to load audio Listner");
+            Utils.CrashApp(-22, "Failed to load audio Listener");
         }
     }
 
@@ -73,6 +82,7 @@ public class AudioListner extends IComponent {
 
     @Override
     public void Destroy() {
-
+        alcCloseDevice(device);
+        alcDestroyContext(context);
     }
 }

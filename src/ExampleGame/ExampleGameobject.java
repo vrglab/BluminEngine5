@@ -29,6 +29,7 @@ public class ExampleGameobject extends BluminBehaviour {
             Debug.log("audio should be playing");
         }else{
             s.Play();
+            Debug.log("audio is not playing");
         }
     }
 
