@@ -5,6 +5,7 @@ import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
@@ -22,17 +23,17 @@ public class MeshRenderer extends IComponent {
     public Mesh mesh;
     private Shader shader;
 
-    public MeshRenderer(Mesh mesh) {
-        this.mesh = mesh;
+    public MeshRenderer(Model model) {
+        this.mesh = model.getMesh();
         shader = Application.getResourceManager().GetShader(Application.ResFolder + "/Shaders/Default/DefaultGameShader.json");
     }
 
-    public MeshRenderer(Mesh mesh, Shader shader) {
-        this.mesh = mesh;
+    public MeshRenderer(Model model, Shader shader) {
+        this.mesh = model.getMesh();
         this.shader = shader;
     }
-    public MeshRenderer(Mesh mesh, String shader) {
-        this.mesh = mesh;
+    public MeshRenderer(Model model, String shader) {
+        this.mesh = model.getMesh();
         this.shader = new Shader(shader);
     }
 

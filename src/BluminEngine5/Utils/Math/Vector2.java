@@ -3,8 +3,9 @@ package BluminEngine5.Utils.Math;
 
 import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
+import java.io.Serializable;
 
-public class Vector2  {
+public class Vector2  implements Serializable {
 
     public float x;
     public float y;

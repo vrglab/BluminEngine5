@@ -3,7 +3,9 @@ package BluminEngine5.Physics.Colision;
 import BluminEngine5.Componant.Transform;
 import BluminEngine5.Utils.Math.Vector3;
 
-public class BoundBox {
+import java.io.Serializable;
+
+public class BoundBox  implements Serializable {
     public Transform transform = Transform.DefaultZero;
 
     public Vector3 TopLeftFront, TopLeftBack,
