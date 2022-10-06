@@ -30,22 +30,41 @@ public class Shader {
     public void Creat() {
         programid = GL20.glCreateProgram();
         vertexId = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
-        GL20.glShaderSource(vertexId, VertexShader);
-        GL20.glCompileShader(vertexId);
-
+        SourceAndCompile(vertexId, VertexShader);
         if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-            Debug.logError(GL20.glGetShaderInfoLog(vertexId));
-            Utils.CrashApp(-14, "Failed to compile vertex shader");
+            var tempog = VertexShader;
+            VertexShader = "#version 460 core \n" + tempog;
+            SourceAndCompile(vertexId, VertexShader);
+            if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                VertexShader = "#version 330 core \n" + tempog;
+                SourceAndCompile(vertexId, VertexShader);
+                if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                    Debug.logError(GL20.glGetShaderInfoLog(vertexId));
+                    Utils.CrashApp(-14, "Failed to compile vertex shader");
+                }
+            }
         }
 
         fragmentId = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
-        GL20.glShaderSource(fragmentId, FragmentShader);
-        GL20.glCompileShader(fragmentId);
+        SourceAndCompile(fragmentId, FragmentShader);
 
         if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-            Debug.logError(GL20.glGetShaderInfoLog(fragmentId));
-            Utils.CrashApp(-15, "Failed to compile fragment shader");
+            var tempog = FragmentShader;
+            FragmentShader = "#version 460 core \n" + tempog;
+            SourceAndCompile(fragmentId, FragmentShader);
+
+            if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                FragmentShader = "#version 330 core \n" + tempog;
+                SourceAndCompile(fragmentId, FragmentShader);
+                if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                    Debug.log(FragmentShader);
+                    Debug.logError(GL20.glGetShaderInfoLog(fragmentId));
+                    Utils.CrashApp(-15, "Failed to compile fragment shader");
+                }
+            }
         }
+
+        Debug.log(FragmentShader);
 
         GL20.glAttachShader(programid, vertexId);
         GL20.glAttachShader(programid, fragmentId);
@@ -70,6 +89,11 @@ public class Shader {
     public int GetUniformLocation(String name, int arraypos, String types) {
         String n = name + "[" + arraypos + "]" + "." + types;
         return GL20.glGetUniformLocation(programid, n);
+    }
+
+    private void SourceAndCompile(int shader, String data) {
+        GL20.glShaderSource(shader, data);
+        GL20.glCompileShader(shader);
     }
 
     public void SetUniform(String name, int data) {
