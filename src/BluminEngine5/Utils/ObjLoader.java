@@ -3,15 +3,19 @@ package BluminEngine5.Utils;
 import BluminEngine5.Application;
 import BluminEngine5.Rendering.Master.Material;
 import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Rendering.Vertex;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.assimp.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class ObjLoader {
 
@@ -196,6 +200,23 @@ public class ObjLoader {
         }
     }
 
+    public static Model LoadModel(ArchivedFile obj) {
+        try{
+            File f = Application.getResourceManager().LoadIntoTempFile(obj);
+            if(FilenameUtils.getExtension(f.getAbsolutePath()) != "bmd") {
+                Debug.logException(new Exception("Not a BluminEngine Model File"));
+                return null;
+            }
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(Utils.LoadFileAsStream(f.getAbsolutePath()));
+            Model m = (Model) objectInputStream.readObject();
+            return m;
+        } catch (Exception e) {
+            Debug.logException(e);
+            return null;
+        }
+    }
+
     private static AIScene GetDtaFromFile(ArchivedFile file){
         try{
             File f = Application.getResourceManager().LoadIntoTempFile(file);
@@ -207,4 +228,6 @@ public class ObjLoader {
         }
         return null;
     }
+
+
 }
