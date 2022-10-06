@@ -15,10 +15,10 @@ out vec3 Normal;
 out vec4 WorldPos;
 
 void main() {
-    vec4 worldPos = ProjectionMatrix * vec4(position, 1.0f);
-    gl_Position =  ProjectionMatrix * ViewMatrix *transform  * vec4(position, 1.0f) ;
+    vec4 worldPos =  transform * vec4(position, 1.0f);
+    gl_Position =  ProjectionMatrix * ViewMatrix * transform  * vec4(position, 1.0f) ;
     color = incolor;
     texCord = textureCord;
-    Normal = (transform * vec4(normal,1.0)).xyz;
+    Normal = (ProjectionMatrix * ViewMatrix * transform * vec4(normal + position,1.0)).xyz;
     WorldPos = worldPos;
 }

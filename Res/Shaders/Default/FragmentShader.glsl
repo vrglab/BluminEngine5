@@ -86,19 +86,63 @@ vec4 calculateSunlight() {
 }
 
 
+vec4 calculatespecularLighting(sampler2D specular,vec3 normal, vec3 pos, vec4 color, float intesity) {
+    vec3 nomr = normalize(normal);
+    vec3 reflectDir = reflect(nomr, pos + WorldPos.xyz);
+    float spec = pow(max(dot(nomr, reflectDir), 0.0), material.shininess);
+    vec3 s = spec * vec3(texture(material.specular, texCord));
+
+
+    if(color.xyz != vec3(1,1,1)) {
+        s = spec * vec3(texture(material.specular, texCord)) * color.xyz;
+    }
+    return vec4(s,1.0) * intesity;
+}
+
+vec4 calculatespecularLightingWithAten(sampler2D specular,vec3 normal, vec3 pos, vec4 color, vec3 attenuation, float intesity) {
+    vec3 nomr = normalize(normal);
+    vec3 reflectDir = reflect(nomr, pos + WorldPos.xyz);
+    float spec = pow(max(dot(nomr, reflectDir), 0.0), material.shininess);
+    vec3 s = spec * vec3(texture(material.specular, texCord));
+
+    float distanc = length(pos - WorldPos.xyz);
+    float atten = attenuation.x + (attenuation.y * distanc) +  (attenuation.z * distanc * distanc);
+
+    if(color.xyz != vec3(1,1,1)) {
+        s = spec * vec3(texture(material.specular, texCord)) * color.xyz;
+    }
+    return (vec4(s,1.0) * intesity) / atten;
+}
 
 
 
 void main() {
 
-    vec3 ambient =  material.ambient * texture(material.Texture, texCord).xyz;
+    if(material.shininess > 0) {
+        vec3 ambient =  material.ambient * texture(material.Texture, texCord).xyz;
 
-    vec4 totalLighting = calculateSunlight();
+        vec4 totalLighting = calculateSunlight() + calculatespecularLighting(material.specular, Normal, levelLightData.sunlight.position, levelLightData.sunlight.color, levelLightData.sunlight.intensity + material.shininess);
 
-    for (int i = 0; i < pointLightsIntheLevel;i ++) {
-        totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation);
+        for (int i = 0; i < pointLightsIntheLevel;i ++) {
+            totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation)
+            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i].position,levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation, levelLightData.pointlights[i].intensity + material.shininess);
+        }
+
+        outColor =  totalLighting * vec4(ambient, 1.0);
+    } else{
+        vec3 ambient =  material.ambient * texture(material.Texture, texCord).xyz;
+
+        vec4 totalLighting = calculateSunlight();
+
+        for (int i = 0; i < pointLightsIntheLevel;i ++) {
+            totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation);
+
+        }
+
+        outColor =  totalLighting * vec4(ambient, 1.0);
     }
 
-    outColor =  totalLighting * vec4(ambient, 1.0);
+
+
 
 }

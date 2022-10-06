@@ -8,6 +8,7 @@ import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
+import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.ObjLoader;
 
 public class ExampleGameobject extends BluminBehaviour {
@@ -30,6 +31,7 @@ public class ExampleGameobject extends BluminBehaviour {
         }else{
             s.Play();
         }
+        transform.rotation = new Vector3(transform.rotation.x, transform.rotation.y += 1, transform.rotation.z);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class ExampleGameobject extends BluminBehaviour {
         s = new Source(2,4);
         RegisterComponant(mr, this);
         RegisterComponant(s, this);
+        model.getMesh().getMaterial().Shine = 0.5f;
     }
 
     @Override
