@@ -2,7 +2,9 @@ package BluminEngine5.Rendering;
 
 import BluminEngine5.Utils.Math.*;
 
-public class Vertex {
+import java.io.Serializable;
+
+public class Vertex implements Serializable {
     private Vector3 position, normals;
     private Vector2 texturePosition;
     private Color color;

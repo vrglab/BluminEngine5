@@ -121,7 +121,7 @@ vec4 reflections(){
     vec3 I      = normalize( WorldPos.xyz);
     vec3 viewR  = reflect(I, normalize(Normal));
     vec3 worldR = inverse(mat3(viewMatrix)) * viewR * material.reflectivenes;
-    return worldR * vec3(texture(material.ReflectionsMap, texCord));
+    return vec4(worldR * vec3(texture(material.ReflectionsMap, texCord)),1.0);
 }
 
 void main() {

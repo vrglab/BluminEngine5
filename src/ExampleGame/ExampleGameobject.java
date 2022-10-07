@@ -7,6 +7,8 @@ import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector3;
 
+import java.io.IOException;
+
 public class ExampleGameobject extends BluminBehaviour {
 
     public Model model = new Model();
@@ -40,15 +42,14 @@ public class ExampleGameobject extends BluminBehaviour {
 
 
         if (sdd == null) {
-            model.setMesh(0,3);
-            model.setMaterial(new Material());
+            model = new Model(2,3);
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
-            model.getMaterial().Shine = 3f;
-            model.getMaterial().reflection= 0.3f;
+            model.getMaterial().Shine = 1f;
+            model.getMaterial().reflection= 0.5f;
 
         } else{
-            model.setMesh(1,3);
+            model = new Model(3,3);
             model.setMaterial(new Material());
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);

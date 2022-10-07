@@ -16,6 +16,8 @@ import org.lwjgl.assimp.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Base64;
 
 public class ObjLoader {
 
@@ -203,8 +205,9 @@ public class ObjLoader {
     public static Model LoadModel(ArchivedFile obj) {
         try{
             File f = Application.getResourceManager().LoadIntoTempFile(obj);
-            if(FilenameUtils.getExtension(f.getAbsolutePath()) != "bmd") {
-                Debug.logException(new Exception("Not a BluminEngine Model File"));
+            if(!FilenameUtils.getExtension(f.getAbsolutePath()).equals("bmd")) {
+                Debug.log(FilenameUtils.getExtension(f.getAbsolutePath()));
+                Debug.logException(new Exception( f.getAbsolutePath() + " is not a BluminEngine Model File"));
                 return null;
             }
 

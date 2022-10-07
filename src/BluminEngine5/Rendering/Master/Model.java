@@ -5,6 +5,9 @@ import BluminEngine5.Componant.Transform;
 import BluminEngine5.Physics.Colision.Collider;
 import BluminEngine5.Utils.ObjLoader;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,4 +66,13 @@ public class Model implements Serializable {
     public void setMaterial(Material material) {
         this.material = material;
     }
+
+    public void SaveToFile(String file) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(Application.getMetadata().ResourceFolder + "/" + file);
+        ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
+        oos.writeObject(this);
+        oos.flush();
+        oos.close();
+    }
+
 }

@@ -4,8 +4,6 @@ import BluminEngine5.Editor.UI.Canvas;
 import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.Lighting.Sun;
-import BluminEngine5.Rendering.UI.Panel;
-import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
@@ -22,14 +20,11 @@ public class ExampleScene extends Scene {
     private ExampleGameobject obj2 = new ExampleGameobject("lsd");
 
 
-    public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
 
     public ExampleScene() {
         RegsiterGameObject(ActiveCamera);
         RegsiterGameObject(obj);
         RegsiterGameObject(obj2);
-
-
     }
     @Override
     public void Update() {
@@ -77,19 +72,19 @@ public class ExampleScene extends Scene {
         pl2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
         pl2.color = Color.White;
         pl2.Intesity = 5;
-        LightObjects.PointLights.AddLight(pl2);
 
         PointLight pl3 = new PointLight();
         pl3.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
         pl3.color = Color.White;
         pl3.Intesity = 5;
-        LightObjects.PointLights.AddLight(pl3);
 
         PointLight pl4 = new PointLight();
         pl4.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
         pl4.color = Color.White;
         pl4.Intesity = 5;
-        LightObjects.PointLights.AddLight(pl4);
+
+
+
         LightObjects.SceneSun.Intesity =2;
 
         LightObjects.SetSunPos(new Vector3(0,1000000000,20));

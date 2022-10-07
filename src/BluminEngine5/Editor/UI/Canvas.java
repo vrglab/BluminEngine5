@@ -2,8 +2,11 @@ package BluminEngine5.Editor.UI;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Editor.EditorUiObject;
-import BluminEngine5.Rendering.UI.Obj.UiObject;
-import imgui.ImGui;
+
+import BluminEngine5.Utils.EventSystem.Action;
+import BluminEngine5.Utils.EventSystem.IAction;
+import imgui.*;
+import imgui.flag.ImGuiFreeTypeBuilderFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 
@@ -16,6 +19,10 @@ public class Canvas extends BluminBehaviour {
     ImGuiImplGl3 s = new ImGuiImplGl3();
     ImGuiImplGlfw a = new ImGuiImplGlfw();
 
+    ImGuiIO io;
+
+    public Action<IAction> AfterInit = new Action<>();
+
     @Override
     public void Update() {
 
@@ -25,6 +32,7 @@ public class Canvas extends BluminBehaviour {
     public void OnRender() {
         a.newFrame();
         ImGui.newFrame();
+
         for (EditorUiObject dat: UiObjects) {
             dat.OnUiRender();
         }
@@ -37,7 +45,25 @@ public class Canvas extends BluminBehaviour {
         ImGui.createContext();
         a.init(Application.display.getWindow(), true);
         s.init("#version 460");
+        io = ImGui.getIO();
+        AfterInit.Invoke();
     }
+
+
+    public ImFont ChangeFont(String font, int size) {
+        final ImFontAtlas fontAtlas = io.getFonts();
+        final ImFontConfig fontConfig = new ImFontConfig(); // Natively allocated object, should be explicitly destroyed
+        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+        fontConfig.setPixelSnapH(true);
+        fontConfig.setMergeMode(true);
+
+        ImFont f = fontAtlas.addFontFromFileTTF(Application.getMetadata().ResourceFolder + "/" + font, size ,fontConfig );
+        fontAtlas.build();
+        fontConfig.destroy();
+        s.init("#version 460");
+        return f;
+    }
+
 
     @Override
     public void PreInit() {

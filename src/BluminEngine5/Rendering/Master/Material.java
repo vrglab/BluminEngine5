@@ -9,9 +9,10 @@ import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Material {
+public class Material implements Serializable {
     private Texture texture, DefuseMap,  SpecularMap, ReflectionsMap;
     private Color color;
 

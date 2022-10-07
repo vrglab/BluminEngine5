@@ -3,8 +3,10 @@ package BluminEngine5.Rendering;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
 
+import java.io.Serializable;
 
-public class Color  {
+
+public class Color implements Serializable {
 
     float r,g,b,a;
 
