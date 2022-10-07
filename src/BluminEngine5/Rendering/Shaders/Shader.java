@@ -31,18 +31,23 @@ public class Shader {
         programid = GL20.glCreateProgram();
         vertexId = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
         SourceAndCompile(vertexId, VertexShader);
+
         if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
             var tempog = VertexShader;
             VertexShader = "#version 460 core \n" + tempog;
             SourceAndCompile(vertexId, VertexShader);
+            Debug.log("Changed the vertex shader version to 460 core");
             if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                Debug.log("Failed to Changed the vertex shader version to 460 core");
                 VertexShader = "#version 330 core \n" + tempog;
                 SourceAndCompile(vertexId, VertexShader);
+                Debug.log("Changed the vertex shader version to 330 core");
                 if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
                     Debug.logError(GL20.glGetShaderInfoLog(vertexId));
                     Utils.CrashApp(-14, "Failed to compile vertex shader");
                 }
             }
+
         }
 
         fragmentId = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
@@ -52,12 +57,13 @@ public class Shader {
             var tempog = FragmentShader;
             FragmentShader = "#version 460 core \n" + tempog;
             SourceAndCompile(fragmentId, FragmentShader);
-
+            Debug.log("Changed the fragment shader version to 460 core");
             if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+                Debug.log("Failed to Changed the fragment shader version to 460 core");
                 FragmentShader = "#version 330 core \n" + tempog;
                 SourceAndCompile(fragmentId, FragmentShader);
+                Debug.log("Changed the fragment shader version to 330 core");
                 if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-                    Debug.log(FragmentShader);
                     Debug.logError(GL20.glGetShaderInfoLog(fragmentId));
                     Utils.CrashApp(-15, "Failed to compile fragment shader");
                 }

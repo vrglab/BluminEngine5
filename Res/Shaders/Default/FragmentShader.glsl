@@ -15,7 +15,7 @@ struct Material {
     sampler2D  specular;
     float shininess;
     float reflectivenes;
-    sampler2D skybox;
+    sampler2D ReflectionsMap;
 };
 
 struct Sun {
@@ -121,10 +121,8 @@ vec4 reflections(){
     vec3 I      = normalize( WorldPos.xyz);
     vec3 viewR  = reflect(I, normalize(Normal));
     vec3 worldR = inverse(mat3(viewMatrix)) * viewR * material.reflectivenes;
-    return worldR;
+    return worldR * vec3(texture(material.ReflectionsMap, texCord));
 }
-
-
 
 void main() {
 

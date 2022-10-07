@@ -13,11 +13,13 @@ public class Model implements Serializable {
 
     public Transform transform = Transform.DefaultZero;
     private Mesh mesh = null;
+    private Material material;
     private List<Collider> coliders = new ArrayList<>();
 
-    public Model(Mesh mesh, List<Collider> coliders) {
+    public Model(Mesh mesh, List<Collider> coliders, Material m) {
         this.mesh = mesh;
         this.coliders = coliders;
+        this.material = m;
     }
 
 
@@ -25,6 +27,7 @@ public class Model implements Serializable {
        var dat = ObjLoader.LoadModel(Application.getResourceManager().archive.GeFileFromArchive(file,archive));
         mesh = dat.getMesh();
         coliders = dat.getColliders();
+        material =  dat.getMaterial();
     }
 
     public Model() {
@@ -51,5 +54,13 @@ public class Model implements Serializable {
             return;
         }
         coliders.remove(coliders.lastIndexOf(col));
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 }

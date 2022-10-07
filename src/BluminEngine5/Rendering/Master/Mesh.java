@@ -13,23 +13,19 @@ import java.nio.IntBuffer;
 public class Mesh implements Serializable {
     private Vertex[] vertecies;
     private int[] indecies;
-    private int vao, pbo, ibo, cbo, tbo, nbo;
-    private Material mat;
+    private int vao, pbo, ibo, tbo, nbo;
 
     public Mesh(Vertex[] vertecies, int[] indecies) {
         this.vertecies = vertecies;
         this.indecies = indecies;
-        mat = new Material();
     }
 
     public Mesh(Vertex[] vertecies, int[] indecies, Material m) {
         this.vertecies = vertecies;
         this.indecies = indecies;
-        mat = m;
     }
 
     public void Creat(){
-        mat.Creat();
 
         vao = GL30.glGenVertexArrays();
         GL30.glBindVertexArray(vao);
@@ -44,20 +40,6 @@ public class Mesh implements Serializable {
         positionBuffer.put(positionData).flip();
 
         pbo = glStoreBuffer(positionBuffer, 0, 3);
-
-
-
-        FloatBuffer colorBuffer = MemoryUtil.memAllocFloat(vertecies.length * 4);
-        float[] colorData = new float[vertecies.length * 4];
-        for (int i = 0; i < vertecies.length; i++) {
-            colorData[i * 4] = mat.getColor().GetR();
-            colorData[i * 4 + 1] = mat.getColor().GetG();
-            colorData[i * 4 + 2] = mat.getColor().GetB();
-            colorData[i * 4 + 3] = mat.getColor().GetA();
-        }
-        colorBuffer.put(colorData).flip();
-        cbo = glStoreBuffer(colorBuffer, 1, 4);
-
 
         FloatBuffer textBuffer = MemoryUtil.memAllocFloat(vertecies.length * 2);
         float[] texData = new float[vertecies.length * 2];
@@ -100,10 +82,8 @@ public class Mesh implements Serializable {
     }
 
     public void Destroy() {
-        mat.Destroy();
         GL15.glDeleteBuffers(pbo);
         GL15.glDeleteBuffers(ibo);
-        GL15.glDeleteBuffers(cbo);
         GL15.glDeleteBuffers(tbo);
         GL30.glDeleteVertexArrays(vao);
     }
@@ -123,9 +103,6 @@ public class Mesh implements Serializable {
     public int getIBO() {
         return ibo;
     }
-    public int getCBO() {
-        return cbo;
-    }
     public int getTBO() {
         return tbo;
     }
@@ -133,7 +110,4 @@ public class Mesh implements Serializable {
         return nbo;
     }
 
-    public Material getMaterial() {
-        return mat;
-    }
 }

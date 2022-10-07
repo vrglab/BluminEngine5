@@ -20,7 +20,7 @@ void main() {
     gl_Position =  ProjectionMatrix * ViewMatrix * transform  * vec4(position, 1.0f) ;
     color = incolor;
     texCord = textureCord;
-    Normal = (ProjectionMatrix * ViewMatrix * transform * vec4(normal + position,1.0)).xyz;
+    Normal = (ProjectionMatrix * transform * vec4(normal + position,1.0)).xyz;
     WorldPos = worldPos;
     viewMatrix = ViewMatrix;
 }

@@ -2,6 +2,7 @@ package ExampleGame;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
+import BluminEngine5.Rendering.Master.Material;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector3;
@@ -39,20 +40,22 @@ public class ExampleGameobject extends BluminBehaviour {
 
 
         if (sdd == null) {
-            model.setMesh(1,3);
+            model.setMesh(0,3);
+            model.setMaterial(new Material());
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
-            model.getMesh().getMaterial().Shine = 12f;
-            model.getMesh().getMaterial().reflection= 1f;
+            model.getMaterial().Shine = 3f;
+            model.getMaterial().reflection= 0.3f;
 
         } else{
-            model.setMesh(0,3);
+            model.setMesh(1,3);
+            model.setMaterial(new Material());
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
             transform.position = new Vector3(6,0,9);
             transform.scale = new Vector3(0.5f,0.5f,0.5f);
-            model.getMesh().getMaterial().reflection = 0;
-            model.getMesh().getMaterial().Shine = 0;
+            model.getMaterial().reflection = 0;
+            model.getMaterial().Shine = 0;
         }
     }
 
