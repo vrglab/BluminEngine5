@@ -4,6 +4,7 @@ in vec4 color;
 in vec2 texCord;
 in vec3 Normal;
 in vec4 WorldPos;
+in mat4 viewMatrix;
 
 #define NR_POINT_LIGHTS 100
 
@@ -13,6 +14,8 @@ struct Material {
     sampler2D  diffuse;
     sampler2D  specular;
     float shininess;
+    float reflectivenes;
+    sampler2D skybox;
 };
 
 struct Sun {
@@ -114,6 +117,13 @@ vec4 calculatespecularLightingWithAten(sampler2D specular,vec3 normal, vec3 pos,
     return (vec4(s,1.0) * intesity) / atten;
 }
 
+vec4 reflections(){
+    vec3 I      = normalize( WorldPos.xyz);
+    vec3 viewR  = reflect(I, normalize(Normal));
+    vec3 worldR = inverse(mat3(viewMatrix)) * viewR * material.reflectivenes;
+    return worldR;
+}
+
 
 
 void main() {
@@ -121,14 +131,17 @@ void main() {
     if(material.shininess > 0) {
         vec3 ambient =  material.ambient * texture(material.Texture, texCord).xyz;
 
-        vec4 totalLighting = calculateSunlight() + calculatespecularLighting(material.specular, Normal, levelLightData.sunlight.position, levelLightData.sunlight.color, levelLightData.sunlight.intensity + material.shininess);
+        vec4 totalLighting = calculateSunlight();
 
         for (int i = 0; i < pointLightsIntheLevel;i ++) {
             totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation)
-            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i].position,levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation, levelLightData.pointlights[i].intensity + material.shininess);
+            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i].position,levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation, levelLightData.pointlights[i].intensity * material.shininess)
+            ;
         }
 
-        outColor =  totalLighting * vec4(ambient, 1.0);
+        totalLighting = totalLighting + calculatespecularLighting(material.specular, Normal, levelLightData.sunlight.position, levelLightData.sunlight.color, levelLightData.sunlight.intensity * material.shininess);
+
+        outColor = reflections() +  totalLighting * vec4(ambient, 1.0);
     } else{
         vec3 ambient =  material.ambient * texture(material.Texture, texCord).xyz;
 
@@ -139,7 +152,7 @@ void main() {
 
         }
 
-        outColor =  totalLighting * vec4(ambient, 1.0);
+        outColor =totalLighting * vec4(ambient, 1.0);
     }
 
 

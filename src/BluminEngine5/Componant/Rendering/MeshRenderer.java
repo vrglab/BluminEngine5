@@ -62,6 +62,7 @@ public class MeshRenderer extends IComponent {
         shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
         shader.SetUniform("material.ambient", mesh.getMaterial().Ambient);
         shader.SetUniform("material.shininess", mesh.getMaterial().Shine);
+        shader.SetUniform("material.reflectivenes", mesh.getMaterial().reflection);
 
 
         shader.SetUniform("levelLightData.sunlight.intensity", SceneManager.GetCurent().GetActiveScene().LightObjects.SceneSun.Intesity);
@@ -88,6 +89,10 @@ public class MeshRenderer extends IComponent {
         GL13.glActiveTexture(GL13.GL_TEXTURE2);
         GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getSpecularMap().getTextureId());
         shader.SetUniform("material.specular", 2);
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE3);
+        GL13.glBindTexture(GL13.GL_TEXTURE_2D, mesh.getMaterial().getSpecularMap().getTextureId());
+        shader.SetUniform("material.specular", 3);
 
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
         shader.Stop();

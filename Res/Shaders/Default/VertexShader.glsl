@@ -13,6 +13,7 @@ out vec4 color;
 out vec2 texCord;
 out vec3 Normal;
 out vec4 WorldPos;
+out mat4 viewMatrix;
 
 void main() {
     vec4 worldPos =  transform * vec4(position, 1.0f);
@@ -21,4 +22,5 @@ void main() {
     texCord = textureCord;
     Normal = (ProjectionMatrix * ViewMatrix * transform * vec4(normal + position,1.0)).xyz;
     WorldPos = worldPos;
+    viewMatrix = ViewMatrix;
 }

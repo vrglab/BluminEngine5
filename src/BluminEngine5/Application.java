@@ -69,7 +69,7 @@ public class Application {
         DealWithEngineVersioning();
         resourceManager= new ResourceMannager(metadata.MainArchiveFile);
         Path tempDir;
-        System.setProperty("org.lwjgl.util.Debug", "true");
+
         try{
             Files.createDirectories(Paths.get(metadata.ResourceFolder+"/Temp"));
             PreInit.Invoke();

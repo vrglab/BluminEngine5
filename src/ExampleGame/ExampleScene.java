@@ -19,6 +19,7 @@ import java.util.Random;
 public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
+    private ExampleGameobject obj2 = new ExampleGameobject("lsd");
 
 
     public Panel p = new Panel(new Rect(new Vector2(0,0), new Vector2(0.5f,0.5f), Vector3.Zero));
@@ -26,6 +27,7 @@ public class ExampleScene extends Scene {
     public ExampleScene() {
         RegsiterGameObject(ActiveCamera);
         RegsiterGameObject(obj);
+        RegsiterGameObject(obj2);
 
 
     }
@@ -90,7 +92,9 @@ public class ExampleScene extends Scene {
         LightObjects.PointLights.AddLight(pl4);
         LightObjects.SceneSun.Intesity =2;
 
-        LightObjects.SetSunPos(new Vector3(0,11,12));
+        LightObjects.SetSunPos(new Vector3(0,5,20));
+
+
     }
 
     @Override
