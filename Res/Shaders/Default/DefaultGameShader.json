@@ -1,6 +1,0 @@
-{
-    "Raytracing": "false",
-    "name": "Default Shader",
-    "Vertex": "Res/Shaders/Default/VertexShader.glsl",
-    "Fragment": "Res/Shaders/Default/FragmentShader.glsl"
-}

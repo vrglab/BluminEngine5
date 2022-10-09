@@ -4,12 +4,11 @@ package BluminEngine5.SceneMannagement;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Behaviour.ILogic;
-import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.CubeMap;
 import BluminEngine5.Rendering.Lighting.LightData;
-import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
 
@@ -24,7 +23,7 @@ public abstract class Scene implements ILogic {
     public objActionData ActionData =  new objActionData();
     public String name = "New Scene";
     public Camera ActiveCamera = new Camera();
-    public Color SkyColor = new Color(0.2f,0.5f,0.5f,1);
+    public CubeMap SkyColor = new CubeMap();
 
 
 

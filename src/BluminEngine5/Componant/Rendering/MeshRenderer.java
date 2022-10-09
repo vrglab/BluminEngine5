@@ -20,7 +20,7 @@ public class MeshRenderer extends IComponent {
 
     public MeshRenderer(Model model) {
         this.model = model;
-        shader = Application.getResourceManager().GetShader(Application.getMetadata().ResourceFolder + "/Shaders/Default/DefaultGameShader.json");
+        shader = Application.getResourceManager().GetShader(Application.getMetadata().ResourceFolder + "/Shaders/Default/Mesh/DefaultGameShader.json");
     }
 
     public MeshRenderer(Model model, Shader shader) {

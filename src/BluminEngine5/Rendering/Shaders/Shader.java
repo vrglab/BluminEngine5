@@ -43,7 +43,7 @@ public class Shader {
                 SourceAndCompile(vertexId, VertexShader);
                 Debug.log("Changed the vertex shader version to 330 core");
                 if(GL20.glGetShaderi(vertexId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-                    Debug.logError(GL20.glGetShaderInfoLog(vertexId));
+                    Debug.logError(name + ": " + GL20.glGetShaderInfoLog(vertexId));
                     Utils.CrashApp(-14, "Failed to compile vertex shader");
                 }
             }
@@ -64,7 +64,7 @@ public class Shader {
                 SourceAndCompile(fragmentId, FragmentShader);
                 Debug.log("Changed the fragment shader version to 330 core");
                 if(GL20.glGetShaderi(fragmentId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-                    Debug.logError(GL20.glGetShaderInfoLog(fragmentId));
+                    Debug.logError(name + ": " +GL20.glGetShaderInfoLog(fragmentId));
                     Utils.CrashApp(-15, "Failed to compile fragment shader");
                 }
             }

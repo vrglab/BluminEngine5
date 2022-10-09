@@ -10,10 +10,7 @@ public class SecondExampleScene extends Scene {
 
 
 
-    public SecondExampleScene() {
-        SkyColor = new Color(0,1,1,1);
 
-    }
 
     @Override
     public void Update() {

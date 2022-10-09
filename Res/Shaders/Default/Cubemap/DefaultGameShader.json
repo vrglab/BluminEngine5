@@ -1,0 +1,6 @@
+{
+    "Raytracing": "false",
+    "name": "SkyBox Shader",
+    "Vertex": "Res/Shaders/Default/Cubemap/VertexShader.glsl",
+    "Fragment": "Res/Shaders/Default/Cubemap/FragmentShader.glsl"
+}

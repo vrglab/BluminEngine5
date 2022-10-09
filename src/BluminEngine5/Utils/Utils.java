@@ -129,15 +129,15 @@ public class Utils {
                 new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE, -SIZE)),
                 new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
                 new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE,  SIZE)),
                 new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
 
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
-                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE,  SIZE)),
 
 
 

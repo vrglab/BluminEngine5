@@ -13,9 +13,10 @@ public class MasterRenderer {
     public Action<IAction> OnRender = new Action<>();
 
     public void Render() {
-        Color SkyColor = SceneManager.GetCurent().GetActiveScene().SkyColor;
-        glClearColor(SkyColor.GetR(), SkyColor.GetG(), SkyColor.GetB(), SkyColor.GetA());
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        if(SceneManager.GetCurent().GetActiveScene().SkyColor.Created == false){
+            SceneManager.GetCurent().GetActiveScene().SkyColor.Creat();
+        }
         OnRender.Invoke();
     }
 }
