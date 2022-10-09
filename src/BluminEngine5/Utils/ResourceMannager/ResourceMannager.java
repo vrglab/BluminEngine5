@@ -3,14 +3,18 @@ package BluminEngine5.Utils.ResourceMannager;
 import BluminEngine5.Application;
 import BluminEngine5.Componant.Audio.WaveData;
 import BluminEngine5.Rendering.Master.Mesh;
+import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.ObjLoader;
+import BluminEngine5.Utils.ResourceMannager.Archive.Archive;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchiveMannager;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
+import BluminEngine5.Utils.Thread.ArgEvent;
 import BluminEngine5.Utils.Utils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.stb.STBVorbisInfo;
 
 import java.io.*;
@@ -27,6 +31,8 @@ public class ResourceMannager {
     private HashMap<String, Texture> texturesbacth = new HashMap<String, Texture>();
     private HashMap<String, Mesh> meshsbacth = new HashMap<String, Mesh>();
     private HashMap<String, WaveData> wavsbacth = new HashMap<String, WaveData>();
+
+    private HashMap<String, Model> modelssbacth = new HashMap<String, Model>();
 
     public ResourceMannager(String s) {
         LoadArchiveAsMainArchive( Application.getMetadata().ResourceFolder + "/" + s);
@@ -98,7 +104,27 @@ public class ResourceMannager {
             return null;
         }
     }
+    public Mesh GetMesh(int file, int Archive) {
+        try{
+            var arch = archive.GeFileFromArchive(file, Archive);
+            var f = LoadIntoTempFile(arch);
 
+            var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
+
+            var shaderLocation = f.getAbsolutePath();
+
+            if(!meshsbacth.containsKey(location)) {
+                var dat = ObjLoader.LoadFile(shaderLocation, 0,4);
+                f.delete();
+                meshsbacth.put(location,dat);
+                return dat;
+            } else{
+                return meshsbacth.get(location);
+            }
+        } catch(IOException e){
+            return  null;
+        }
+    }
 
     public Mesh GetMesh(int file, int Archive, int texArch, int texId) {
         try{
@@ -122,27 +148,91 @@ public class ResourceMannager {
         }
     }
 
-    public Mesh GetMesh(int file, int Archive) {
+    public Model GetModel(int file, int Archive) {
+        File f = null;
         try{
             var arch = archive.GeFileFromArchive(file, Archive);
-            var f = LoadIntoTempFile(arch);
+
+            f = LoadIntoTempFile(arch);
 
             var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
 
-            var shaderLocation = f.getAbsolutePath();
+            if(!modelssbacth.containsKey(location)) {
 
-            if(!meshsbacth.containsKey(location)) {
-                var dat = ObjLoader.LoadFile(shaderLocation, 0,2);
+                if(!FilenameUtils.getExtension(f.getAbsolutePath()).equals("bmd")) {
+                    Debug.log(FilenameUtils.getExtension(f.getAbsolutePath()));
+                    Debug.logException(new Exception( f.getAbsolutePath() + " is not a BluminEngine Model File"));
+                    return null;
+                }
+
+                ObjectInputStream objectInputStream = new ObjectInputStream(Utils.LoadFileAsStream(f.getAbsolutePath()));
+                var dat = (Model) objectInputStream.readObject();
+                modelssbacth.put(location,dat);
+                objectInputStream.close();
                 f.delete();
-                meshsbacth.put(location,dat);
                 return dat;
             } else{
-                return meshsbacth.get(location);
+                return modelssbacth.get(location);
             }
-        } catch(IOException e){
+        } catch(Exception e){
+            f.delete();
             return  null;
         }
     }
+
+    public static ArchiveMannager DirectoryToArchive(String directory) throws IOException {
+        HashMap<String, Archive> Directories = new HashMap<>();
+        HashMap<String, ArchivedFile> Files = new HashMap<>();
+        File currentDirectory = FileUtils.getFile(directory);
+        ArchiveMannager am = new ArchiveMannager();
+
+
+        for (File p: currentDirectory.listFiles()) {
+            if(p.isDirectory()) {
+                shush(am, p);
+            } else if(p.isFile()) {
+                yell(am,p, 0);
+            }
+        }
+
+        return am;
+    }
+
+
+    private static Archive shush(ArchiveMannager am, File p) {
+        Archive us = null;
+        if(am.getArchives().contains(p.getPath())) {
+            int root = am.getArchives().lastIndexOf(p.getPath());
+            us = am.CreateArchive(root,FilenameUtils.getBaseName(p.getAbsolutePath()));
+            for (File d: p.listFiles()) {
+                if(d.isDirectory()) {
+                    shush(am, d);
+                } else if(d.isFile()) {
+                    yell(am, d, us.Id);
+                }
+            }
+        }else {
+            int root = 0;
+            us = am.CreateArchive(root,FilenameUtils.getBaseName(p.getAbsolutePath()));
+            for (File d: p.listFiles()) {
+                if(d.isDirectory()) {
+                    shush(am, d);
+                } else if(d.isFile()) {
+                    yell(am, d, us.Id);
+                }
+            }
+        }
+        return us;
+    }
+
+    static ArchivedFile yell(ArchiveMannager am, File p, int root) {
+        ArchivedFile us = null;
+            us = am.ArchiveFile(p.getAbsolutePath());
+            am.PutFileInArchive(us, root);
+        return us;
+    }
+
+
 
 
 

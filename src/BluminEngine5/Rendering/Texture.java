@@ -23,10 +23,11 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
 public class Texture implements Serializable{
+
     private org.newdawn.slick.opengl.Texture texture;
     private float width, height;
     private int textureId;
-    private ArchivedFile file;
+    public ArchivedFile file;
     private String fileBackup;
     private TextureMode renderMode = TextureMode.ClampToEdge;
 

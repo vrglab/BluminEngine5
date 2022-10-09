@@ -42,14 +42,17 @@ public class ExampleGameobject extends BluminBehaviour {
 
 
         if (sdd == null) {
-            model = new Model(2,3);
+            model = new Model();
+            model.setMesh(0,1);
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
+            model.setMaterial(new Material());
             model.getMaterial().Shine = 1f;
             model.getMaterial().reflection= 0.5f;
 
         } else{
-            model = new Model(3,3);
+            model = new Model();
+            model.setMesh(1,1);
             model.setMaterial(new Material());
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
