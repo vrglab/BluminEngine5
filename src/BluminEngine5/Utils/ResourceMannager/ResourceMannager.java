@@ -114,29 +114,7 @@ public class ResourceMannager {
             var shaderLocation = f.getAbsolutePath();
 
             if(!meshsbacth.containsKey(location)) {
-                var dat = ObjLoader.LoadFile(shaderLocation, 0,4);
-                f.delete();
-                meshsbacth.put(location,dat);
-                return dat;
-            } else{
-                return meshsbacth.get(location);
-            }
-        } catch(IOException e){
-            return  null;
-        }
-    }
-
-    public Mesh GetMesh(int file, int Archive, int texArch, int texId) {
-        try{
-            var arch = archive.GeFileFromArchive(file, Archive);
-            var f = LoadIntoTempFile(arch);
-
-            var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
-
-            var shaderLocation = f.getAbsolutePath();
-
-            if(!meshsbacth.containsKey(location)) {
-                var dat = ObjLoader.LoadFile(shaderLocation, texArch, texId);
+                var dat = ObjLoader.LoadFile(shaderLocation);
                 f.delete();
                 meshsbacth.put(location,dat);
                 return dat;

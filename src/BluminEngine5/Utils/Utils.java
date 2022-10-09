@@ -4,6 +4,7 @@ import BluminEngine5.Application;
 import BluminEngine5.Rendering.UI.Obj.Vertex;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
+import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.openal.AL;
 
 import java.io.*;
@@ -89,6 +90,57 @@ public class Utils {
                 new Vertex(new Vector2(-1,-1)),
                 new Vertex(new Vector2(1,1)),
                 new Vertex(new Vector2(1,-1)),
+        };
+        return vpos;
+    }
+
+
+    public static BluminEngine5.Rendering.Vertex[] CubeAsVertex3D(int SIZE ) {
+        BluminEngine5.Rendering.Vertex vpos[] = {
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE, -SIZE)),
+
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE, -SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE, -SIZE,  SIZE)),
+
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(SIZE,  SIZE,  SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+                new BluminEngine5.Rendering.Vertex(new Vector3(-SIZE,  SIZE, -SIZE)),
+
+
+
         };
         return vpos;
     }

@@ -27,10 +27,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
     @Override
     public void Update() {
-        if (sdd == null) {
-            transform.rotation = new Vector3(transform.rotation.x, transform.rotation.y += 1, transform.rotation.z);
 
-        }
     }
 
     @Override
@@ -46,20 +43,11 @@ public class ExampleGameobject extends BluminBehaviour {
             model.setMesh(0,1);
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
-            model.setMaterial(new Material());
-            model.getMaterial().Shine = 1f;
-            model.getMaterial().reflection= 0.5f;
-
         } else{
             model = new Model();
             model.setMesh(1,1);
-            model.setMaterial(new Material());
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
-            transform.position = new Vector3(6,0,9);
-            transform.scale = new Vector3(0.5f,0.5f,0.5f);
-            model.getMaterial().reflection = 0;
-            model.getMaterial().Shine = 0;
         }
     }
 

@@ -53,7 +53,7 @@ public class Model implements Serializable {
             infl.write(dat.getRawMesh());
             infl.flush();
             infl.close();
-            ByteArrayInputStream in = new ByteArrayInputStream(dat.getRawMesh());
+            ByteArrayInputStream in = new ByteArrayInputStream(out2.toByteArray());
             ObjectInputStream is = new ObjectInputStream(in);
 
             m = (Mesh)is.readObject();
@@ -95,10 +95,10 @@ public class Model implements Serializable {
         }
 
         this.mesh = new MeshData(m, out.toByteArray());
+        setMaterial(new Material());
     }
 
     public Mesh getMesh() {
-
         return mesh.mesh;
     }
 
@@ -200,12 +200,14 @@ public class Model implements Serializable {
 
 
     public void SaveToFile(String file) throws IOException {
+        Mesh meshUntoutched = mesh.mesh;
+        mesh.mesh = null;
         FileOutputStream fileOutputStream = new FileOutputStream(Application.getMetadata().ResourceFolder + "/" + file + ".bmd");
         ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-        mesh.mesh = null;
         oos.writeObject(this);
         oos.flush();
         oos.close();
+        mesh.mesh = meshUntoutched;
     }
 
 }

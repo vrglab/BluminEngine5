@@ -1,5 +1,7 @@
 package BluminEngine5.Rendering;
 
+import BluminEngine5.Application;
+import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.Math.Matrix;
 import BluminEngine5.Utils.Utils;
@@ -14,7 +16,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class Display {
+public class Display{
 
     public long getWindow() {
         return window;
@@ -24,7 +26,6 @@ public class Display {
     private Resolution CurentScreenRes;
     private DisplayMode CurentDisplayMode;
 
-    private Matrix projectionMatrix;
     private GLFWWindowSizeCallback sizeCallback = new GLFWWindowSizeCallback() {
         @Override
         public void invoke(long window, int width, int height) {
@@ -39,14 +40,7 @@ public class Display {
             Utils.CrashApp(-12, "Glfw could not be initilazed");
         }
         glfwDefaultWindowHints();
-        switch(dim) {
-            case ThreeD:
-                projectionMatrix = Matrix.projection(90,res.getWIDTH() / res.getHIGHT()+ 0.7f, 0.1f,10000.0f);
-                break;
-            case TwoD:
-                make2D();
-                break;
-        }
+
         long monitor = NULL;
         switch(mode) {
             case Windowed:
@@ -118,9 +112,7 @@ public class Display {
         glfwTerminate();
     }
 
-    public Matrix getProjectionMatrix() {
-        return projectionMatrix;
-    }
+
 
     public Resolution getCurentScreenRes() {
         return CurentScreenRes;

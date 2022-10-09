@@ -15,6 +15,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
@@ -26,10 +27,11 @@ public class Texture implements Serializable{
 
     private org.newdawn.slick.opengl.Texture texture;
     private float width, height;
+    private ByteBuffer decodedbytes;
     private int textureId;
     public ArchivedFile file;
     private String fileBackup;
-    private TextureMode renderMode = TextureMode.ClampToEdge;
+    private TextureMode renderMode = TextureMode.ClampToBorder;
 
     public Texture(ArchivedFile file) {
         this.file = file;
@@ -51,6 +53,10 @@ public class Texture implements Serializable{
                 height = texture.getHeight();
                 textureId = texture.getTextureID();
 
+                decodedbytes = ByteBuffer.allocate(file.GetDecodedData().length * 4);
+                decodedbytes.put(file.GetDecodedData());
+                decodedbytes.flip();
+
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
             } catch(IOException e){
                 Debug.logException("Failed to load texture with exception", e);
@@ -63,6 +69,11 @@ public class Texture implements Serializable{
                 width = texture.getWidth();
                 height = texture.getHeight();
                 textureId = texture.getTextureID();
+                byte[] data = texture.getTextureData();
+
+                decodedbytes = ByteBuffer.allocate(data.length * 4);
+                decodedbytes.put(data);
+                decodedbytes.flip();
 
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
                 f.delete();
@@ -84,6 +95,10 @@ public class Texture implements Serializable{
 
     public float getHeight() {
         return height;
+    }
+
+    public ByteBuffer getDecodedbytes() {
+        return decodedbytes;
     }
 
     public int getTextureId() {

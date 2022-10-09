@@ -5,9 +5,10 @@ import BluminEngine5.Utils.Math.*;
 import java.io.Serializable;
 
 public class Vertex implements Serializable {
-    private Vector3 position, normals;
-    private Vector2 texturePosition;
+    private Vector3 position, normals = Vector3.Zero;
+    private Vector2 texturePosition = Vector2.NULL;
     private Color color;
+
 
     public Vertex(Vector3 pos,Vector2 texpos) {
         position = pos;
@@ -26,6 +27,11 @@ public class Vertex implements Serializable {
         normals = norm;
         color = c;
     }
+    public Vertex(Vector3 pos) {
+        position = pos;
+    }
+
+
     public Vector3 getPosition() {
         return position;
     }

@@ -46,6 +46,7 @@ public class Vector3  implements Serializable {
     }
 
     public static Vector3 Zero = new Vector3(0,0,0);
+    public static Vector3 NULL = new Vector3(-1231245542,-1231245542,-1231245542);
 
     @Override
     public String toString() {

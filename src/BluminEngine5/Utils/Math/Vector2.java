@@ -32,6 +32,7 @@ public class Vector2  implements Serializable {
     }
 
     public static Vector2 Zero = new Vector2(0,0);
+    public static Vector2 NULL = new Vector2(-1231245542,-1231245542);
 
     public Vector2f GetAsVec3f() {
         Vector2f f = new Vector2f();

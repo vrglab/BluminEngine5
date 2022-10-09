@@ -52,7 +52,7 @@ public class MeshRenderer extends IComponent {
         }
         shader.Run();
         shader.SetUniform("transform", Matrix.transform(Parent.transform));
-        shader.SetUniform("ProjectionMatrix", Application.display.getProjectionMatrix());
+        shader.SetUniform("ProjectionMatrix", SceneManager.GetCurent().GetActiveScene().ActiveCamera.getProjectionMatrix());
         shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
         shader.SetUniform("viewPos", SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position);
         shader.SetUniform("material.ambient", model.getMaterial().Ambient);
