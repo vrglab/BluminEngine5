@@ -26,7 +26,7 @@ import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 public class Texture implements Serializable{
 
     private org.newdawn.slick.opengl.Texture texture;
-    private float width, height;
+    private int width, height;
     private ByteBuffer decodedbytes;
     private int textureId;
     public ArchivedFile file;
@@ -41,16 +41,16 @@ public class Texture implements Serializable{
         this.fileBackup = file;
     }
     public Texture(Vector2 size) {
-        width = size.x;
-        height = size.y;
+        width = (int)size.x;
+        height = (int)size.y;
     }
 
     public void Create() {
         if(file != null) {
             try{
                 texture = GetTexFromFile();
-                width = texture.getWidth();
-                height = texture.getHeight();
+                width = (int)texture.getWidth();
+                height = (int)texture.getHeight();
                 textureId = texture.getTextureID();
 
                 decodedbytes = ByteBuffer.allocate(file.GetDecodedData().length * 4);
@@ -66,8 +66,8 @@ public class Texture implements Serializable{
                 InputStream is = Utils.LoadFileAsStream(fileBackup);
                 File f = new File(fileBackup);
                 texture =  TextureLoader.getTexture(FilenameUtils.getExtension(fileBackup), is , GL11.GL_LINEAR);
-                width = texture.getWidth();
-                height = texture.getHeight();
+                width = (int)texture.getWidth();
+                height = (int)texture.getHeight();
                 textureId = texture.getTextureID();
                 byte[] data = texture.getTextureData();
 
@@ -89,11 +89,11 @@ public class Texture implements Serializable{
         GL13.glDeleteTextures(textureId);
     }
 
-    public float getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 

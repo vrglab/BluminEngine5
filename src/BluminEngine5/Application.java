@@ -1,11 +1,8 @@
 package BluminEngine5;
 
-import BluminEngine5.Rendering.Display;
-import BluminEngine5.Rendering.DisplayDimension;
-import BluminEngine5.Rendering.DisplayMode;
+import BluminEngine5.Rendering.*;
 import BluminEngine5.Rendering.Master.MasterRenderer;
 import BluminEngine5.Rendering.PostProcessing.PostProcessingProfileBehaviour;
-import BluminEngine5.Rendering.Resolution;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.*;
 import BluminEngine5.Utils.*;
@@ -37,6 +34,7 @@ public class Application {
 
     public static Action<IAction> Update = new Action<>();
     public static Action<IAction> Init = new Action<>();
+    public static Action<IAction> Awake = new Action<>();
     public static Action<IAction> PreInit = new Action<>();
     public static Action<IAction> OnExit = new Action<>();
 
@@ -118,6 +116,8 @@ public class Application {
             Dispatcher dispatcher = new CollisionDispatcher(collisionConfig);
             ConstraintSolver solver = new SequentialImpulseConstraintSolver();
             dynamicsWorld = new DiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
+
+            Awake.Invoke();
 
             glEnable(GL_CULL_FACE);
             glCullFace(GL_BACK);

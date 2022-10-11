@@ -17,6 +17,8 @@ public class Mesh implements Serializable {
     private int[] indecies;
     private int vao, pbo, ibo, tbo, nbo;
 
+    public boolean Created = false;
+
     public Mesh(Vertex[] vertecies, int[] indecies) {
         this.vertecies = vertecies;
         this.indecies = indecies;
@@ -30,7 +32,6 @@ public class Mesh implements Serializable {
     }
 
     public void Creat(){
-
         vao = GL30.glGenVertexArrays();
         GL30.glBindVertexArray(vao);
 
@@ -69,15 +70,13 @@ public class Mesh implements Serializable {
 
         nbo = glStoreBuffer(normalsBuffer, 3, 3);
 
-
-        if(indecies.length > 0) {
-            IntBuffer indeciesBuffer = MemoryUtil.memAllocInt(indecies.length);
-            indeciesBuffer.put(indecies).flip();
-            ibo = GL15.glGenBuffers();
-            GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,ibo);
-            GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indeciesBuffer, GL15.GL_STATIC_DRAW);
-            GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,0);
-        }
+        IntBuffer indeciesBuffer = MemoryUtil.memAllocInt(indecies.length);
+        indeciesBuffer.put(indecies).flip();
+        ibo = GL15.glGenBuffers();
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,ibo);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indeciesBuffer, GL15.GL_STATIC_DRAW);
+        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,0);
+        Created = true;
     }
 
     private int glStoreBuffer(FloatBuffer bufferdata, int index, int size){

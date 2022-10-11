@@ -71,6 +71,7 @@ public class Display{
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         window = glfwCreateWindow(res.getWIDTH(), res.getHIGHT(), name, monitor, NULL);
+
         if ( window == NULL ) {
             Utils.CrashApp(-13, "Failed to create the GLFW window");
         }
@@ -95,8 +96,6 @@ public class Display{
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
-
-
     }
 
     public void Close() {
