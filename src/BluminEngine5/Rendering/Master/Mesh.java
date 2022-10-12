@@ -1,8 +1,7 @@
 package BluminEngine5.Rendering.Master;
 
 import BluminEngine5.Rendering.Vertex;
-import BluminEngine5.Utils.Math.Math;
-import BluminEngine5.Utils.Math.Vector2;
+import BluminEngine5.Utils.Debuging.Debug;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -32,22 +31,25 @@ public class Mesh implements Serializable {
     }
 
     public void Creat(){
-        vao = GL30.glGenVertexArrays();
-        GL30.glBindVertexArray(vao);
-
-        FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
-        float[] positionData = new float[vertecies.length * 3];
-        for (int i = 0; i < vertecies.length; i++) {
-            positionData[i * 3] = vertecies[i].getPosition().x;
-            positionData[i * 3 + 1] = vertecies[i].getPosition().y;
-            positionData[i * 3 + 2] = vertecies[i].getPosition().z;
-        }
-        positionBuffer.put(positionData).flip();
-
-        pbo = glStoreBuffer(positionBuffer, 0, 3);
+        try {
+            //vertices data
+            vao = GL30.glGenVertexArrays();
+            GL30.glBindVertexArray(vao);
 
 
-        if(!Math.Equals(vertecies[0].getTexturePosition(), Vector2.NULL)) {
+            //vertices data
+            FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
+            float[] positionData = new float[vertecies.length * 3];
+            for (int i = 0; i < vertecies.length; i++) {
+                positionData[i * 3] = vertecies[i].getPosition().x;
+                positionData[i * 3 + 1] = vertecies[i].getPosition().y;
+                positionData[i * 3 + 2] = vertecies[i].getPosition().z;
+            }
+            positionBuffer.put(positionData).flip();
+            pbo = glStoreBuffer(positionBuffer, 0, 3);
+
+
+            //texture data
             FloatBuffer textBuffer = MemoryUtil.memAllocFloat(vertecies.length * 2);
             float[] texData = new float[vertecies.length * 2];
             for (int i = 0; i < vertecies.length; i++) {
@@ -55,28 +57,48 @@ public class Mesh implements Serializable {
                 texData[i * 2 + 1] = vertecies[i].getTexturePosition().y;
             }
             textBuffer.put(texData).flip();
-
             tbo = glStoreBuffer(textBuffer, 2, 2);
+
+
+            //normals data
+            FloatBuffer normalsBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
+            float[]  normalsData = new float[vertecies.length * 3];
+            for (int i = 0; i < vertecies.length; i++) {
+                normalsData[i * 3] = vertecies[i].getNormals().x;
+                normalsData[i * 3 + 1] = vertecies[i].getNormals().y;
+                normalsData[i * 3 + 2] = vertecies[i].getNormals().z;
+            }
+            normalsBuffer.put(normalsData).flip();
+            nbo = glStoreBuffer(normalsBuffer, 3, 3);
+
+
+            //indicies data
+            IntBuffer indeciesBuffer = MemoryUtil.memAllocInt(indecies.length);
+            indeciesBuffer.put(indecies).flip();
+            ibo = GL15.glGenBuffers();
+            GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,ibo);
+            GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indeciesBuffer, GL15.GL_STATIC_DRAW);
+            GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,0);
+            Created = true;
+        } catch(Exception e) {
+            //vertices data
+            vao = GL30.glGenVertexArrays();
+            GL30.glBindVertexArray(vao);
+
+
+            //vertices data
+            FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
+            float[] positionData = new float[vertecies.length * 3];
+            for (int i = 0; i < vertecies.length; i++) {
+                positionData[i * 3] = vertecies[i].getPosition().x;
+                positionData[i * 3 + 1] = vertecies[i].getPosition().y;
+                positionData[i * 3 + 2] = vertecies[i].getPosition().z;
+            }
+            positionBuffer.put(positionData).flip();
+            pbo = glStoreBuffer(positionBuffer, 0, 3);
+            Created = true;
         }
 
-        FloatBuffer normalsBuffer = MemoryUtil.memAllocFloat(vertecies.length * 3);
-        float[]  normalsData = new float[vertecies.length * 3];
-        for (int i = 0; i < vertecies.length; i++) {
-            normalsData[i * 3] = vertecies[i].getNormals().x;
-            normalsData[i * 3 + 1] = vertecies[i].getNormals().y;
-            normalsData[i * 3 + 2] = vertecies[i].getNormals().z;
-        }
-        normalsBuffer.put(normalsData).flip();
-
-        nbo = glStoreBuffer(normalsBuffer, 3, 3);
-
-        IntBuffer indeciesBuffer = MemoryUtil.memAllocInt(indecies.length);
-        indeciesBuffer.put(indecies).flip();
-        ibo = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,ibo);
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indeciesBuffer, GL15.GL_STATIC_DRAW);
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER,0);
-        Created = true;
     }
 
     private int glStoreBuffer(FloatBuffer bufferdata, int index, int size){

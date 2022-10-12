@@ -43,6 +43,7 @@ public class ExampleGameobject extends BluminBehaviour {
             model.setMesh(0,1);
             mr = new MeshRenderer(model);
             RegisterComponant(mr, this);
+
         } else{
             model = new Model();
             model.setMesh(1,1);

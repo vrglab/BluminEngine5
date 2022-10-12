@@ -17,19 +17,17 @@ import static org.lwjgl.opengl.GL11.*;
 public class MasterRenderer {
     public Action<IAction> OnRender = new Action<>();
 
-    Shader skyBoxShader;
+    Shader skyBoxShader = null;
     public void Render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1,0.5f,0.2f,1);
        CubeMap skybox = SceneManager.GetCurent().GetActiveScene().SkyColor;
 
         if(skyBoxShader == null) {
-            skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Mesh/DefaultGameShader.json");
+            skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
             skyBoxShader.Creat();
             skybox.mesh.Creat();
         }
-
-
         skyBoxShader.Run();
         skyBoxShader.SetUniform("ProjectionMatrix", SceneManager.GetCurent().GetActiveScene().ActiveCamera.getProjectionMatrix());
         skyBoxShader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
@@ -37,6 +35,7 @@ public class MasterRenderer {
         GL30.glBindVertexArray(skybox.mesh.getVAO());
 
         skyBoxShader.Stop();
+
         OnRender.Invoke();
     }
 }

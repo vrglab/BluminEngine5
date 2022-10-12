@@ -33,6 +33,10 @@ public class ExampleScene extends Scene {
         }
 */
 
+        obj2 = new ExampleGameobject("lsd");
+        obj2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
+        RegsiterGameObject(obj2);
+
         RegsiterGameObject(obj);
     }
     @Override

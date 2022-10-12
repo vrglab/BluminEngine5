@@ -97,7 +97,7 @@ public class MeshRenderer extends IComponent {
             GL13.glBindTexture(GL13.GL_TEXTURE_2D, model.getMaterial().getReflectionsMap().getTextureId());
             shader.SetUniform("material.ReflectionsMap", 3);
 
-            Debug.log(model.getMesh().getIBO());
+
             GL11.glDrawElements(GL11.GL_TRIANGLES, model.getMesh().getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
             shader.Stop();
             if(model.getMaterial().getColor().GetA() < 1) {

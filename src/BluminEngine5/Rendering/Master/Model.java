@@ -21,7 +21,7 @@ public class Model implements Serializable {
 
     public Transform transform = Transform.DefaultZero;
     private MeshData mesh = null;
-    private SerliazedMaterial material;
+    private MaterialData material;
     private List<Collider> coliders = new ArrayList<>();
 
     public Model(Mesh mesh, List<Collider> coliders, Material m) {
@@ -56,6 +56,8 @@ public class Model implements Serializable {
             ByteArrayInputStream in = new ByteArrayInputStream(out2.toByteArray());
             ObjectInputStream is = new ObjectInputStream(in);
 
+            Debug.log(in.readAllBytes().length);
+
             m = (Mesh)is.readObject();
         } catch (Exception e) {
             Debug.logException(e);
@@ -63,7 +65,7 @@ public class Model implements Serializable {
 
         mesh = new MeshData(m, dat.getRawMesh());
         coliders = dat.getColliders();
-        setMaterial(dat.getMaterial());
+        setMaterial(dat.getRawMaterial());
     }
 
     public Model() {
@@ -77,6 +79,7 @@ public class Model implements Serializable {
         byte[] meshdata = SerializationUtils.serialize(Application.getResourceManager().GetMesh(file,folder));
         try {
 
+            Debug.log(meshdata.length);
             defl.write(meshdata);
             defl.flush();
             defl.close();
@@ -122,11 +125,19 @@ public class Model implements Serializable {
     }
 
     public Material getMaterial() {
-        return SerliazedMaterial.Parse(material);
+        return material.getMaterial();
+    }
+
+    public SerliazedMaterial getRawMaterial() {
+        return material.SerMaterial;
     }
 
     public void setMaterial(Material material) {
-        this.material = SerliazedMaterial.Parse(material);
+        this.material = new MaterialData(material);
+    }
+
+    public void setMaterial(SerliazedMaterial material) {
+        this.material = new MaterialData(material);
     }
 
 
@@ -188,6 +199,29 @@ public class Model implements Serializable {
 
     }
 
+    private class MaterialData{
+        SerliazedMaterial SerMaterial;
+        Material Material;
+
+        public MaterialData(BluminEngine5.Rendering.Master.Material material) {
+            Material = material;
+            SerMaterial = SerliazedMaterial.Parse(material);
+        }
+
+        public MaterialData(SerliazedMaterial material) {
+            SerMaterial = material;
+            Material = SerliazedMaterial.Parse(material);
+        }
+
+        public SerliazedMaterial getSerMaterial() {
+            return SerMaterial;
+        }
+
+        public BluminEngine5.Rendering.Master.Material getMaterial() {
+            return Material;
+        }
+    }
+
     private static class MeshData implements Serializable{
         Mesh mesh = null;
         byte[] rawMesh = null;
@@ -201,13 +235,16 @@ public class Model implements Serializable {
 
     public void SaveToFile(String file) throws IOException {
         Mesh meshUntoutched = mesh.mesh;
+        Material materialuntoutched = material.Material;
         mesh.mesh = null;
+        material.Material = null;
         FileOutputStream fileOutputStream = new FileOutputStream(Application.getMetadata().ResourceFolder + "/" + file + ".bmd");
         ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
         oos.writeObject(this);
         oos.flush();
         oos.close();
         mesh.mesh = meshUntoutched;
+        material.Material = materialuntoutched;
     }
 
 }

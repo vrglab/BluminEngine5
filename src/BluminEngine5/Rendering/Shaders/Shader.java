@@ -84,6 +84,7 @@ public class Shader {
             Debug.logError(GL20.glGetProgramInfoLog(programid));
             Utils.CrashApp(-17, "Failed to validate shader program");
         }
+        Debug.log("Shader "+ name +" corectly made");
     }
 
     public int GetUniformLocation(String name) {
