@@ -10,18 +10,24 @@ public class Action<t> {
     private List<IActionArgBased<t>> ListenersArg =  new ArrayList<>();
     private List<IAction> Listeners =  new ArrayList<>();
 
-    public void Invoke() {
-        try {
-            for (IActionArgBased<t> mr : ListenersArg) {
-                mr.Run();
-            }
-            for (IAction mr : Listeners) {
-                mr.Run();
-            }
-        } catch(ConcurrentModificationException e ){
+    private boolean CanInvoke = true;
 
+
+    public void Invoke() {
+        if(CanInvoke) {
+            try {
+                for (IActionArgBased<t> mr : ListenersArg) {
+                    mr.Run();
+                }
+                for (IAction mr : Listeners) {
+                    mr.Run();
+                }
+            } catch(ConcurrentModificationException e ){
+
+            }
         }
     }
+
     public void Invoke(t args) {
         for (IActionArgBased<t> mr : ListenersArg) {
             mr.Run(args);
@@ -60,5 +66,13 @@ public class Action<t> {
             return true;
         }
         return false;
+    }
+
+    public boolean CanInvoke() {
+        return CanInvoke;
+    }
+
+    public void setCanInvoke(boolean canInvoke) {
+        CanInvoke = canInvoke;
     }
 }
