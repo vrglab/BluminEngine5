@@ -56,8 +56,6 @@ public class Model implements Serializable {
             ByteArrayInputStream in = new ByteArrayInputStream(out2.toByteArray());
             ObjectInputStream is = new ObjectInputStream(in);
 
-            Debug.log(in.readAllBytes().length);
-
             m = (Mesh)is.readObject();
         } catch (Exception e) {
             Debug.logException(e);
@@ -78,8 +76,6 @@ public class Model implements Serializable {
 
         byte[] meshdata = SerializationUtils.serialize(Application.getResourceManager().GetMesh(file,folder));
         try {
-
-            Debug.log(meshdata.length);
             defl.write(meshdata);
             defl.flush();
             defl.close();
