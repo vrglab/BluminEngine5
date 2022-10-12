@@ -119,9 +119,13 @@ public class Shader {
         GL20.glUniform2f(GetUniformLocation(name), data.x, data.y);
     }
     public void SetUniform(String name, Matrix data) {
-        FloatBuffer matrix = MemoryUtil.memAllocFloat(Matrix.SIZE * Matrix.SIZE);
-        matrix.put(data.Get()).flip();
-        GL20.glUniformMatrix4fv(GetUniformLocation(name), true, matrix);
+        try{
+            FloatBuffer matrix = MemoryUtil.memAllocFloat(Matrix.SIZE * Matrix.SIZE);
+            matrix.put(data.Get()).flip();
+            GL20.glUniformMatrix4fv(GetUniformLocation(name), true, matrix);
+        } catch(NullPointerException e) {
+
+        }
     }
 
     public void SetUniform(String name, BaseLight data, int arrayPos) {

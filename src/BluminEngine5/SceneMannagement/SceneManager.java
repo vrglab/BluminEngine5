@@ -57,18 +57,16 @@ public class SceneManager {
     }
 
     public void SetActiveScene(Scene scene) {
-        Application.getRenderer().OnRender.setCanInvoke(false);
         if(CurrentActiveScene != null) {
-            Application.PreInit.Invoke();
             CurrentActiveScene.ActionData.OnDestroy.Run();
             CurrentActiveScene = scene;
+            Application.PreInit.Invoke();
             Application.Init.Invoke();
             CurrentActiveScene.ActionData.OnSceneLoad.Run();
         }else{
             scene.Load();
             CurrentActiveScene = scene;
         }
-        Application.getRenderer().OnRender.setCanInvoke(true);
     }
 
     public Scene GetActiveScene() {

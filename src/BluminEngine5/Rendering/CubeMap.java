@@ -39,39 +39,15 @@ public class CubeMap {
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-            mesh = new Mesh(Utils.CubeAsVertex3D(1000));
+
+
         });
 
-
-
-        Application.getRenderer().OnRender.addListener(()->{
-
-
-                CubeMap skybox = SceneManager.GetCurent().GetActiveScene().SkyColor;
-
-                if(skyBoxShader == null) {
-                    skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
-                    skyBoxShader.Creat();
-                    skybox.mesh.Creat();
-                }
-                skyBoxShader.Run();
-
-                Matrix view = Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation);
-                view.Set(3,0,0);
-                view.Set(3,1,0);
-                view.Set(3,2,0);
-
-                skyBoxShader.SetUniform("ProjectionMatrix", SceneManager.GetCurent().GetActiveScene().ActiveCamera.getProjectionMatrix());
-                skyBoxShader.SetUniform("ViewMatrix", view);
-
-                GL30.glBindVertexArray(skybox.mesh.getVAO());
-                GL20.glEnableVertexAttribArray(0);
-                GL13.glActiveTexture(GL13.GL_TEXTURE4);
-                GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, skybox.getID());
-                GL11.glDrawArrays(GL_TRIANGLES, 0, skybox.mesh.getVertecies().length);
-                GL20.glDisableVertexAttribArray(0);
-                GL30.glBindVertexArray(0);
-                skyBoxShader.Stop();
+        Application.Init.addListener(()->{
+            skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
+            skyBoxShader.Creat();
+            mesh = new Mesh(Utils.CubeAsVertex3D(1000));
+            mesh.Creat();
         });
     }
 
@@ -93,7 +69,14 @@ public class CubeMap {
             }
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-            mesh = new Mesh(Utils.CubeAsVertex3D(600));
+
+        });
+
+        Application.Init.addListener(()->{
+            skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
+            skyBoxShader.Creat();
+            mesh = new Mesh(Utils.CubeAsVertex3D(1000));
+            mesh.Creat();
         });
     }
 
@@ -115,8 +98,36 @@ public class CubeMap {
             }
             GL13.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-            mesh = new Mesh(Utils.CubeAsVertex3D(600));
+
         });
+
+        Application.Init.addListener(()->{
+            skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
+            skyBoxShader.Creat();
+            mesh = new Mesh(Utils.CubeAsVertex3D(1000));
+            mesh.Creat();
+        });
+    }
+
+    public void Render() {
+        skyBoxShader.Run();
+
+        Matrix view = Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation);
+        view.Set(3,0,0);
+        view.Set(3,1,0);
+        view.Set(3,2,0);
+
+        skyBoxShader.SetUniform("ProjectionMatrix", SceneManager.GetCurent().GetActiveScene().ActiveCamera.getProjectionMatrix());
+        skyBoxShader.SetUniform("ViewMatrix", view);
+
+        GL30.glBindVertexArray(mesh.getVAO());
+        GL20.glEnableVertexAttribArray(0);
+        GL13.glActiveTexture(GL13.GL_TEXTURE4);
+        GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, getID());
+        GL11.glDrawArrays(GL_TRIANGLES, 0, mesh.getVertecies().length);
+        GL20.glDisableVertexAttribArray(0);
+        GL30.glBindVertexArray(0);
+        skyBoxShader.Stop();
     }
 
 
