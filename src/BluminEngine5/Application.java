@@ -141,16 +141,11 @@ public class Application {
         try{
             Debug.log("Loading Metadata");
             metadata  = new Metadata(ConfigFile);
+            Debug.log("Attempting to load BluminEngine3 on " + metadata.engineVersion);
         }catch (IOException e) {
             Utils.CrashApp(-134, e);
         }
-        if(Math.Equals(metadata.engineVersion, EngineVersion)) {
-            ActiveEngineVersion = EngineVersion;
-            Debug.log("Starting BluminEngine3 on " + EngineVersion);
-        } else {
-            EngineVersion = metadata.engineVersion;
-            Debug.log("Attempting to load BluminEngine3 on " + metadata.engineVersion);
-        }
+
     }
 
     public static DynamicsWorld getDynamicsWorld() {

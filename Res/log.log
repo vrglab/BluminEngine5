@@ -1,5 +1,5 @@
-{System 2022/10/12 11:48:29:4829}: Starting SceneManager
-{System 2022/10/12 11:48:29:4829}: Loading Metadata
-{System 2022/10/12 11:48:29:4829}: Attempting to load BluminEngine3 on Version 0.0.0.1_DevSystem
-{System 2022/10/12 11:48:31:4831}: Setting up keyboard
-{System 2022/10/12 11:48:31:4831}: Setting up DaynamicsWorld
+{System 2022/10/12 13:25:39:2539}: Starting SceneManager
+{System 2022/10/12 13:25:39:2539}: Loading Metadata
+{System 2022/10/12 13:25:39:2539}: Attempting to load BluminEngine3 on Version 0.0.1.0_Dev System
+{System 2022/10/12 13:25:41:2541}: Setting up keyboard
+{System 2022/10/12 13:25:41:2541}: Setting up DaynamicsWorld
