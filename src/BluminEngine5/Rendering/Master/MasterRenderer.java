@@ -21,7 +21,7 @@ public class MasterRenderer {
     public void Render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1,0.5f,0.2f,1);
-       CubeMap skybox = SceneManager.GetCurent().GetActiveScene().SkyColor;
+       /*CubeMap skybox = SceneManager.GetCurent().GetActiveScene().SkyColor;
 
         if(skyBoxShader == null) {
             skyBoxShader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
@@ -34,7 +34,7 @@ public class MasterRenderer {
 
         GL30.glBindVertexArray(skybox.mesh.getVAO());
 
-        skyBoxShader.Stop();
+        skyBoxShader.Stop();*/
 
         OnRender.Invoke();
     }

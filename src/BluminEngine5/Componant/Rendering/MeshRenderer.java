@@ -22,6 +22,7 @@ public class MeshRenderer extends IComponent {
     public MeshRenderer(Model model) {
         this.model = model;
         shader = Application.getResourceManager().GetShader(Application.getMetadata().ResourceFolder + "/Shaders/Default/Mesh/DefaultGameShader.json");
+
     }
 
     public MeshRenderer(Model model, Shader shader) {
@@ -30,7 +31,7 @@ public class MeshRenderer extends IComponent {
     }
     public MeshRenderer(Model model, String shader) {
         this.model = model;
-        this.shader = new Shader(shader);
+        this.shader = Application.getResourceManager().GetShader(shader);
     }
 
     @Override
@@ -115,14 +116,13 @@ public class MeshRenderer extends IComponent {
 
     @Override
     public void Init() {
+        shader.Creat();
         model.getMesh().Creat();
         model.getMaterial().Creat();
-        shader.Creat();
     }
 
     @Override
     public void PreInit() {
-
     }
 
     @Override

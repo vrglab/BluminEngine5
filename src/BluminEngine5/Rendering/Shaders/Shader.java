@@ -7,6 +7,7 @@ import BluminEngine5.Utils.Math.*;
 import BluminEngine5.Utils.Utils;
 import org.json.JSONObject;
 import org.lwjgl.opengl.*;
+import org.lwjgl.openxr.MSFTHandInteraction;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
@@ -16,6 +17,7 @@ public class Shader {
     private String VertexShader, FragmentShader, name;
     private int vertexId, fragmentId, programid;
     private boolean Raytracing;
+    String location;
 
 
     public Shader(String ShaderFile) {
@@ -25,6 +27,7 @@ public class Shader {
         Raytracing = obj.getBoolean("Raytracing");
         VertexShader = Utils.LoadFile(obj.getString("Vertex"));
         FragmentShader = Utils.LoadFile(obj.getString("Fragment"));
+        location = ShaderFile;
     }
 
     public void Creat() {
@@ -84,7 +87,7 @@ public class Shader {
             Debug.logError(GL20.glGetProgramInfoLog(programid));
             Utils.CrashApp(-17, "Failed to validate shader program");
         }
-        Debug.log("Shader "+ name +" corectly made");
+        Debug.log("Shader "+ name +" corectly made" + "_" + location);
     }
 
     public int GetUniformLocation(String name) {

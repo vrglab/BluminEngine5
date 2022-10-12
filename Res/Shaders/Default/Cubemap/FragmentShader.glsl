@@ -1,16 +1,10 @@
-
-
-in vec4 color;
 in vec2 texCord;
-in vec3 Normal;
-in vec4 WorldPos;
-in mat4 viewMatrix;
+
+
+uniform sampler2D cubeMap;
+
+out vec4 outColor;
 
 void main() {
-
-
+    outColor = texture(cubeMap, texCord);
 }
-
-
-
-
