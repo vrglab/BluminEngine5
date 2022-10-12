@@ -76,53 +76,8 @@ public class Application {
             display = new Display();
             display.CreateWindow(getMetadata().GameName, res, mode, dim);
 
+            InvokeAfterWindowCreation();
 
-            GL.createCapabilities();
-
-            Debug.log("Setting up keyboard");
-            //TODO: this is a dumb way to handel inputs re-write this system
-            glfwSetKeyCallback(display.getWindow(), (window, key, scancode, action, mods) -> {
-                if(action == GLFW_PRESS) {
-                    if(!Input.Instance().Pressed.contains(key)) {
-                        Input.Instance().Pressed.add(key);
-                    }
-                }
-                if(action == GLFW_REPEAT) {
-                    if(Input.Instance().Pressed.contains(key)) {
-                        Input.Instance().Pressed.remove(Input.Instance().Pressed.lastIndexOf(key));
-                    }
-                    if(!Input.Instance().Held.contains(key)) {
-                        Input.Instance().Held.add(key);
-                    }
-                }
-                if(action == GLFW_RELEASE) {
-                    if(Input.Instance().Held.contains(key)) {
-                        Input.Instance().Held.remove(Input.Instance().Held.lastIndexOf(key));
-                    }
-                    if(Input.Instance().Pressed.contains(key)) {
-                        Input.Instance().Pressed.remove(Input.Instance().Pressed.lastIndexOf(key));
-                    }
-                    if(!Input.Instance().Released.contains(key)) {
-                        Input.Instance().Released.add(key);
-                    }
-                }
-            });
-
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-
-            Debug.log("Setting up DaynamicsWorld");
-            BroadphaseInterface broadphase = new DbvtBroadphase();
-            CollisionConfiguration collisionConfig = new DefaultCollisionConfiguration();
-            Dispatcher dispatcher = new CollisionDispatcher(collisionConfig);
-            ConstraintSolver solver = new SequentialImpulseConstraintSolver();
-            dynamicsWorld = new DiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
-
-            Awake.Invoke();
-
-            glEnable(GL_CULL_FACE);
-            glCullFace(GL_BACK);
-
-            Init.Invoke();
             while (!glfwWindowShouldClose(display.getWindow()) ) {
                 Update.Invoke();
                 renderer.Render();
@@ -135,6 +90,56 @@ public class Application {
         } catch (IOException i) {
             Utils.CrashApp(-100, "Failed to create required temp folder");
         }
+    }
+
+    public static void InvokeAfterWindowCreation() {
+
+        GL.createCapabilities();
+
+        Debug.log("Setting up keyboard");
+        //TODO: this is a dumb way to handel inputs re-write this system
+        glfwSetKeyCallback(display.getWindow(), (window, key, scancode, action, mods) -> {
+            if(action == GLFW_PRESS) {
+                if(!Input.Instance().Pressed.contains(key)) {
+                    Input.Instance().Pressed.add(key);
+                }
+            }
+            if(action == GLFW_REPEAT) {
+                if(Input.Instance().Pressed.contains(key)) {
+                    Input.Instance().Pressed.remove(Input.Instance().Pressed.lastIndexOf(key));
+                }
+                if(!Input.Instance().Held.contains(key)) {
+                    Input.Instance().Held.add(key);
+                }
+            }
+            if(action == GLFW_RELEASE) {
+                if(Input.Instance().Held.contains(key)) {
+                    Input.Instance().Held.remove(Input.Instance().Held.lastIndexOf(key));
+                }
+                if(Input.Instance().Pressed.contains(key)) {
+                    Input.Instance().Pressed.remove(Input.Instance().Pressed.lastIndexOf(key));
+                }
+                if(!Input.Instance().Released.contains(key)) {
+                    Input.Instance().Released.add(key);
+                }
+            }
+        });
+
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
+        Debug.log("Setting up DaynamicsWorld");
+        BroadphaseInterface broadphase = new DbvtBroadphase();
+        CollisionConfiguration collisionConfig = new DefaultCollisionConfiguration();
+        Dispatcher dispatcher = new CollisionDispatcher(collisionConfig);
+        ConstraintSolver solver = new SequentialImpulseConstraintSolver();
+        dynamicsWorld = new DiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
+
+        Awake.Invoke();
+
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+
+        Init.Invoke();
     }
 
     private static void DealWithEngineVersioning() {

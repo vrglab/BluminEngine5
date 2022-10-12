@@ -11,7 +11,7 @@ import BluminEngine5.Utils.Utils;
 import org.lwjgl.opengl.*;
 
 import static BluminEngine5.Utils.ResourceMannager.Archive.ArchiveMannager.NULL;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.*;
 
 public class CubeMap {
 
@@ -39,8 +39,6 @@ public class CubeMap {
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
             GL11.glTexParameteri(GL13.GL_TEXTURE_CUBE_MAP, GL11.GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-
-
         });
 
         Application.Init.addListener(()->{
@@ -110,6 +108,7 @@ public class CubeMap {
     }
 
     public void Render() {
+        glDepthMask(false);
         skyBoxShader.Run();
 
         Matrix view = Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation);
@@ -128,6 +127,7 @@ public class CubeMap {
         GL20.glDisableVertexAttribArray(0);
         GL30.glBindVertexArray(0);
         skyBoxShader.Stop();
+        glDepthMask(true);
     }
 
 

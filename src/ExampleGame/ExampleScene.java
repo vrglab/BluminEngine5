@@ -71,24 +71,24 @@ public class ExampleScene extends Scene {
         int dat = 4;
 
         PointLight pl = new PointLight();
-        pl.color = Color.White;
+        pl.color = Color.Yellow;
         pl.transform.position = new Vector3(r.nextInt(-dat,dat),r.nextInt(-dat,dat), r.nextInt(-dat,dat));
         pl.Intesity = 5;
         LightObjects.PointLights.AddLight(pl);
 
         PointLight pl2 = new PointLight();
         pl2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
-        pl2.color = Color.White;
+        pl2.color = Color.Red;
         pl2.Intesity = 5;
 
         PointLight pl3 = new PointLight();
         pl3.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
-        pl3.color = Color.White;
+        pl3.color = Color.Green;
         pl3.Intesity = 5;
 
         PointLight pl4 = new PointLight();
         pl4.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
-        pl4.color = Color.White;
+        pl4.color = Color.Yellow;
         pl4.Intesity = 5;
 
 
