@@ -9,9 +9,12 @@ import org.lwjgl.glfw.GLFW;
 
 public class SecondExampleScene extends Scene {
 
+    Skybox sb = new Skybox();
 
 
-
+    public SecondExampleScene() {
+        RegsiterGameObject(sb);
+    }
 
     @Override
     public void Update() {

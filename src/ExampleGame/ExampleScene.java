@@ -20,6 +20,7 @@ public class ExampleScene extends Scene {
     private ExampleGameobject obj = new ExampleGameobject();
     private ExampleGameobject obj2 = new ExampleGameobject("lsd");
 
+    Skybox sb = new Skybox();
 
 
 
@@ -27,14 +28,15 @@ public class ExampleScene extends Scene {
         RegsiterGameObject(ActiveCamera);
         Random r = new Random();
         var dat = 50;
-/*
+            /*
         for (int i = 0; i < 100; i++) {
             obj2 = new ExampleGameobject("lsd");
             obj2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
             RegsiterGameObject(obj2);
         }
-*/
+            */
         RegsiterGameObject(obj);
+        RegsiterGameObject(sb);
     }
     @Override
     public void Update() {

@@ -109,6 +109,7 @@ public abstract class Scene implements ILogic {
         Application.Update.addListener(ActionData.OnUpdate);
         Application.OnExit.addListener(ActionData.OnExit);
         Application.getRenderer().OnRender.addListener(ActionData.OnRender);
+        name = this.getClass().getSimpleName();
     }
 
     public void RegsiterGameObject(BluminBehaviour bb) {
