@@ -12,6 +12,11 @@ import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
 
+
+/**
+ * Class used for opening, using and loading shaders at runtime
+ * @author Vrglab
+ */
 public class Shader {
 
     private String VertexShader, FragmentShader, name;

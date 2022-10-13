@@ -2,6 +2,7 @@ package BluminEngine5.Rendering;
 
 import BluminEngine5.Application;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Annotations.Obsolete;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.Math.Matrix;
 import BluminEngine5.Utils.Utils;
@@ -16,6 +17,10 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+/**
+ * Class used for handling window's
+ * @author Vrglab
+ */
 public class Display{
 
     public long getWindow() {
@@ -24,6 +29,8 @@ public class Display{
 
     private long window;
     private Resolution CurentScreenRes;
+
+
     private DisplayMode CurentDisplayMode;
 
     private GLFWWindowSizeCallback sizeCallback = new GLFWWindowSizeCallback() {

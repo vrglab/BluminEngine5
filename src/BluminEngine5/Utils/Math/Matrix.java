@@ -3,6 +3,12 @@ import BluminEngine5.Componant.Transform;
 import org.lwjglx.util.vector.Matrix4f;
 
 import java.lang.Math;
+
+
+/**
+ * Class that mainly handles Matrix data for buffering
+ * @author Vrglab
+ */
 public class Matrix {
     public static final int SIZE = 4;
     private float[] elements = new float[SIZE * SIZE];
