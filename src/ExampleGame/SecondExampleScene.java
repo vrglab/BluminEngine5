@@ -9,7 +9,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class SecondExampleScene extends Scene {
 
-    CubeMap skybox = new CubeMap();
+
 
 
 
@@ -40,7 +40,6 @@ public class SecondExampleScene extends Scene {
 
     @Override
     public void OnRender() {
-        skybox.Render();
     }
 
     @Override
@@ -50,7 +49,6 @@ public class SecondExampleScene extends Scene {
 
     @Override
     public void PreInit() {
-        skybox.Create();
     }
 
     @Override
