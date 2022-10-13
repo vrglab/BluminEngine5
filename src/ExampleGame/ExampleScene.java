@@ -1,15 +1,10 @@
 package ExampleGame;
 
-import BluminEngine5.Editor.UI.Canvas;
 import BluminEngine5.Rendering.Color;
-import BluminEngine5.Rendering.CubeMap;
 import BluminEngine5.Rendering.Lighting.PointLight;
-import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Input;
-import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
 import org.lwjgl.glfw.GLFW;
 

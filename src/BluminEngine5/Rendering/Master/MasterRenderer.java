@@ -1,19 +1,8 @@
 package BluminEngine5.Rendering.Master;
 
-import BluminEngine5.Application;
-import BluminEngine5.Rendering.Color;
-import BluminEngine5.Rendering.CubeMap;
-import BluminEngine5.Rendering.PostProcessing.Effect;
 import BluminEngine5.Rendering.Shaders.Shader;
-import BluminEngine5.SceneMannagement.SceneManager;
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.EventSystem.IAction;
-import BluminEngine5.Utils.Math.Matrix;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
 
 import static org.lwjgl.opengl.GL11.*;
 
