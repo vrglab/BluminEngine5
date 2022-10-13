@@ -15,7 +15,6 @@ public class Skybox extends BluminBehaviour {
 
     @Override
     public void Update() {
-
     }
 
     @Override
@@ -25,7 +24,6 @@ public class Skybox extends BluminBehaviour {
 
     @Override
     public void Init() {
-        Debug.log("What the fuck " + parent.name);
         cmr = new CubeMapRenderer(new Mesh(Utils.CubeAsVertex3D(500)),
                 Utils.CreateCubeMap(),
                 Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json"));

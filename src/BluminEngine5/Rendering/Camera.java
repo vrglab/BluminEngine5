@@ -34,7 +34,9 @@ public class Camera extends BluminBehaviour {
 
     @Override
     public void Init() {
-        projectionMatrix = Matrix.projection(fov, Application.display.getCurentScreenRes().getWIDTH() / Application.display.getCurentScreenRes().getHIGHT()+ 0.7f, NearPlane,FarPlane);
+        projectionMatrix = Matrix.projection(fov,
+                (Application.display.getCurentScreenRes().getWIDTH() / Application.display.getCurentScreenRes().getHIGHT()) + 0.7f,
+                NearPlane,FarPlane);
     }
 
     @Override
