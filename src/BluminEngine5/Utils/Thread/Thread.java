@@ -1,11 +1,14 @@
 package BluminEngine5.Utils.Thread;
 
+import BluminEngine5.Utils.Annotations.Obsolete;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.EventSystem.IActionArgBased;
 
 import java.io.File;
 
+
+@Obsolete
 public class Thread<t>{
     public Action<t> OnThreadFinished = new Action<>();
 
