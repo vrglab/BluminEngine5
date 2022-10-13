@@ -13,7 +13,7 @@ public class SecondExampleScene extends Scene {
 
 
     public SecondExampleScene() {
-        RegsiterGameObject(sb);
+
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SecondExampleScene extends Scene {
 
     @Override
     public void Init() {
-
+        RegsiterGameObject(sb);
     }
 
     @Override

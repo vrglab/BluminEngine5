@@ -15,6 +15,11 @@ import BluminEngine5.Utils.objActionData;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * A class used for creating game levels
+ * @author Vrglab
+**/
 public abstract class Scene implements ILogic {
 
     private List<BluminBehaviour> GameObjects = new ArrayList<>();
@@ -76,10 +81,9 @@ public abstract class Scene implements ILogic {
                 Load();
                 for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnPreInit.Run();
-                }
-                for (BluminBehaviour comp: GameObjects) {
                     comp.ActionData.OnInit.Run();
                 }
+
                 LightObjects.PreInit();
                 LightObjects.Init();
             }

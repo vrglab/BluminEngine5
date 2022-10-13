@@ -1,5 +1,9 @@
 package BluminEngine5.Behaviour;
 
+/**
+ * Basic interface used to give Logic methods to class's
+ * @author Vrglab
+ */
 public interface ILogic {
     void Update();
     void OnRender();

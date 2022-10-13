@@ -10,6 +10,10 @@ import BluminEngine5.Utils.objActionData;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Behaviour class for all in scene Objects
+ * @author Vrglab
+ */
 public abstract class BluminBehaviour implements IObjLogic{
 
         private List<IComponent> AttachedComponants = new ArrayList<>();
