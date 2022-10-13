@@ -30,7 +30,7 @@ public class Panel extends UiObject {
     @Override
     public void Init() {
         mesh = new Mesh(Utils.QuadAsVertex2D());
-        mesh.getMaterial().SetTexture(Application.getResourceManager().GetTexture(5,0));
+        mesh.getMaterial().SetTexture(Application.getResourceManager().GetTexture(0,4));
         shader = Application.getResourceManager().GetShader(Application.getMetadata().ResourceFolder + "/Shaders/HUD/HUDShader.json");
         RegisterComponant(sr,this);
         mesh.Creat();
