@@ -1,6 +1,7 @@
 package BluminEngine5.Rendering;
 
 import BluminEngine5.Application;
+import BluminEngine5.Utils.Annotations.MustCreate;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
@@ -23,6 +24,7 @@ import java.util.Base64;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
+@MustCreate
 public class Texture implements Serializable{
 
     private org.newdawn.slick.opengl.Texture texture;

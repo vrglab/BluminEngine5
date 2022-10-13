@@ -18,7 +18,6 @@ import com.bulletphysics.dynamics.DynamicsWorld;
 import com.bulletphysics.dynamics.constraintsolver.ConstraintSolver;
 import com.bulletphysics.dynamics.constraintsolver.SequentialImpulseConstraintSolver;
 import org.lwjgl.opengl.GL;
-import BluminEngine5.Utils.Math.Math;
 import org.lwjgl.opengl.GL11;
 
 
@@ -69,14 +68,11 @@ public class Application {
         Path tempDir;
 
         try{
-            Files.createDirectories(Paths.get(metadata.ResourceFolder+"/Temp"));
-            PreInit.Invoke();
-
-
+            InvokeBeforeWindowCreation();
             display = new Display();
             display.CreateWindow(getMetadata().GameName, res, mode, dim);
 
-            InvokeAfterWindowCreation();
+            InvokeAfterWindowCreation(true);
 
             while (!glfwWindowShouldClose(display.getWindow()) ) {
                 Update.Invoke();
@@ -87,16 +83,31 @@ public class Application {
             }
             display.Close(OnExit);
 
-        } catch (IOException i) {
-            Utils.CrashApp(-100, "Failed to create required temp folder");
+        } catch (Exception i) {
+            Utils.CrashApp(-100, i);
         }
     }
 
-    public static void InvokeAfterWindowCreation() {
+    public static void InvokeBeforeWindowCreation(){
+        try {
+            Files.createDirectories(Paths.get(metadata.ResourceFolder+"/Temp"));
+        } catch(Exception e) {
+
+        }
+
+        PreInit.Invoke();
+
+
+    }
+
+    public static void InvokeAfterWindowCreation(boolean Debugs) {
 
         GL.createCapabilities();
 
-        Debug.log("Setting up keyboard");
+        if(Debugs) {
+            Debug.log("Setting up keyboard");
+        }
+
         //TODO: this is a dumb way to handel inputs re-write this system
         glfwSetKeyCallback(display.getWindow(), (window, key, scancode, action, mods) -> {
             if(action == GLFW_PRESS) {
@@ -127,7 +138,10 @@ public class Application {
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-        Debug.log("Setting up DaynamicsWorld");
+        if(Debugs) {
+            Debug.log("Setting up DaynamicsWorld");
+        }
+
         BroadphaseInterface broadphase = new DbvtBroadphase();
         CollisionConfiguration collisionConfig = new DefaultCollisionConfiguration();
         Dispatcher dispatcher = new CollisionDispatcher(collisionConfig);
@@ -150,7 +164,6 @@ public class Application {
         }catch (IOException e) {
             Utils.CrashApp(-134, e);
         }
-
     }
 
     public static DynamicsWorld getDynamicsWorld() {
@@ -163,6 +176,8 @@ public class Application {
     public static void setPostProcessingProfile(PostProcessingProfileBehaviour postProcessingProfile) {
         Application.postProcessingProfile = postProcessingProfile;
     }
+
+    @Deprecated
     public static PostProcessingProfileBehaviour getPostProcessingProfile() {
         return postProcessingProfile;
     }

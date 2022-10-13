@@ -1,17 +1,10 @@
 package BluminEngine5.Utils.Debuging;
 
-//import BluminEngine5.Application;
-//import BluminEngine5.Utils.EventSystem.Action;
-//import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Application;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.Utils;
 
-import java.beans.ExceptionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

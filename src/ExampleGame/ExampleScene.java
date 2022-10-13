@@ -2,6 +2,7 @@ package ExampleGame;
 
 import BluminEngine5.Editor.UI.Canvas;
 import BluminEngine5.Rendering.Color;
+import BluminEngine5.Rendering.CubeMap;
 import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.Lighting.Sun;
 import BluminEngine5.SceneMannagement.Scene;
@@ -18,6 +19,7 @@ public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
     private ExampleGameobject obj2 = new ExampleGameobject("lsd");
+    CubeMap SkyBox = new CubeMap();
 
 
 
@@ -62,7 +64,7 @@ public class ExampleScene extends Scene {
 
     @Override
     public void OnRender() {
-
+        SkyBox.Render();
     }
 
     @Override
@@ -102,7 +104,7 @@ public class ExampleScene extends Scene {
 
     @Override
     public void PreInit() {
-
+            SkyBox.Create();
     }
 
     @Override

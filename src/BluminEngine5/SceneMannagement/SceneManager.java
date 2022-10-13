@@ -9,8 +9,6 @@ import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.Action;
 import BluminEngine5.Utils.EventSystem.IAction;
 
-import static org.lwjgl.system.MemoryUtil.NULL;
-
 public class SceneManager {
 
     public Action<IAction> Unload = new Action<>();
@@ -60,8 +58,8 @@ public class SceneManager {
         if(CurrentActiveScene != null) {
             CurrentActiveScene.ActionData.OnDestroy.Run();
             CurrentActiveScene = scene;
-
-            //Application.InvokeAfterWindowCreation();
+            Application.InvokeBeforeWindowCreation();
+            Application.InvokeAfterWindowCreation(false);
 
             CurrentActiveScene.ActionData.OnSceneLoad.Run();
         }else{

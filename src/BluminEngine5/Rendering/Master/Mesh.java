@@ -1,6 +1,7 @@
 package BluminEngine5.Rendering.Master;
 
 import BluminEngine5.Rendering.Vertex;
+import BluminEngine5.Utils.Annotations.MustCreate;
 import BluminEngine5.Utils.Debuging.Debug;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+@MustCreate
 public class Mesh implements Serializable {
     private Vertex[] vertecies;
     private int[] indecies;

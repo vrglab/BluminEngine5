@@ -5,6 +5,7 @@ import BluminEngine5.Application;
 import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.Texture;
 import BluminEngine5.Rendering.Vertex;
+import BluminEngine5.Utils.Annotations.MustCreate;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
@@ -12,6 +13,7 @@ import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
 import java.io.Serializable;
 import java.util.UUID;
 
+@MustCreate
 public class Material implements Serializable {
     private Texture texture, DefuseMap,  SpecularMap, ReflectionsMap;
     private Color color;

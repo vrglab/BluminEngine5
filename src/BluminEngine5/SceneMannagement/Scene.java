@@ -23,7 +23,6 @@ public abstract class Scene implements ILogic {
     public objActionData ActionData =  new objActionData();
     public String name = "New Scene";
     public Camera ActiveCamera = new Camera();
-    public CubeMap SkyBox = new CubeMap();
 
 
 
@@ -58,7 +57,7 @@ public abstract class Scene implements ILogic {
                     comp.ActionData.OnRender.Run();
                 }
                 LightObjects.OnRender();
-                SkyBox.Render();
+
             }
         };
         ActionData.OnInit = new IAction() {
