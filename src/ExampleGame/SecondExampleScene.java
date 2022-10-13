@@ -4,6 +4,7 @@ import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.CubeMap;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Input;
 import org.lwjgl.glfw.GLFW;
 
@@ -13,7 +14,7 @@ public class SecondExampleScene extends Scene {
 
 
     public SecondExampleScene() {
-
+        RegsiterGameObject(sb);
     }
 
     @Override
@@ -47,11 +48,12 @@ public class SecondExampleScene extends Scene {
 
     @Override
     public void Init() {
-        RegsiterGameObject(sb);
+
     }
 
     @Override
     public void PreInit() {
+
     }
 
     @Override

@@ -23,6 +23,8 @@ public abstract class BluminBehaviour implements IObjLogic{
 
         public Scene parent;
 
+        public String name;
+
         public BluminBehaviour() {
                 RegisterComponant(transform, this);
                 ActionData.OnUpdate = new IAction() {
@@ -79,6 +81,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                                 }
                         }
                 };
+                name = getClass().getSimpleName();
         }
 
         public void RegisterComponant(IComponent component, BluminBehaviour bb) {

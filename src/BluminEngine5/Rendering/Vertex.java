@@ -4,6 +4,10 @@ import BluminEngine5.Utils.Math.*;
 
 import java.io.Serializable;
 
+/**
+ * Class used for models Vertex data handling/Buffering
+ * @author Vrglab
+ */
 public class Vertex implements Serializable {
     private Vector3 position, normals = Vector3.Zero;
     private Vector2 texturePosition = Vector2.NULL;

@@ -4,6 +4,7 @@ import BluminEngine5.Componant.IComponent;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
