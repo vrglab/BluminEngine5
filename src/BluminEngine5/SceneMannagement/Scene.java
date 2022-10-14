@@ -28,7 +28,6 @@ public abstract class Scene implements ILogic {
     public Camera ActiveCamera = new Camera();
 
 
-
     public Scene() {
 
 

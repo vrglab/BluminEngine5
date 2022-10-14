@@ -26,7 +26,7 @@ public abstract class BluminBehaviour implements IObjLogic{
         public String name;
 
         public BluminBehaviour() {
-                RegisterComponant(transform, this);
+                RegisterComponant(transform);
                 ActionData.OnUpdate = new IAction() {
                         @Override
                         public void Run() {
@@ -84,7 +84,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                 name = getClass().getSimpleName();
         }
 
-        public void RegisterComponant(Component component, BluminBehaviour bb) {
+        public <t extends Component> t RegisterComponant(t component) {
                 component.data = new objActionData();
                 component.data.OnInit = new IAction() {
                         @Override
@@ -122,8 +122,9 @@ public abstract class BluminBehaviour implements IObjLogic{
                                 component.OnExit();
                         }
                 };
-                component.Parent = bb;
+                component.Parent = this;
                 AttachedComponants.add(component);
+                return component;
         }
 
         public void UnregisterComponant(Component component) {

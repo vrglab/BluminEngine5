@@ -20,7 +20,7 @@ public abstract class EditorUiObject extends BluminBehaviour {
 
 
     public EditorUiObject() {
-        RegisterComponant(transform, this);
+        RegisterComponant(transform);
         ActionData.OnUpdate = new IAction() {
             @Override
             public void Run() {

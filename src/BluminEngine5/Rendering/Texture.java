@@ -33,7 +33,7 @@ public class Texture implements Serializable{
     private int textureId;
     public ArchivedFile file;
     private String fileBackup;
-    private TextureMode renderMode = TextureMode.ClampToEdge;
+    private TextureMode renderMode = TextureMode.ClampToBorder;
 
     public Texture(ArchivedFile file) {
         this.file = file;

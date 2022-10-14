@@ -1,48 +1,5 @@
-{System 2022/10/13 13:39:37:3937}: Starting SceneManager
-{System 2022/10/13 13:39:37:3937}: Loading Metadata
-{System 2022/10/13 13:39:37:3937}: Attempting to load BluminEngine3 on Version 0.0.1.0_Dev System
-{System 2022/10/13 13:39:39:3939}: Setting up keyboard
-{System 2022/10/13 13:39:39:3939}: Setting up DaynamicsWorld
-{System 2022/10/13 13:39:40:3940}: wtf: ExampleGame.Skybox@74fe5c40
-{System 2022/10/13 13:39:41:3941}: wtf: ExampleGame.Skybox@10e31a9a
-{System 2022/10/13 13:39:42:3942}: wtf: ExampleGame.Skybox@57a3af25
-{System 2022/10/13 13:39:44:3944}: wtf: ExampleGame.Skybox@2b662a77
-{System 2022/10/13 13:39:45:3945}: wtf: ExampleGame.Skybox@6adbc9d
-{System 2022/10/13 13:39:47:3947}: wtf: ExampleGame.Skybox@4550bb58
-{System 2022/10/13 13:39:47:3947}: wtf: ExampleGame.Skybox@6069db50
-{System 2022/10/13 13:39:48:3948}: wtf: ExampleGame.Skybox@4efbca5a
-{System 2022/10/13 13:39:49:3949}: wtf: ExampleGame.Skybox@1a482e36
-{System 2022/10/13 13:39:50:3950}: wtf: ExampleGame.Skybox@72967906
-{System 2022/10/13 13:39:50:3950}: wtf: ExampleGame.Skybox@1bd4fdd
-{System 2022/10/13 13:39:51:3951}: wtf: ExampleGame.Skybox@55183b20
-{System 2022/10/13 13:39:51:3951}: wtf: ExampleGame.Skybox@42a48628
-{System 2022/10/13 13:39:52:3952}: wtf: ExampleGame.Skybox@293a5bf6
-{System 2022/10/13 13:39:52:3952}: wtf: ExampleGame.Skybox@3c19aaa5
-{System 2022/10/13 13:39:53:3953}: wtf: ExampleGame.Skybox@3349e9bb
-{System 2022/10/13 13:39:53:3953}: wtf: ExampleGame.Skybox@2a3b5b47
-{System 2022/10/13 13:39:53:3953}: wtf: ExampleGame.Skybox@55b699ef
-{System 2022/10/13 13:39:54:3954}: wtf: ExampleGame.Skybox@4c371370
-{System 2022/10/13 13:39:54:3954}: wtf: ExampleGame.Skybox@145f66e3
-{System 2022/10/13 13:39:54:3954}: wtf: ExampleGame.Skybox@4135c3b
-{System 2022/10/13 13:39:55:3955}: wtf: ExampleGame.Skybox@6302bbb1
-{System 2022/10/13 13:39:55:3955}: wtf: ExampleGame.Skybox@6f1de4c7
-{System 2022/10/13 13:39:56:3956}: wtf: ExampleGame.Skybox@459e9125
-{System 2022/10/13 13:39:56:3956}: wtf: ExampleGame.Skybox@368f2016
-{System 2022/10/13 13:39:57:3957}: wtf: ExampleGame.Skybox@4c583ecf
-{System 2022/10/13 13:39:57:3957}: wtf: ExampleGame.Skybox@1aafa419
-{System 2022/10/13 13:39:57:3957}: wtf: ExampleGame.Skybox@47eaca72
-{System 2022/10/13 13:39:58:3958}: wtf: ExampleGame.Skybox@5656be13
-{System 2022/10/13 13:39:58:3958}: wtf: ExampleGame.Skybox@4218d6a3
-{System 2022/10/13 13:39:58:3958}: wtf: ExampleGame.Skybox@71d44a3
-{System 2022/10/13 13:39:59:3959}: wtf: ExampleGame.Skybox@7b98f307
-{System 2022/10/13 13:39:59:3959}: wtf: ExampleGame.Skybox@3e694b3f
-{System 2022/10/13 13:39:59:3959}: wtf: ExampleGame.Skybox@1bb5a082
-{System 2022/10/13 13:39:59:3959}: wtf: ExampleGame.Skybox@33d512c1
-{System 2022/10/13 13:39:59:3959}: wtf: ExampleGame.Skybox@515c6049
-{System 2022/10/13 13:40:00:400}: wtf: ExampleGame.Skybox@74235045
-{System 2022/10/13 13:40:00:400}: wtf: ExampleGame.Skybox@618b19ad
-{System 2022/10/13 13:40:00:400}: wtf: ExampleGame.Skybox@51399530
-{System 2022/10/13 13:40:00:400}: wtf: ExampleGame.Skybox@6b2ea799
-{System 2022/10/13 13:40:01:401}: wtf: ExampleGame.Skybox@13c9d689
-{System 2022/10/13 13:40:01:401}: wtf: ExampleGame.Skybox@3754a4bf
-{System 2022/10/13 13:40:02:402}: wtf: ExampleGame.Skybox@5b7a5baa
+{System 2022/10/14 10:06:54:654}: Starting SceneManager
+{System 2022/10/14 10:06:54:654}: Loading Metadata
+{System 2022/10/14 10:06:54:654}: Attempting to load BluminEngine3 on Version 0.0.1.0_Dev System
+{System 2022/10/14 10:06:55:655}: Setting up keyboard
+{System 2022/10/14 10:06:55:655}: Setting up DaynamicsWorld

@@ -1,5 +1,6 @@
 package BluminEngine5.Componant.Audio;
 
+import BluminEngine5.Utils.Annotations.MustCreate;
 import BluminEngine5.Utils.Debuging.Debug;
 
 import javax.sound.sampled.AudioFormat;
@@ -14,6 +15,11 @@ import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
 import java.util.Locale;
 
+/**
+ * Class used to handel .wav files
+ * @author Vrglab
+ */
+@MustCreate
 public class WaveData {
 
     public final ByteBuffer data;

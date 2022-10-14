@@ -58,7 +58,7 @@ public class Skybox extends BluminBehaviour {
         }catch(Exception e) {
 
         }
-        RegisterComponant(cmr, this);
+        RegisterComponant(cmr);
     }
 
     @Override

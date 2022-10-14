@@ -10,5 +10,6 @@ public abstract class Component implements IObjLogic {
      public BluminBehaviour Parent = null;
      public UiObject UIParent = null;
      public objActionData data = null;
+     public String name = getClass().getSimpleName();
 
 }
