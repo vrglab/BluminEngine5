@@ -3,6 +3,7 @@ package BluminEngine5.Behaviour;
 import BluminEngine5.Componant.Component;
 import BluminEngine5.Componant.Transform;
 import BluminEngine5.SceneMannagement.Scene;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.Math.Vector3;
 import BluminEngine5.Utils.objActionData;
@@ -133,11 +134,11 @@ public abstract class BluminBehaviour implements IObjLogic{
 
         public <t extends Component> t getComponant(Class<t> componantType) {
                 for (Component comp: AttachedComponants) {
-                        if(comp.getClass().isAssignableFrom(componantType.getClass())) {
+                        if(comp.getClass().isAssignableFrom(componantType)) {
                                 try{
-                                        return componantType.cast(comp);
+                                     return componantType.cast(comp);
                                 } catch(ClassCastException e){
-
+                                        Debug.logException(e);
                                 }
                         }
                 }

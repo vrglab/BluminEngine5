@@ -1,5 +1,7 @@
 package ExampleGame;
 
+import BluminEngine5.Componant.Audio.Mixer;
+import BluminEngine5.Componant.Audio.listener;
 import BluminEngine5.Rendering.Color;
 import BluminEngine5.Rendering.Lighting.PointLight;
 import BluminEngine5.Rendering.UI.Canvas;
@@ -7,6 +9,7 @@ import BluminEngine5.Rendering.UI.Panel;
 import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Input;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
@@ -19,29 +22,22 @@ public class ExampleScene extends Scene {
 
     private ExampleGameobject obj = new ExampleGameobject();
     private ExampleGameobject obj2 = new ExampleGameobject("lsd");
-
-    Canvas canvas = new Canvas();
-
+    MixerObj audiomixer = new MixerObj();
     Skybox sb = new Skybox();
 
-
-
     public ExampleScene() {
-        RegsiterGameObject(ActiveCamera);
+        RegsiterGameObject(audiomixer);
         Random r = new Random();
         var dat = 50;
-/*
+        /*
         for (int i = 0; i < 100; i++) {
             obj2 = new ExampleGameobject("lsd");
             obj2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
             RegsiterGameObject(obj2);
         }
-*/
+         */
         RegsiterGameObject(obj);
         RegsiterGameObject(sb);
-        canvas.RegisterUiObj(new Panel(new Rect(Vector2.Zero,new Vector2(0.5f,0.5f), Vector3.Zero)));
-        RegsiterGameObject(canvas);
-
     }
     @Override
     public void Update() {

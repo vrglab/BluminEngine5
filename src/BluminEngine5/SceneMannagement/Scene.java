@@ -4,6 +4,7 @@ package BluminEngine5.SceneMannagement;
 import BluminEngine5.Application;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Behaviour.ILogic;
+import BluminEngine5.Componant.Audio.Mixer;
 import BluminEngine5.Componant.Rendering.Lighting.BaseLight;
 import BluminEngine5.Rendering.Camera;
 import BluminEngine5.Rendering.Lighting.LightData;
@@ -25,12 +26,11 @@ public abstract class Scene implements ILogic {
 
     public objActionData ActionData =  new objActionData();
     public String name = "New Scene";
+
     public Camera ActiveCamera = new Camera();
 
 
     public Scene() {
-
-
         ActionData.OnUpdate = new IAction() {
             @Override
             public void Run() {
@@ -111,6 +111,7 @@ public abstract class Scene implements ILogic {
         Application.OnExit.addListener(ActionData.OnExit);
         Application.getRenderer().OnRender.addListener(ActionData.OnRender);
         name = this.getClass().getSimpleName();
+        RegsiterGameObject(ActiveCamera);
     }
 
     public void RegsiterGameObject(BluminBehaviour bb) {

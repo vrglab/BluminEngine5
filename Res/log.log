@@ -1,5 +1,8 @@
-{System 2022/10/14 10:06:54:654}: Starting SceneManager
-{System 2022/10/14 10:06:54:654}: Loading Metadata
-{System 2022/10/14 10:06:54:654}: Attempting to load BluminEngine3 on Version 0.0.1.0_Dev System
-{System 2022/10/14 10:06:55:655}: Setting up keyboard
-{System 2022/10/14 10:06:55:655}: Setting up DaynamicsWorld
+{System 2022/10/14 10:30:23:3023}: Starting SceneManager
+{System 2022/10/14 10:30:23:3023}: Loading Metadata
+{System 2022/10/14 10:30:23:3023}: Attempting to load BluminEngine3 on Version 0.0.1.0_Dev System
+{System 2022/10/14 10:30:24:3024}: Setting up keyboard
+{System 2022/10/14 10:30:25:3025}: Setting up DaynamicsWorld
+{System 2022/10/14 10:30:25:3025}: Should no longer be null
+{System 2022/10/14 10:30:25:3025}: BluminEngine5.Componant.Audio.listener@f8c1ddd
+{System 2022/10/14 10:30:25:3025}: bitch
