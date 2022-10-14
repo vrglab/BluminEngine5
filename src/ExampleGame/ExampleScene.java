@@ -10,6 +10,7 @@ import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
+import BluminEngine5.Utils.Skybox;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Random;
@@ -29,16 +30,17 @@ public class ExampleScene extends Scene {
         RegsiterGameObject(ActiveCamera);
         Random r = new Random();
         var dat = 50;
-
+/*
         for (int i = 0; i < 100; i++) {
             obj2 = new ExampleGameobject("lsd");
             obj2.transform.position = new Vector3(r.nextInt(-dat,dat), r.nextInt(-dat,dat),r.nextInt(-dat,dat));
             RegsiterGameObject(obj2);
         }
-
+*/
         RegsiterGameObject(obj);
         RegsiterGameObject(sb);
         canvas.RegisterUiObj(new Panel(new Rect(Vector2.Zero,new Vector2(0.5f,0.5f), Vector3.Zero)));
+        RegsiterGameObject(canvas);
 
     }
     @Override

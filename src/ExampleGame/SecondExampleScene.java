@@ -3,6 +3,7 @@ package ExampleGame;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Input;
+import BluminEngine5.Utils.Skybox;
 import org.lwjgl.glfw.GLFW;
 
 public class SecondExampleScene extends Scene {
