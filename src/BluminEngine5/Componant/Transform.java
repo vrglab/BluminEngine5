@@ -2,12 +2,10 @@ package BluminEngine5.Componant;
 
 import BluminEngine5.Utils.Math.Vector3;
 
-import javax.vecmath.Matrix3f;
-import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import java.io.Serializable;
 
-public class Transform extends IComponent implements Serializable {
+public class Transform extends Component implements Serializable {
     public Vector3 position = Vector3.Zero;
     public Vector3 rotation = Vector3.Zero;
     public Vector3 scale = Vector3.Zero;

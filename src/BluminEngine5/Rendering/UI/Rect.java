@@ -1,10 +1,10 @@
 package BluminEngine5.Rendering.UI;
 
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Math.Vector2;
 import BluminEngine5.Utils.Math.Vector3;
 
-public class Rect extends IComponent {
+public class Rect extends Component {
 
     public Vector2 position = Vector2.Zero;
     public Vector2 scale = Vector2.Zero;

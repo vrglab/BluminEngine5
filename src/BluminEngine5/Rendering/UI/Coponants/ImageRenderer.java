@@ -1,6 +1,6 @@
 package BluminEngine5.Rendering.UI.Coponants;
 
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Rendering.UI.Obj.UiObject;
 import BluminEngine5.Utils.Math.Matrix;
 import org.lwjgl.opengl.GL11;
@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL13;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class ImageRenderer extends IComponent {
+public class ImageRenderer extends Component {
 
     public UiObject Parent;
 

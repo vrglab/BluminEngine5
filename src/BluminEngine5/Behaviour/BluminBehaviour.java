@@ -1,6 +1,6 @@
 package BluminEngine5.Behaviour;
 
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Componant.Transform;
 import BluminEngine5.SceneMannagement.Scene;
 import BluminEngine5.Utils.EventSystem.IAction;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class BluminBehaviour implements IObjLogic{
 
-        private List<IComponent> AttachedComponants = new ArrayList<>();
+        private List<Component> AttachedComponants = new ArrayList<>();
         public objActionData ActionData =  new objActionData();
 
         public Transform transform = new Transform(new Vector3(0,0,-1), Vector3.Zero);
@@ -31,7 +31,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                         @Override
                         public void Run() {
                                 Update();
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnUpdate.Run();
                                 }
                         }
@@ -39,7 +39,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                 ActionData.OnExit = new IAction() {
                         @Override
                         public void Run() {
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnExit.Run();
                                 }
                                 Destroy();
@@ -50,7 +50,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                         @Override
                         public void Run() {
                                 OnRender();
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnRender.Run();
                                 }
                         }
@@ -59,7 +59,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                         @Override
                         public void Run() {
                                 Init();
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnInit.Run();
                                 }
                         }
@@ -68,7 +68,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                         @Override
                         public void Run() {
                                 Destroy();
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnDestroy.Run();
                                 }
                         }
@@ -76,7 +76,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                 ActionData.OnPreInit = new IAction() {
                         @Override
                         public void Run() {
-                                for (IComponent comp: AttachedComponants) {
+                                for (Component comp: AttachedComponants) {
                                         comp.data.OnPreInit.Run();
                                 }
                         }
@@ -84,7 +84,7 @@ public abstract class BluminBehaviour implements IObjLogic{
                 name = getClass().getSimpleName();
         }
 
-        public void RegisterComponant(IComponent component, BluminBehaviour bb) {
+        public void RegisterComponant(Component component, BluminBehaviour bb) {
                 component.data = new objActionData();
                 component.data.OnInit = new IAction() {
                         @Override
@@ -126,12 +126,12 @@ public abstract class BluminBehaviour implements IObjLogic{
                 AttachedComponants.add(component);
         }
 
-        public void UnregisterComponant(IComponent component) {
+        public void UnregisterComponant(Component component) {
                 AttachedComponants.remove(AttachedComponants.lastIndexOf(component));
         }
 
-        public <t extends IComponent> t getComponant(Class<t> componantType) {
-                for (IComponent comp: AttachedComponants) {
+        public <t extends Component> t getComponant(Class<t> componantType) {
+                for (Component comp: AttachedComponants) {
                         if(comp.getClass().isAssignableFrom(componantType.getClass())) {
                                 try{
                                         return componantType.cast(comp);

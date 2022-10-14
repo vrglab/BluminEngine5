@@ -1,7 +1,6 @@
 package BluminEngine5.Rendering.PostProcessing;
 
-import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Utils.EventSystem.IAction;
 import BluminEngine5.Utils.objActionData;
@@ -9,7 +8,7 @@ import BluminEngine5.Utils.objActionData;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PostProcessingBehaviour extends IComponent {
+public abstract class PostProcessingBehaviour extends Component {
     public Shader ProcessShader;
     private List<Effect> AttachedEffects = new ArrayList<>();
 
@@ -109,7 +108,7 @@ public abstract class PostProcessingBehaviour extends IComponent {
         AttachedEffects.add(component);
     }
 
-    public void UnregisterComponant(IComponent component) {
+    public void UnregisterComponant(Component component) {
         AttachedEffects.remove(AttachedEffects.lastIndexOf(component));
     }
 

@@ -57,6 +57,19 @@ public class Math {
         return new Vector3((a.x / b.x), (a.y/b.y), (a.z/b.z));
     }
 
+    public static Vector2 Modual(Vector2 a, Vector2 b) {
+        return new Vector2((a.x % b.x), (a.y%b.y));
+    }
+    public static Vector3 Modual(Vector2 a, Vector3 b) {
+        return new Vector3((a.x % b.x), (a.y%b.y), b.z);
+    }
+    public static Vector3 Modual(Vector3 a, Vector2 b) {
+        return new Vector3((a.x % b.x), (a.y%b.y), a.z);
+    }
+    public static Vector3 Modual(Vector3 a, Vector3 b) {
+        return new Vector3((a.x % b.x), (a.y%b.y), (a.z%b.z));
+    }
+
     public static boolean Equals(Version a, Version b) {
         if(a.r == b.r) {
             if(a.a == b.a) {

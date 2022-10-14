@@ -1,7 +1,7 @@
 package BluminEngine5.Rendering.UI.Obj;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.Rendering.UI.Rect;
 import BluminEngine5.Utils.EventSystem.IAction;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public abstract class UiObject extends BluminBehaviour  {
 
-    private List<IComponent> AttachedComponants = new ArrayList<>();
+    private List<Component> AttachedComponants = new ArrayList<>();
     public objActionData ActionData =  new objActionData();
     public Rect transform = new Rect(Vector2.Zero,new Vector2(1,1), Vector3.Zero);
     public Shader shader;
@@ -26,7 +26,7 @@ public abstract class UiObject extends BluminBehaviour  {
             @Override
             public void Run() {
                 Update();
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnUpdate.Run();
                 }
             }
@@ -34,7 +34,7 @@ public abstract class UiObject extends BluminBehaviour  {
         ActionData.OnExit = new IAction() {
             @Override
             public void Run() {
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnExit.Run();
                 }
                 Destroy();
@@ -45,7 +45,7 @@ public abstract class UiObject extends BluminBehaviour  {
             @Override
             public void Run() {
                 OnUiRender();
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnRender.Run();
                 }
             }
@@ -54,7 +54,7 @@ public abstract class UiObject extends BluminBehaviour  {
             @Override
             public void Run() {
                 Init();
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnInit.Run();
                 }
             }
@@ -63,7 +63,7 @@ public abstract class UiObject extends BluminBehaviour  {
             @Override
             public void Run() {
                 Destroy();
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnDestroy.Run();
                 }
             }
@@ -71,7 +71,7 @@ public abstract class UiObject extends BluminBehaviour  {
         ActionData.OnPreInit = new IAction() {
             @Override
             public void Run() {
-                for (IComponent comp: AttachedComponants) {
+                for (Component comp: AttachedComponants) {
                     comp.data.OnPreInit.Run();
                 }
             }
@@ -81,7 +81,7 @@ public abstract class UiObject extends BluminBehaviour  {
 
     public abstract void OnUiRender();
 
-    public void RegisterComponant(IComponent component, UiObject bb) {
+    public void RegisterComponant(Component component, UiObject bb) {
         component.data = new objActionData();
         component.data.OnInit = new IAction() {
             @Override
@@ -123,7 +123,7 @@ public abstract class UiObject extends BluminBehaviour  {
         AttachedComponants.add(component);
     }
 
-    public void UnregisterComponant(IComponent component) {
+    public void UnregisterComponant(Component component) {
         AttachedComponants.remove(AttachedComponants.lastIndexOf(component));
     }
 }

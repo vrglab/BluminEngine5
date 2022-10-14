@@ -1,10 +1,9 @@
 package BluminEngine5.Componant.Rendering;
 
-import BluminEngine5.Componant.IComponent;
+import BluminEngine5.Componant.Component;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
-import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -13,7 +12,7 @@ import org.lwjgl.opengl.GL30;
 
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 
-public class CubeMapRenderer extends IComponent {
+public class CubeMapRenderer extends Component {
 
     Mesh mesh;
     int cubemap;
