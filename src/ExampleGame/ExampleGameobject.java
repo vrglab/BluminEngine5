@@ -1,13 +1,10 @@
 package ExampleGame;
 
 import BluminEngine5.Behaviour.BluminBehaviour;
+import BluminEngine5.Componant.Audio.AudioSource;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
-import BluminEngine5.Rendering.Master.Material;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Utils.Debuging.Debug;
-import BluminEngine5.Utils.Math.Vector3;
-
-import java.io.IOException;
 
 public class ExampleGameobject extends BluminBehaviour {
 
@@ -17,6 +14,8 @@ public class ExampleGameobject extends BluminBehaviour {
 
     String sdd = null;
 
+    AudioSource s;
+
 
     public ExampleGameobject() {
 
@@ -25,9 +24,13 @@ public class ExampleGameobject extends BluminBehaviour {
       sdd = sd;
     }
 
+    boolean bs = false;
+
     @Override
     public void Update() {
-
+        if(!s.isPlaying()) {
+            s.Play();
+        }
     }
 
     @Override
@@ -50,6 +53,8 @@ public class ExampleGameobject extends BluminBehaviour {
             mr = new MeshRenderer(model);
             RegisterComponant(mr);
         }
+        s = new AudioSource(0,3);
+        RegisterComponant(s);
     }
 
     @Override
