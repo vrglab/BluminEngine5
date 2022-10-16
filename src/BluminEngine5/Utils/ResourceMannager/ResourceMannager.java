@@ -91,7 +91,7 @@ public class ResourceMannager {
 
             var shaderLocation = f.getAbsolutePath();
             if(!audiobatch.containsKey(location)) {
-                var dat = AudioFile.create(Utils.LoadFileAsStream(shaderLocation));
+                var dat = AudioFile.create(f);
                 audiobatch.put(location,dat);
                 f.delete();
                 return dat;

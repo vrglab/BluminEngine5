@@ -35,6 +35,7 @@ public class AudioSource extends Component {
     @Override
     public void Update() {
         AL10.alSource3f(id, AL_POSITION, Parent.transform.position.x,Parent.transform.position.y,Parent.transform.position.z);
+        SetVolume(mp.Volume);
     }
 
     @Override
@@ -47,9 +48,14 @@ public class AudioSource extends Component {
         id = AL10.alGenSources();
         buffer = AL10.alGenBuffers();
         alBufferData(buffer, AL_FORMAT_STEREO16, Audiofile.data, Audiofile.samplerate);
-        Debug.log( Audiofile.data.get(56));
         AL10.alSourcei(id, AL_BUFFER, buffer);
-        AL10.alSourcef(id, AL_GAIN, 0.4f);
+        SetVolume(0.4f);
+    }
+
+
+    public void SetVolume(float volume) {
+
+        AL10.alSourcef(id, AL_GAIN, volume);
     }
 
     @Override

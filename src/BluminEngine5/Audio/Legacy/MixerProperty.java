@@ -5,6 +5,6 @@ import java.util.List;
 
 public class MixerProperty {
     public String name;
-    public float Volume = 0;
+    public float Volume = 0.4f;
     public List<AudioSource> sources = new ArrayList<>();
 }

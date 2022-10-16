@@ -90,6 +90,7 @@ public class Mixer extends Component {
     public void Destroy() {
         alcDestroyContext(context);
         alcCloseDevice(device);
+        instance = null;
     }
 }
 

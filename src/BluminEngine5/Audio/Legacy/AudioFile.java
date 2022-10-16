@@ -1,14 +1,23 @@
 package BluminEngine5.Audio.Legacy;
 
 import BluminEngine5.Utils.Annotations.MustCreate;
+import BluminEngine5.Utils.Utils;
+import jdk.jshell.execution.Util;
+import org.apache.commons.io.FilenameUtils;
+import org.lwjgl.stb.STBVorbis;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
+import static org.lwjgl.stb.STBVorbis.stb_vorbis_decode_filename;
+import static org.lwjgl.system.MemoryStack.*;
 
 
 /**
@@ -28,21 +37,55 @@ public class AudioFile {
         this.samplerate = samplerate;
     }
 
-    public static AudioFile create(InputStream is) {
+    public static AudioFile create(File file) {
         try {
-            byte[] wavData = new byte[is.available()];
-            ByteBuffer dest = ByteBuffer.allocateDirect(wavData.length);
-            dest.put(wavData);
-            dest.flip();
-            InputStream bufferedIn = new BufferedInputStream(is);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
-            AudioFormat audioFormat = audioInputStream.getFormat();
-            is.close();
-            return new AudioFile(dest,  audioFormat.getChannels(), (int)audioFormat.getSampleRate());
+
+            InputStream is = Utils.LoadFileAsStream(file.getAbsolutePath());
+
+
+            if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("wav")) {
+                byte[] wavData = new byte[is.available()];
+                ByteBuffer dest = ByteBuffer.allocateDirect(wavData.length * 2);
+                dest.put(wavData);
+                dest.flip();
+
+                InputStream bufferedIn = new BufferedInputStream(is);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
+                AudioFormat audioFormat = audioInputStream.getFormat();
+
+                ByteBuffer dest1 = ByteBuffer.allocateDirect(wavData.length * 2);
+                dest1.put( audioInputStream.readAllBytes());
+                dest1.flip();
+                is.close();
+                return new AudioFile(dest1, audioFormat.getChannels(), (int) audioFormat.getSampleRate());
+            }
+
+            if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("ogg")) {
+                stackPush();
+                IntBuffer chanels = stackMallocInt(1);
+                stackPush();
+                IntBuffer samplerate = stackMallocInt(1);
+
+                ShortBuffer audioFile = stb_vorbis_decode_filename(file.getAbsolutePath(), chanels, samplerate);
+
+                var dat = audioFile.array();
+
+                ByteBuffer dest = ByteBuffer.allocateDirect(dat.length * 2);
+                dest.asShortBuffer().put(dat);
+                dest.flip();
+
+                var f = new AudioFile(dest, chanels.get(), samplerate.get());
+                stackPop();
+                stackPop();
+
+                return f;
+            }
+
         } catch (Exception e){
             e.printStackTrace();
             return null;
         }
+        return null;
     }
 
     public void dispose() {
