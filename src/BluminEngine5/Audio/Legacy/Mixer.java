@@ -1,13 +1,11 @@
-package BluminEngine5.Componant.Audio;
+package BluminEngine5.Audio.Legacy;
 
 import BluminEngine5.Componant.Component;
 import BluminEngine5.SceneMannagement.SceneManager;
 import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Utils;
 import org.lwjgl.openal.*;
-import org.lwjglx.openal.AL10;
 
-import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;

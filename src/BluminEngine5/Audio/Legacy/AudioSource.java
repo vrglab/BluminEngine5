@@ -1,30 +1,22 @@
-package BluminEngine5.Componant.Audio;
+package BluminEngine5.Audio.Legacy;
 
 import BluminEngine5.Application;
 import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Debuging.Debug;
-import BluminEngine5.Utils.Utils;
 import org.lwjgl.openal.AL10;
-
-import java.io.File;
-import java.io.InputStream;
 
 import static org.lwjgl.openal.AL10.*;
 
 public class AudioSource extends Component {
 
-    private WaveData AudioFile;
+    private AudioFile Audiofile;
     private MixerProperty mp;
 
     int id, buffer;
 
     public AudioSource(int file, int archive) {
         try {
-            File fil = Application.getResourceManager().LoadIntoTempFile(Application.getResourceManager().archive.GeFileFromArchive(file ,archive));
-            InputStream istream = Utils.LoadFileAsStream(fil.getAbsolutePath());
-            AudioFile = WaveData.create(istream);
-            istream.close();
-            fil.delete();
+            Audiofile = Application.getResourceManager().GetAudio(file, archive);
             if(Mixer.instance == null) {
                 Debug.logError("Mixer is required in the scene for audio playing");
                 return;
@@ -42,7 +34,7 @@ public class AudioSource extends Component {
 
     @Override
     public void Update() {
-
+        AL10.alSource3f(id, AL_POSITION, Parent.transform.position.x,Parent.transform.position.y,Parent.transform.position.z);
     }
 
     @Override
@@ -54,10 +46,10 @@ public class AudioSource extends Component {
     public void Init() {
         id = AL10.alGenSources();
         buffer = AL10.alGenBuffers();
-        alBufferData(buffer, AL_FORMAT_STEREO16, AudioFile.data.asIntBuffer(), AudioFile.samplerate);
+        alBufferData(buffer, AL_FORMAT_STEREO16, Audiofile.data, Audiofile.samplerate);
+        Debug.log( Audiofile.data.get(56));
         AL10.alSourcei(id, AL_BUFFER, buffer);
         AL10.alSourcef(id, AL_GAIN, 0.4f);
-        AL10.alSourcei(id, AL_POSITION, 0);
     }
 
     @Override
@@ -77,11 +69,11 @@ public class AudioSource extends Component {
 
     @Override
     public void Destroy() {
+        Stop();
         alDeleteBuffers(buffer);
     }
 
     public void Play() {
-        Debug.log("Should start to play");
         alSourcePlay(id);
     }
 

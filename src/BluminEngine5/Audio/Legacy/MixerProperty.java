@@ -1,4 +1,4 @@
-package BluminEngine5.Componant.Audio;
+package BluminEngine5.Audio.Legacy;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,38 +1,34 @@
-package BluminEngine5.Componant.Audio;
+package BluminEngine5.Audio.Legacy;
 
 import BluminEngine5.Utils.Annotations.MustCreate;
-import BluminEngine5.Utils.Debuging.Debug;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.ShortBuffer;
-import java.util.Locale;
+
+
 
 /**
- * Class used to handel .wav files
+ * Class used to handel Audio files
  * @author Vrglab
  */
 @MustCreate
-public class WaveData {
+public class AudioFile {
 
     public final ByteBuffer data;
     public final int format;
     public final int samplerate;
 
-    private WaveData(ByteBuffer data, int format, int samplerate) {
+    private AudioFile(ByteBuffer data, int format, int samplerate) {
         this.data = data;
         this.format = format;
         this.samplerate = samplerate;
     }
 
-    public static WaveData create(InputStream is) {
+    public static AudioFile create(InputStream is) {
         try {
             byte[] wavData = new byte[is.available()];
             ByteBuffer dest = ByteBuffer.allocateDirect(wavData.length);
@@ -42,7 +38,7 @@ public class WaveData {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
             AudioFormat audioFormat = audioInputStream.getFormat();
             is.close();
-            return new WaveData(dest,  audioFormat.getChannels(), (int)audioFormat.getSampleRate());
+            return new AudioFile(dest,  audioFormat.getChannels(), (int)audioFormat.getSampleRate());
         } catch (Exception e){
             e.printStackTrace();
             return null;

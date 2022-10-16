@@ -1,7 +1,7 @@
 package BluminEngine5.Utils.ResourceMannager;
 
 import BluminEngine5.Application;
-import BluminEngine5.Componant.Audio.WaveData;
+import BluminEngine5.Audio.Legacy.AudioFile;
 import BluminEngine5.Rendering.Master.Mesh;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Rendering.Shaders.Shader;
@@ -11,11 +11,9 @@ import BluminEngine5.Utils.ObjLoader;
 import BluminEngine5.Utils.ResourceMannager.Archive.Archive;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchiveMannager;
 import BluminEngine5.Utils.ResourceMannager.Archive.ArchivedFile;
-import BluminEngine5.Utils.Thread.ArgEvent;
 import BluminEngine5.Utils.Utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.lwjgl.stb.STBVorbisInfo;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -30,7 +28,7 @@ public class ResourceMannager {
     private HashMap<String, Shader> shadersbacth = new HashMap<String, Shader>();
     private HashMap<String, Texture> texturesbacth = new HashMap<String, Texture>();
     private HashMap<String, Mesh> meshsbacth = new HashMap<String, Mesh>();
-    private HashMap<String, WaveData> wavsbacth = new HashMap<String, WaveData>();
+    private HashMap<String, AudioFile> audiobatch = new HashMap<String, AudioFile>();
 
     private HashMap<String, Model> modelssbacth = new HashMap<String, Model>();
 
@@ -85,19 +83,20 @@ public class ResourceMannager {
         }
     }
 
-    public WaveData GetWav(int file, int Archive) {
+    public AudioFile GetAudio(int file, int Archive) {
         try {
             var arch = archive.GeFileFromArchive(file, Archive);
             var f = LoadIntoTempFile(arch);
             var location = Application.getMetadata().ResourceFolder +"/Temp/Temp " + arch.FileName + "." + arch.Extension;
 
             var shaderLocation = f.getAbsolutePath();
-            if(!wavsbacth.containsKey(location)) {
-                var dat = WaveData.create(Utils.LoadFileAsStream(shaderLocation));
-                wavsbacth.put(location,dat);
+            if(!audiobatch.containsKey(location)) {
+                var dat = AudioFile.create(Utils.LoadFileAsStream(shaderLocation));
+                audiobatch.put(location,dat);
+                f.delete();
                 return dat;
             } else{
-                return wavsbacth.get(location);
+                return audiobatch.get(location);
             }
         }catch (Exception e) {
             Debug.logException("Could not load the wav file",e);

@@ -1,7 +1,7 @@
 package ExampleGame;
 
+import BluminEngine5.Audio.Legacy.Mixer;
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.Audio.Mixer;
 
 public class MixerObj extends BluminBehaviour {
 

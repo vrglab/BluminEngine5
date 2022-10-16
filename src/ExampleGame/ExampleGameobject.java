@@ -1,7 +1,7 @@
 package ExampleGame;
 
+import BluminEngine5.Audio.Legacy.AudioSource;
 import BluminEngine5.Behaviour.BluminBehaviour;
-import BluminEngine5.Componant.Audio.AudioSource;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Utils.Debuging.Debug;

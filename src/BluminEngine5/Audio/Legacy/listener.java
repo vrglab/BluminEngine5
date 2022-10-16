@@ -1,8 +1,7 @@
-package BluminEngine5.Componant.Audio;
+package BluminEngine5.Audio.Legacy;
 
 import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Debuging.Debug;
-import org.lwjgl.openal.AL;
 
 import static org.lwjgl.openal.AL10.*;
 
