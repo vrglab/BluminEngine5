@@ -4,12 +4,16 @@ import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Annotations.Obsolete;
 import org.fmod.FMODLoader;
 import org.fmod.studio.Bank;
+import org.fmod.studio.EventDescription;
+import org.fmod.studio.EventInstance;
 import org.fmod.studio.FmodStudioSystem;
 
 import static org.fmod.jni.FMODConstants.FMOD_INIT_NORMAL;
 import static org.fmod.jni.FMODConstants.FMOD_STUDIO_INIT_NORMAL;
 
-
+/**
+ * Please refrain from using this class in any way, as it still not complete and broken
+ */
 @Obsolete @Deprecated
 public class Fmod extends Component {
 
@@ -54,5 +58,9 @@ public class Fmod extends Component {
 
     public Bank GetBank(String path) {
         return studioSystem.getBank(path);
+    }
+
+    public EventDescription GetEvent(String path){
+        return studioSystem.getEvent(path);
     }
 }

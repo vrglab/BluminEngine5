@@ -11,4 +11,6 @@ public class Archive implements Serializable {
     public List<ArchivedFile> archivedFiles = new ArrayList<>();
     public int Id = NULL;
     public int ParentArchiveId = NULL;
+
+    protected static int idFileCounter = 0;
 }

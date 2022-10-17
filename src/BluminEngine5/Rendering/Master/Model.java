@@ -144,7 +144,7 @@ public class Model implements Serializable {
     }
 
 
-    private static class SerliazedMaterial implements Serializable {
+    private static class SerliazedMaterial implements Serializable  {
 
         public SerliazedTexture texture, DefuseMap,  SpecularMap, ReflectionsMap;
 
@@ -176,14 +176,14 @@ public class Model implements Serializable {
 
         public static Material Parse(SerliazedMaterial material) {
             Material m = new Material();
-            m.setSpecularMap(Application.getResourceManager().GetTexture(material.SpecularMap.file-5, material.SpecularMap.Archive));
-            m.setDefuseMap(Application.getResourceManager().GetTexture(material.DefuseMap.file-5, material.DefuseMap.Archive));
-            m.setReflectionsMap(Application.getResourceManager().GetTexture(material.ReflectionsMap.file-5, material.ReflectionsMap.Archive));
-            m.SetTexture(Application.getResourceManager().GetTexture(material.texture.file-5, material.texture.Archive));
-            m.setColor(material.color);
             m.reflection = material.reflection;
             m.Shine = material.Shine;
             m.Ambient = material.Ambient;
+            m.setSpecularMap(Application.getResourceManager().GetTexture(material.SpecularMap.file, material.SpecularMap.Archive));
+            m.setDefuseMap(Application.getResourceManager().GetTexture(material.DefuseMap.file, material.DefuseMap.Archive));
+            m.setReflectionsMap(Application.getResourceManager().GetTexture(material.ReflectionsMap.file, material.ReflectionsMap.Archive));
+            m.SetTexture(Application.getResourceManager().GetTexture(material.texture.file, material.texture.Archive));
+            m.setColor(material.color);
             return m;
         }
 

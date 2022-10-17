@@ -20,7 +20,7 @@ public class ArchiveMannager implements Serializable{
     public static final int NULL = -0000000;
     private List<Archive> Archives = new ArrayList<>();
 
-    private static int idFileCounter = 0;
+
     private static int idArchiveCounter = 0;
 
     public ArchiveMannager() {
@@ -40,8 +40,7 @@ public class ArchiveMannager implements Serializable{
             byte[] fileContent = FileUtils.readFileToByteArray(path.toFile());
             String encodedString = Base64.getEncoder().encodeToString(fileContent);
             af.fileData = encodedString;
-            af.ID = idFileCounter;
-            idFileCounter++;
+            af.ID = NULL;
         } catch (IOException e) {
             Debug.logError(e.getMessage());
         }
@@ -50,6 +49,8 @@ public class ArchiveMannager implements Serializable{
     public void PutFileInArchive(ArchivedFile file, int ArchiveId) {
         Archive ar = Archives.get(ArchiveId);
         file.ArchiveId = ArchiveId;
+        file.ID = ar.ParentArchiveId;
+        ar.ParentArchiveId++;
         ar.archivedFiles.add(file);
 
         Archives.remove(ArchiveId);
@@ -59,6 +60,8 @@ public class ArchiveMannager implements Serializable{
         Archive ar = Archives.get(ArchiveId);
         ArchivedFile af = ArchiveFile(file);
         af.ArchiveId = ArchiveId;
+        af.ID = ar.ParentArchiveId;
+        ar.ParentArchiveId++;
         ar.archivedFiles.add(af);
         Archives.remove(ArchiveId);
         Archives.add(ArchiveId, ar);
@@ -67,6 +70,8 @@ public class ArchiveMannager implements Serializable{
         Archive ar = Archives.get(0);
         ArchivedFile af = ArchiveFile(file);
         af.ArchiveId = 0;
+        af.ID = ar.ParentArchiveId;
+        ar.ParentArchiveId++;
         ar.archivedFiles.add(af);
         Archives.remove(0);
         Archives.add(0,ar);
