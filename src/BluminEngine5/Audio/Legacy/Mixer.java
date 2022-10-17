@@ -10,6 +10,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.alcCloseDevice;
 import static org.lwjgl.openal.ALC10.alcDestroyContext;
 
@@ -48,6 +49,7 @@ public class Mixer extends Component {
         AL.createCapabilities(alc);
         ALCapabilities cap = AL.getCapabilities();
         AL.setCurrentThread(cap);
+        alDistanceModel(AL_INVERSE_DISTANCE_CLAMPED);
 
         if(!cap.OpenAL10) {
             Utils.CrashApp(-45, "No Valid OpenAL library found");

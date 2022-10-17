@@ -28,11 +28,20 @@ import static org.lwjgl.system.MemoryStack.*;
 public class AudioFile {
 
     public final ByteBuffer data;
+    public final ShortBuffer sdata;
     public final int format;
     public final int samplerate;
 
     private AudioFile(ByteBuffer data, int format, int samplerate) {
         this.data = data;
+        this.sdata = null;
+        this.format = format;
+        this.samplerate = samplerate;
+    }
+
+    private AudioFile(ShortBuffer data, int format, int samplerate) {
+        this.data = null;
+        this.sdata = data;
         this.format = format;
         this.samplerate = samplerate;
     }
@@ -68,16 +77,11 @@ public class AudioFile {
 
                 ShortBuffer audioFile = stb_vorbis_decode_filename(file.getAbsolutePath(), chanels, samplerate);
 
-                var dat = audioFile.array();
 
-                ByteBuffer dest = ByteBuffer.allocateDirect(dat.length * 2);
-                dest.asShortBuffer().put(dat);
-                dest.flip();
-
-                var f = new AudioFile(dest, chanels.get(), samplerate.get());
+                var f = new AudioFile(audioFile, chanels.get(), samplerate.get());
                 stackPop();
                 stackPop();
-
+                is.close();
                 return f;
             }
 

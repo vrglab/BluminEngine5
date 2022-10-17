@@ -61,7 +61,7 @@ public class Application {
     }
 
 
-    private static Version EngineVersion = new Version(0,0,1,0,"DevSystem");
+    private static Version EngineVersion = new Version(0,0,1,0,"Alpha");
 
     public static void Run(Resolution res, DisplayMode mode, DisplayDimension dim) {
         DealWithEngineVersioning();
@@ -161,7 +161,7 @@ public class Application {
         try{
             Debug.log("Loading Metadata");
             metadata  = new Metadata(ConfigFile);
-            Debug.log("Attempting to load BluminEngine3 on " + metadata.engineVersion);
+            Debug.log("Loading BluminEngine5" + EngineVersion);
         }catch (IOException e) {
             Utils.CrashApp(-134, e);
         }

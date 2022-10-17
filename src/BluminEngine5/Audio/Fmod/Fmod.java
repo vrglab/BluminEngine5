@@ -1,6 +1,7 @@
 package BluminEngine5.Audio.Fmod;
 
 import BluminEngine5.Componant.Component;
+import BluminEngine5.Utils.Annotations.Obsolete;
 import org.fmod.FMODLoader;
 import org.fmod.studio.Bank;
 import org.fmod.studio.FmodStudioSystem;
@@ -8,6 +9,8 @@ import org.fmod.studio.FmodStudioSystem;
 import static org.fmod.jni.FMODConstants.FMOD_INIT_NORMAL;
 import static org.fmod.jni.FMODConstants.FMOD_STUDIO_INIT_NORMAL;
 
+
+@Obsolete @Deprecated
 public class Fmod extends Component {
 
     FmodStudioSystem studioSystem;

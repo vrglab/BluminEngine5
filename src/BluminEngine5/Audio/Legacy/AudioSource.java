@@ -5,13 +5,18 @@ import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Debuging.Debug;
 import org.lwjgl.openal.AL10;
 
+import java.nio.FloatBuffer;
+
 import static org.lwjgl.openal.AL10.*;
+import static org.lwjgl.system.MemoryStack.stackPop;
+import static org.lwjgl.system.MemoryStack.stackPush;
 
 public class AudioSource extends Component {
 
     private AudioFile Audiofile;
     private MixerProperty mp;
 
+    private float rolloff = 2, Distance = 6, max_distance = 50;
     int id, buffer;
 
     public AudioSource(int file, int archive) {
@@ -35,6 +40,9 @@ public class AudioSource extends Component {
     @Override
     public void Update() {
         AL10.alSource3f(id, AL_POSITION, Parent.transform.position.x,Parent.transform.position.y,Parent.transform.position.z);
+        AL10.alSourcef(id, AL_MAX_DISTANCE, max_distance);
+        AL10.alSourcef(id, AL_REFERENCE_DISTANCE, Distance);
+        AL10.alSourcef(id, AL_ROLLOFF_FACTOR, rolloff);
         SetVolume(mp.Volume);
     }
 
@@ -47,11 +55,16 @@ public class AudioSource extends Component {
     public void Init() {
         id = AL10.alGenSources();
         buffer = AL10.alGenBuffers();
-        alBufferData(buffer, AL_FORMAT_STEREO16, Audiofile.data, Audiofile.samplerate);
+
+        if(Audiofile.sdata == null) {
+            alBufferData(buffer, AL_FORMAT_STEREO16, Audiofile.data, Audiofile.samplerate);
+        } else{
+            alBufferData(buffer, AL_FORMAT_STEREO16, Audiofile.sdata, Audiofile.samplerate);
+        }
         AL10.alSourcei(id, AL_BUFFER, buffer);
         SetVolume(0.4f);
-    }
 
+    }
 
     public void SetVolume(float volume) {
 
@@ -93,5 +106,29 @@ public class AudioSource extends Component {
 
     public boolean isPlaying() {
         return alGetSourcei(id, AL_SOURCE_STATE) == AL_PLAYING;
+    }
+
+    public float getRolloff() {
+        return rolloff;
+    }
+
+    public void setRolloff(float rolloff) {
+        this.rolloff = rolloff;
+    }
+
+    public float getDistance() {
+        return Distance;
+    }
+
+    public void setDistance(float distance) {
+        Distance = distance;
+    }
+
+    public float getMax_distance() {
+        return max_distance;
+    }
+
+    public void setMax_distance(float max_distance) {
+        this.max_distance = max_distance;
     }
 }

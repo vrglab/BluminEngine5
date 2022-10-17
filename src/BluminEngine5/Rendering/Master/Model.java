@@ -17,6 +17,13 @@ import java.util.List;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterOutputStream;
 
+/**
+ * The model class does as its name suggests, the model class handles everything that is needed for
+ * 3D model to properly load
+ * @author Vrglab
+ * @version SerializationSystem_0.1
+ * @since 0.0.1.0_Alpha
+ */
 public class Model implements Serializable {
 
     public Transform transform = Transform.DefaultZero;

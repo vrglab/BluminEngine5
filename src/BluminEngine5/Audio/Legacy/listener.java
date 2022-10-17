@@ -3,6 +3,8 @@ package BluminEngine5.Audio.Legacy;
 import BluminEngine5.Componant.Component;
 import BluminEngine5.Utils.Debuging.Debug;
 
+import java.nio.FloatBuffer;
+
 import static org.lwjgl.openal.AL10.*;
 
 public class listener extends Component {
@@ -10,7 +12,6 @@ public class listener extends Component {
     @Override
     public void Update() {
         try {
-
             alListener3f(AL_POSITION, Parent.transform.position.x, Parent.transform.position.y, Parent.transform.position.z);
             alListener3f(AL_VELOCITY, 0, 0, 0);
         } catch (Exception e) {
