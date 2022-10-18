@@ -7,25 +7,14 @@ import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.EventSystem.*;
 import BluminEngine5.Utils.*;
 import BluminEngine5.Utils.ResourceMannager.ResourceMannager;
-import com.bulletphysics.collision.broadphase.BroadphaseInterface;
-import com.bulletphysics.collision.broadphase.DbvtBroadphase;
-import com.bulletphysics.collision.broadphase.Dispatcher;
-import com.bulletphysics.collision.dispatch.CollisionConfiguration;
-import com.bulletphysics.collision.dispatch.CollisionDispatcher;
-import com.bulletphysics.collision.dispatch.DefaultCollisionConfiguration;
-import com.bulletphysics.dynamics.DiscreteDynamicsWorld;
 import com.bulletphysics.dynamics.DynamicsWorld;
-import com.bulletphysics.dynamics.constraintsolver.ConstraintSolver;
-import com.bulletphysics.dynamics.constraintsolver.SequentialImpulseConstraintSolver;
-import de.fabmax.physxjni.Loader;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-import physx.PxTopLevelFunctions;
-import physx.common.PxDefaultErrorCallback;
-import physx.common.PxFoundation;
-import physx.common.PxTolerancesScale;
-import physx.extensions.PxDefaultAllocator;
-import physx.physics.PxPhysics;
+import org.lwjgl.system.MemoryStack;
+import org.lwjgl.vulkan.VK;
+import org.lwjgl.vulkan.VkInstance;
+import org.lwjgl.vulkan.VkInstanceCreateInfo;
 
 
 import java.io.IOException;
@@ -34,7 +23,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFWVulkan.glfwGetRequiredInstanceExtensions;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.stackPush;
+import static org.lwjgl.vulkan.VK10.*;
 
 public class Application {
 
@@ -46,6 +38,8 @@ public class Application {
 
     private static ResourceMannager resourceManager;
     private static String ConfigFile =  "Config.ini";
+    private static VkInstance vkInstance;
+
     public static Metadata getMetadata() {
         return metadata;
     }
@@ -83,6 +77,7 @@ public class Application {
                     break;
                 case "Vulkan":
 
+                        Vulkan();
                     break;
             }
             while (!glfwWindowShouldClose(display.getWindow()) ) {
@@ -99,12 +94,50 @@ public class Application {
         }
     }
 
+
+    private static void Vulkan() {
+        VK.create();
+        MemoryStack stack = stackPush();
+
+
+        VkInstanceCreateInfo createInfo = VkInstanceCreateInfo.calloc(stack);
+
+        createInfo.sType(VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO);
+        createInfo.ppEnabledExtensionNames(glfwGetRequiredInstanceExtensions());
+        createInfo.ppEnabledLayerNames(null);
+
+        PointerBuffer instancePtr = stack.mallocPointer(1);
+
+        if(vkCreateInstance(createInfo, null, instancePtr) != VK_SUCCESS) {
+            throw new RuntimeException("Failed to create instance");
+        }
+
+        vkInstance = new VkInstance(instancePtr.get(0), createInfo);
+    }
+
+
     private static void OpenGL(Resolution res, DisplayMode mode, DisplayDimension dim) {
         InvokeBeforeWindowCreation();
         display = new Display();
         display.CreateWindow(getMetadata().GameName, res, mode, dim);
 
+
+        GL.createCapabilities();
+
         InvokeAfterWindowCreation(true);
+
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
+
+
+        //Physics should be implemented here
+
+        Awake.Invoke();
+
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+
+        Init.Invoke();
     }
 
 
@@ -121,9 +154,6 @@ public class Application {
     }
 
     private static void InvokeAfterWindowCreation(boolean Debugs) {
-
-        GL.createCapabilities();
-
         if(Debugs) {
             Debug.log("Setting up keyboard");
         }
@@ -156,20 +186,6 @@ public class Application {
             }
         });
 
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-
-        if(Debugs) {
-            Debug.log("Setting up DaynamicsWorld");
-        }
-
-        //Physics should be implemented here
-
-        Awake.Invoke();
-
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-
-        Init.Invoke();
     }
 
     private static void DealWithEngineVersioning() {
