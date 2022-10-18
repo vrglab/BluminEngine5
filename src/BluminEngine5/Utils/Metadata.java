@@ -11,7 +11,7 @@ public class Metadata {
     public Version gameVersion;
     public String ResourceFolder;
     public String MainArchiveFile;
-    public Version engineVersion = new Version(0,0,1,0, "Dev System");
+    public String RenderPipline;
     public String Developer = "";
     public String Publisher = "";
 
@@ -26,7 +26,7 @@ public class Metadata {
 
         ResourceFolder = ini.get("EngineConfig", "ResourcesPath");
         MainArchiveFile = ini.get("EngineConfig", "Archive");
-        //engineVersion= new Version(ini.get("EngineConfig", "Version"));
+        RenderPipline= ini.get("EngineConfig", "RePipline");
 
         GameName = ini.get("GameConfig", "Name");
         Developer = ini.get("GameConfig", "Developer");

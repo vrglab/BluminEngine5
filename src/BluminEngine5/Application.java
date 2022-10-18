@@ -76,12 +76,15 @@ public class Application {
         Path tempDir;
 
         try{
-            InvokeBeforeWindowCreation();
-            display = new Display();
-            display.CreateWindow(getMetadata().GameName, res, mode, dim);
 
-            InvokeAfterWindowCreation(true);
+            switch(metadata.RenderPipline){
+                case "OpenGL":
+                        OpenGL(res, mode, dim);
+                    break;
+                case "Vulkan":
 
+                    break;
+            }
             while (!glfwWindowShouldClose(display.getWindow()) ) {
                 Update.Invoke();
                 renderer.Render();
@@ -96,7 +99,16 @@ public class Application {
         }
     }
 
-    public static void InvokeBeforeWindowCreation(){
+    private static void OpenGL(Resolution res, DisplayMode mode, DisplayDimension dim) {
+        InvokeBeforeWindowCreation();
+        display = new Display();
+        display.CreateWindow(getMetadata().GameName, res, mode, dim);
+
+        InvokeAfterWindowCreation(true);
+    }
+
+
+    private static void InvokeBeforeWindowCreation(){
         try {
             Files.createDirectories(Paths.get(metadata.ResourceFolder+"/Temp"));
         } catch(Exception e) {
@@ -108,7 +120,7 @@ public class Application {
 
     }
 
-    public static void InvokeAfterWindowCreation(boolean Debugs) {
+    private static void InvokeAfterWindowCreation(boolean Debugs) {
 
         GL.createCapabilities();
 
