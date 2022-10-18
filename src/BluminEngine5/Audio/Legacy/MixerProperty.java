@@ -7,4 +7,5 @@ public class MixerProperty {
     public String name;
     public float Volume = 0.4f;
     public List<AudioSource> sources = new ArrayList<>();
+    public MixerProperty parent;
 }

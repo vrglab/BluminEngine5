@@ -51,7 +51,7 @@ public class Model implements Serializable {
     }
 
     public Model(int file, int archive) {
-       var dat = ObjLoader.LoadModel(Application.getResourceManager().archive.GeFileFromArchive(file,archive));
+        var dat = ObjLoader.LoadModel(Application.getResourceManager().archive.GeFileFromArchive(file,archive));
         ByteArrayOutputStream out2 = new ByteArrayOutputStream();
         InflaterOutputStream infl = new InflaterOutputStream(out2);
         Mesh m = null;
@@ -202,7 +202,7 @@ public class Model implements Serializable {
 
     }
 
-    private class MaterialData{
+    private class MaterialData implements Serializable{
         SerliazedMaterial SerMaterial;
         Material Material;
 
@@ -244,7 +244,6 @@ public class Model implements Serializable {
         FileOutputStream fileOutputStream = new FileOutputStream(Application.getMetadata().ResourceFolder + "/" + file + ".bmd");
         ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
         oos.writeObject(this);
-        oos.flush();
         oos.close();
         mesh.mesh = meshUntoutched;
         material.Material = materialuntoutched;

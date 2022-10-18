@@ -1,9 +1,6 @@
-{System 2022/10/17 19:33:43:3343}: Starting SceneManager
-{System 2022/10/17 19:33:43:3343}: Loading Metadata
-{System 2022/10/17 19:33:43:3343}: Loading BluminEngine5Version 0.0.1.0_Alpha
-{System 2022/10/17 19:33:44:3344}: Setting up keyboard
-{System 2022/10/17 19:33:44:3344}: Setting up DaynamicsWorld
-{System 2022/10/17 19:33:44:3344}: Should no longer be null
-{System 2022/10/17 19:33:44:3344}: 0
-{System 2022/10/17 19:33:44:3344}: Changed the vertex shader version to 460 core
-{System 2022/10/17 19:33:44:3344}: Changed the fragment shader version to 460 core
+{System 2022/10/18 09:34:56:3456}: Starting SceneManager
+{System 2022/10/18 09:34:56:3456}: Loading Metadata
+{System 2022/10/18 09:34:56:3456}: Loading BluminEngine5Version 0.0.1.0_Alpha
+{System 2022/10/18 09:34:57:3457}: Setting up keyboard
+{System 2022/10/18 09:34:57:3457}: Setting up DaynamicsWorld
+{System 2022/10/18 09:34:58:3458}: Should no longer be null

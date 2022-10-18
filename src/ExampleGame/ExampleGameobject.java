@@ -3,6 +3,7 @@ package ExampleGame;
 import BluminEngine5.Audio.Legacy.AudioSource;
 import BluminEngine5.Behaviour.BluminBehaviour;
 import BluminEngine5.Componant.Rendering.MeshRenderer;
+import BluminEngine5.Rendering.Master.Material;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Utils.Debuging.Debug;
 
@@ -44,6 +45,13 @@ public class ExampleGameobject extends BluminBehaviour {
         if (sdd == null) {
             model = new Model();
             model.setMesh(0,1);
+            model.getMaterial().Shine = 1;
+            model.getMaterial().reflection = 0.4f;
+            try {
+                model.SaveToFile("Cube");
+            } catch (Exception e) {
+                Debug.logException(e);
+            }
             mr = new MeshRenderer(model);
             RegisterComponant(mr);
 
@@ -54,7 +62,7 @@ public class ExampleGameobject extends BluminBehaviour {
             RegisterComponant(mr);
         }
         s = new AudioSource(0,3);
-        RegisterComponant(s);
+        //RegisterComponant(s);
     }
 
     @Override

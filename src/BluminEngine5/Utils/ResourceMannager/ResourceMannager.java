@@ -166,7 +166,7 @@ public class ResourceMannager {
 
         for (File p: currentDirectory.listFiles()) {
             if(p.isDirectory()) {
-                shush(am, p);
+                shush(am, p, 0);
             } else if(p.isFile()) {
                 yell(am,p, 0);
             }
@@ -176,27 +176,19 @@ public class ResourceMannager {
     }
 
 
-    private static Archive shush(ArchiveMannager am, File p) {
-        Archive us = null;
-        if(am.getArchives().contains(p.getPath())) {
-            int root = am.getArchives().lastIndexOf(p.getPath());
-            us = am.CreateArchive(root,FilenameUtils.getBaseName(p.getAbsolutePath()));
-            for (File d: p.listFiles()) {
-                if(d.isDirectory()) {
-                    shush(am, d);
-                } else if(d.isFile()) {
-                    yell(am, d, us.Id);
-                }
-            }
-        }else {
-            int root = 0;
-            us = am.CreateArchive(root,FilenameUtils.getBaseName(p.getAbsolutePath()));
-            for (File d: p.listFiles()) {
-                if(d.isDirectory()) {
-                    shush(am, d);
-                } else if(d.isFile()) {
-                    yell(am, d, us.Id);
-                }
+    private static Archive shush(ArchiveMannager am, File p, int parent) {
+        int parentId = parent;
+
+        Archive root = am.GetArchive(parentId);
+
+        Archive us  = am.CreateArchive(root.Id,FilenameUtils.getBaseName(p.getAbsolutePath()));
+
+        Debug.log(root.name + "_us name:" + us.name + "_root id: " + root.Id + "_us id: " + us.Id + "_ Parent id: " + parent + "_ Requested directory: " + p.getPath());
+        for (File d: p.listFiles()) {
+            if(d.isDirectory()) {
+                shush(am, d, us.Id+1);
+            } else if(d.isFile()) {
+                yell(am, d, us.Id);
             }
         }
         return us;
