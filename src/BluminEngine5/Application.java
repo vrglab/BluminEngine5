@@ -17,8 +17,15 @@ import com.bulletphysics.dynamics.DiscreteDynamicsWorld;
 import com.bulletphysics.dynamics.DynamicsWorld;
 import com.bulletphysics.dynamics.constraintsolver.ConstraintSolver;
 import com.bulletphysics.dynamics.constraintsolver.SequentialImpulseConstraintSolver;
+import de.fabmax.physxjni.Loader;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
+import physx.PxTopLevelFunctions;
+import physx.common.PxDefaultErrorCallback;
+import physx.common.PxFoundation;
+import physx.common.PxTolerancesScale;
+import physx.extensions.PxDefaultAllocator;
+import physx.physics.PxPhysics;
 
 
 import java.io.IOException;
@@ -143,11 +150,7 @@ public class Application {
             Debug.log("Setting up DaynamicsWorld");
         }
 
-        BroadphaseInterface broadphase = new DbvtBroadphase();
-        CollisionConfiguration collisionConfig = new DefaultCollisionConfiguration();
-        Dispatcher dispatcher = new CollisionDispatcher(collisionConfig);
-        ConstraintSolver solver = new SequentialImpulseConstraintSolver();
-        dynamicsWorld = new DiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfig);
+        //Physics should be implemented here
 
         Awake.Invoke();
 
