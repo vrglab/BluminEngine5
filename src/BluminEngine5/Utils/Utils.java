@@ -188,14 +188,14 @@ public class Utils {
         return ID;
     }
 
-    public static int CreateCubeMap() {
+    public static int CreateCubeMap(int shh) {
         int ID = GL11.glGenTextures();
         GL13.glActiveTexture(GL13.GL_TEXTURE4);
         GL11.glEnable(GL13.GL_TEXTURE_CUBE_MAP);
         GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, ID);
 
         for (int i = 0; i < 6; i++) {
-            Texture tex = Application.getResourceManager().GetTexture(0, 0);
+            Texture tex = Application.getResourceManager().GetTexture(0, shh);
             GL11.glTexImage2D(
                     GL13.GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL11.GL_RGBA,
                     (int) tex.getWidth(), (int) tex.getHeight(), 0,

@@ -44,7 +44,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
         if (sdd == null) {
             model = new Model();
-            model.setMesh(0,1);
+            model.setMesh(0,2);
             model.getMaterial().Shine = 1;
             model.getMaterial().reflection = 0.4f;
             try {

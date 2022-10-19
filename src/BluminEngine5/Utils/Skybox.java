@@ -41,11 +41,12 @@ public class Skybox extends BluminBehaviour {
         Mesh m = new Mesh(Utils.CubeAsVertex3D(500));
         Shader shader = Application.getResourceManager().GetShader("Res/Shaders/Default/Cubemap/DefaultGameShader.json");
 
+
+
         try {
             cmr = new CubeMapRenderer(m,
-                    Utils.CreateCubeMap(),
+                    Utils.CreateCubeMap(4),
                     shader);
-
             if(singelImage != null) {
                 cmr = new CubeMapRenderer(m,
                         Utils.CreateCubeMap(singelImage.ID,singelImage.ArchiveId),

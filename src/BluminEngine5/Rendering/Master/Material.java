@@ -26,26 +26,26 @@ public class Material implements Serializable {
 
 
     public Material() {
-        texture = Application.getResourceManager().GetTexture(0, 4);
-        DefuseMap = Application.getResourceManager().GetTexture(0,4);
-        SpecularMap = Application.getResourceManager().GetTexture(0,4);
-        ReflectionsMap = Application.getResourceManager().GetTexture(0,4);
+        texture = Application.getResourceManager().GetTexture(0, 5);
+        DefuseMap = Application.getResourceManager().GetTexture(0,5);
+        SpecularMap = Application.getResourceManager().GetTexture(0,5);
+        ReflectionsMap = Application.getResourceManager().GetTexture(0,5);
         color = new Color(1,0.5f,1,1);
     }
 
     public Material(ArchivedFile text) {
         texture = Application.getResourceManager().GetTexture(text.ArchiveId, text.ID);
-        DefuseMap = Application.getResourceManager().GetTexture(0,4);
-        SpecularMap = Application.getResourceManager().GetTexture(0,4);
-        ReflectionsMap = Application.getResourceManager().GetTexture(0,4);
+        DefuseMap = Application.getResourceManager().GetTexture(0,5);
+        SpecularMap = Application.getResourceManager().GetTexture(0,5);
+        ReflectionsMap = Application.getResourceManager().GetTexture(0,5);
         color = new Color(1,0.5f,1,1);
     }
 
     public Material(Texture text) {
         texture = text;
-        DefuseMap = Application.getResourceManager().GetTexture(0,4);
-        SpecularMap = Application.getResourceManager().GetTexture(0,4);
-        ReflectionsMap = Application.getResourceManager().GetTexture(0,4);
+        DefuseMap = Application.getResourceManager().GetTexture(0,5);
+        SpecularMap = Application.getResourceManager().GetTexture(0,5);
+        ReflectionsMap = Application.getResourceManager().GetTexture(0,5);
         color = new Color(1,0.5f,1,1);
     }
 

@@ -183,12 +183,12 @@ public class ResourceMannager {
 
         Archive us  = am.CreateArchive(root.Id,FilenameUtils.getBaseName(p.getAbsolutePath()));
 
-        Debug.log(root.name + "_us name:" + us.name + "_root id: " + root.Id + "_us id: " + us.Id + "_ Parent id: " + parent + "_ Requested directory: " + p.getPath());
+        Debug.log(root.name + "_ us name:" + us.name + "_ root id: " + root.Id + "_ us id: " + us.Id + "_ Parent id: " + parent + "_ Requested directory: " + p.getPath());
         for (File d: p.listFiles()) {
             if(d.isDirectory()) {
                 shush(am, d, us.Id+1);
             } else if(d.isFile()) {
-                yell(am, d, us.Id);
+                yell(am, d, us.Id+1);
             }
         }
         return us;

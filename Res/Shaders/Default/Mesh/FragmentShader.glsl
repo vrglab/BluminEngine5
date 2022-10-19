@@ -102,19 +102,20 @@ vec4 calculatespecularLighting(sampler2D specular,vec3 normal, vec3 pos, vec4 co
     return vec4(s,1.0) * intesity;
 }
 
-vec4 calculatespecularLightingWithAten(sampler2D specular,vec3 normal, vec3 pos, vec4 color, vec3 attenuation, float intesity) {
+
+vec4 calculatespecularLightingWithAten(sampler2D specular,vec3 normal, PointLight light) {
     vec3 nomr = normalize(normal);
-    vec3 reflectDir = reflect(nomr, pos + WorldPos.xyz);
+    vec3 reflectDir = reflect(nomr, light.position + WorldPos.xyz);
     float spec = pow(max(dot(nomr, reflectDir), 0.0), material.shininess);
     vec3 s = spec * vec3(texture(material.specular, texCord));
 
-    float distanc = length(pos - WorldPos.xyz);
-    float atten = attenuation.x + (attenuation.y * distanc) +  (attenuation.z * distanc * distanc);
+    float distanc = length(light.position  - WorldPos.xyz);
+    float atten = light.attenuation.x + ( light.attenuation.y * distanc) +  ( light.attenuation.z * distanc * distanc);
 
     if(color.xyz != vec3(1,1,1)) {
         s = spec * vec3(texture(material.specular, texCord)) * color.xyz;
     }
-    return (vec4(s,1.0) * intesity) / atten;
+    return (vec4(s,1.0) * light.intensity) / atten;
 }
 
 vec4 reflections(){
@@ -133,7 +134,7 @@ void main() {
 
         for (int i = 0; i < pointLightsIntheLevel;i ++) {
             totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation)
-            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i].position,levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation, levelLightData.pointlights[i].intensity * material.shininess)
+            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i])
             ;
         }
 
