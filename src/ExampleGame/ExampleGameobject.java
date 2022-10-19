@@ -43,10 +43,7 @@ public class ExampleGameobject extends BluminBehaviour {
 
 
         if (sdd == null) {
-            model = new Model();
-            model.setMesh(0,2);
-            model.getMaterial().Shine = 1;
-            model.getMaterial().reflection = 0.4f;
+            model = new Model(0,3);
             try {
                 model.SaveToFile("Cube");
             } catch (Exception e) {
@@ -61,7 +58,7 @@ public class ExampleGameobject extends BluminBehaviour {
             mr = new MeshRenderer(model);
             RegisterComponant(mr);
         }
-        s = new AudioSource(0,3);
+        s = new AudioSource(0,4);
         //RegisterComponant(s);
     }
 

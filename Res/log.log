@@ -1,16 +1,6 @@
-{System 2022/10/19 11:02:34:234}: Starting SceneManager
-{System 2022/10/19 11:02:35:235}: Loading Metadata
-{System 2022/10/19 11:02:35:235}: Loading BluminEngine5Version 0.0.1.0_Alpha
-{System 2022/10/19 11:02:36:236}: Setting up keyboard
-{System 2022/10/19 11:02:36:236}: Setting up DaynamicsWorld
-{System 2022/10/19 11:02:36:236}: Should no longer be null
-{Error: 2022/10/19 11:02:36:236}: Cannot assign field "data" because "component" is null
-BluminEngine5.Behaviour.BluminBehaviour.RegisterComponant(BluminBehaviour.java:89)
-BluminEngine5.Utils.Skybox.Init(Skybox.java:62)
-BluminEngine5.Behaviour.BluminBehaviour$4.Run(BluminBehaviour.java:62)
-BluminEngine5.SceneMannagement.Scene$4.Run(Scene.java:69)
-BluminEngine5.Utils.EventSystem.Action.Invoke(Action.java:23)
-BluminEngine5.Application.InvokeAfterWindowCreation(Application.java:160)
-BluminEngine5.Application.Run(Application.java:83)
-ExampleGame.Main.main(Main.java:12)
-
+{System 2022/10/19 13:12:56:1256}: Starting SceneManager
+{System 2022/10/19 13:12:56:1256}: Loading Metadata
+{System 2022/10/19 13:12:57:1257}: Loading BluminEngine5Version 0.0.1.0_Alpha
+{System 2022/10/19 13:12:59:1259}: Setting up keyboard
+{System 2022/10/19 13:12:59:1259}: Setting up DaynamicsWorld
+{System 2022/10/19 13:12:59:1259}: Should no longer be null
