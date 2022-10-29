@@ -43,12 +43,9 @@ public class ExampleGameobject extends BluminBehaviour {
 
 
         if (sdd == null) {
-            model = new Model(0,3);
-            try {
-                model.SaveToFile("Cube");
-            } catch (Exception e) {
-                Debug.logException(e);
-            }
+            model = new Model();
+            model.setMesh(0,2);
+
             mr = new MeshRenderer(model);
             RegisterComponant(mr);
 

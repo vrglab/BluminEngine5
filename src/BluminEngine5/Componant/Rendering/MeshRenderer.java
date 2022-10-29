@@ -5,11 +5,14 @@ import BluminEngine5.Componant.Component;
 import BluminEngine5.Rendering.Master.Model;
 import BluminEngine5.Rendering.Shaders.Shader;
 import BluminEngine5.SceneMannagement.SceneManager;
+import BluminEngine5.Utils.Debuging.Debug;
 import BluminEngine5.Utils.Math.Matrix;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
+
+import java.util.Arrays;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -43,12 +46,14 @@ public class MeshRenderer extends Component {
 
         if(model.getMesh().Created) {
 
+            shader.Run();
             glDepthFunc(GL_LEQUAL);
             glEnable(GL_DEPTH_TEST);
             GL30.glBindVertexArray(model.getMesh().getVAO());
             GL30.glEnableVertexAttribArray(0);
             GL30.glEnableVertexAttribArray(1);
             GL30.glEnableVertexAttribArray(2);
+            GL30.glEnableVertexAttribArray(3);
             GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, model.getMesh().getIBO());
 
 
@@ -56,7 +61,7 @@ public class MeshRenderer extends Component {
                 glEnable(GL_BLEND);
                 glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
             }
-            shader.Run();
+
             shader.SetUniform("transform", Matrix.transform(Parent.transform));
             shader.SetUniform("ProjectionMatrix", SceneManager.GetCurent().GetActiveScene().ActiveCamera.getProjectionMatrix());
             shader.SetUniform("ViewMatrix", Matrix.view(SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.position,SceneManager.GetCurent().GetActiveScene().ActiveCamera.transform.rotation));
@@ -98,8 +103,9 @@ public class MeshRenderer extends Component {
             shader.SetUniform("material.ReflectionsMap", 3);
 
 
+
             GL11.glDrawElements(GL11.GL_TRIANGLES, model.getMesh().getIndecies().length, GL11.GL_UNSIGNED_INT, 0);
-            shader.Stop();
+
             if(model.getMaterial().getColor().GetA() < 1) {
                 glDisable(GL_BLEND);
             }
@@ -109,7 +115,9 @@ public class MeshRenderer extends Component {
             GL30.glDisableVertexAttribArray(0);
             GL30.glDisableVertexAttribArray(1);
             GL30.glDisableVertexAttribArray(2);
+            GL30.glDisableVertexAttribArray(3);
             GL30.glBindVertexArray(0);
+            shader.Stop();
         }
     }
 

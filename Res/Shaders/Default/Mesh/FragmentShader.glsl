@@ -133,9 +133,8 @@ void main() {
         vec4 totalLighting = calculateSunlight();
 
         for (int i = 0; i < pointLightsIntheLevel;i ++) {
-            totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation)
-            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i])
-            ;
+            totalLighting = totalLighting + DefuseWithAtten(Normal, levelLightData.pointlights[i].position, levelLightData.pointlights[i].intensity, levelLightData.pointlights[i].color, levelLightData.pointlights[i].attenuation);
+            + calculatespecularLightingWithAten(material.specular, Normal, levelLightData.pointlights[i]);
         }
 
         totalLighting = totalLighting + calculatespecularLighting(material.specular, Normal, levelLightData.sunlight.position, levelLightData.sunlight.color, levelLightData.sunlight.intensity * material.shininess);
@@ -153,8 +152,4 @@ void main() {
 
         outColor =totalLighting * vec4(ambient, 1.0);
     }
-
-
-
-
 }
